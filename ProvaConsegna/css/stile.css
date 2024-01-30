@@ -52,6 +52,7 @@ h1 {
     color: #fff;
     padding: 20px;
     text-align: center;
+    margin: 0; /* Remove any default margins */
 }
 
 /* Stile per gli elenchi */
@@ -344,3 +345,8 @@ footer {
 }
 
 /*Questa modifica fa schifo*/
+.login-form {
+    width: 50%; /* Adjust the width as needed */
+    margin: 0 auto; /* Set left and right margins to auto */
+    text-align: center; /* Center the inline content */
+}
