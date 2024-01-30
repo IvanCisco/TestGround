@@ -42,9 +42,9 @@
     </div>
     </div>
 
+<div class="lista-ristoranti">
     <p>Ecco l'elenco dei ristoranti da cui puoi ordinare</p>
 
-<div>
 
 <?php
 

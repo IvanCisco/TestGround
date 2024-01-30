@@ -350,3 +350,7 @@ footer {
     margin: 0 auto; /* Set left and right margins to auto */
     text-align: center; /* Center the inline content */
 }
+
+.lista-ristoranti{
+    margin:5px;
+}
