@@ -9,6 +9,7 @@ session_start();
         <style>
             .error {color: #FF0000;}
         </style>
+        <link rel="stylesheet" href="css/stile.css">
     </head>
     <body>
         <?php
@@ -45,5 +46,8 @@ session_start();
                 <span><a href="backend/registrazione_fatt.php">Crea account fattorino</a></span>
             </div>
         </form>
+
+        <!-- Include the footer -->
+    <?php include("common/footer.html"); ?>
     </body>
 </html>

@@ -171,6 +171,9 @@ footer {
     background-color: #f2f2f2;
     position: relative;
 }
+.navbar li {
+    list-style-type: none;
+}
 
 .menu-toggle {
     cursor: pointer;
