@@ -45,14 +45,15 @@ if (isset($_GET['nomeristorante'])) {
 }else {
     echo "Ristorante not found.";
 }
-}
-}
+
         // Edit icon triggering the edit modal
         ?>
         <!--<input type="hidden" name="selectedPlates" id="selectedPlates">-->
         <br>
         <br>	
         <input type="submit" value="Ordina">
+        }
+}
     </form>
         
 </html>
