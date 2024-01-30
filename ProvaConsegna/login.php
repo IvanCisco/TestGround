@@ -12,8 +12,8 @@ session_start();
     </head>
     <body>
         <?php
-        include("./common/connessione.php");
-        include("./backend/logincheck.php");
+        include("common/connessione.php");
+        include("backend/logincheck.php");
         ?>
         <h1>Benvenuto</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
