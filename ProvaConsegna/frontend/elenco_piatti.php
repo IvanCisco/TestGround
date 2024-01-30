@@ -41,7 +41,11 @@ if (isset($_GET['nomeristorante'])) {
         echo "<input type='checkbox' name='selectedPlates[]' value='{$row['nome']}|{$row['prezzo']}'><br>";
 
 }
-
+?>
+        <br>
+        <br>    
+        <input type="submit" value="Ordina">
+<?php
 }else {
     echo "Ristorante not found.";
 }
