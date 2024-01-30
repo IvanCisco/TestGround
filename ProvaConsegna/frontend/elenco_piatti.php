@@ -31,6 +31,7 @@ if (isset($_GET['nomeristorante'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    if ($result && $result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
     //stampo le pietanze di quel ristorante
 
@@ -43,6 +44,7 @@ if (isset($_GET['nomeristorante'])) {
 
 }else {
     echo "Ristorante not found.";
+}
 }
 }
         // Edit icon triggering the edit modal
