@@ -178,7 +178,6 @@ footer {
 .menu-toggle {
     cursor: pointer;
     order: 2;/* posizione destra*/
-    margin-left:;
 }
 
 .bar {
