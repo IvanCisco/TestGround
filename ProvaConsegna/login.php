@@ -17,11 +17,9 @@ session_start();
         include("backend/logincheck.php");
         ?>
         <h1>Benvenuto</h1>
-        <br>
+        <br><br><br><br><br><br><br><br>
         <div class=login-form>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    		<!--<form method="post" action"/check/your_script.php">-->
-    		
                 <label for="email"><b>E-mail</b></label>
                 <input type="email" name="mail" maxlength="40" required>
                 <span class="error"><?php echo $mailErr;?></span>
