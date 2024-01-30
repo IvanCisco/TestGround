@@ -5,6 +5,8 @@
     <script src="../js/javascript.js"></script>
 </head>
 
+<body>
+
 <p><a href="acquirente.php">Torna indietro</a></p>
 <form action="../backend/inserisci_ordine_acquirente.php" method="POST">
 <?php
@@ -51,13 +53,9 @@ if (isset($_GET['nomeristorante'])) {
 }
 
         // Edit icon triggering the edit modal
-        ?>
-        <!--<input type="hidden" name="selectedPlates" id="selectedPlates">-->
-        <br>
-        <br>	
-        <input type="submit" value="Ordina">
         }
 }
+        ?>
     </form>
-        
+        </body>
 </html>
