@@ -108,6 +108,6 @@ if ($res->num_rows > 0) {
 
    <!-- <p><a href="carrello.html">Visualizza il carrello</a></p>-->
 </div>
-
+<?php include("../common/footer.html"); ?>
 </body>
 </html>

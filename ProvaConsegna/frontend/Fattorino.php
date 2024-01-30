@@ -148,3 +148,6 @@ $conn->close();
 }
 
 ?>
+<?php include("../common/footer.html"); ?>
+</body>
+</html>
