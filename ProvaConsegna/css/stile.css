@@ -347,6 +347,10 @@ footer {
 /*Questa modifica fa schifo*/
 .login-form {
     width: 50%; /* Adjust the width as needed */
-    margin: 0 auto; /* Set left and right margins to auto */
+    margin: 5% auto; /* Set left and right margins to auto */
     text-align: center; /* Center the inline content */
+}
+
+.lista-ristoranti{
+    margin:5px;
 }
