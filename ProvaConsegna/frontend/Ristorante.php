@@ -12,6 +12,7 @@
     </head>
     <body>
         <div class="navbar">
+            <li><img src="../images/MainIcon.png" height="40px"></li>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <div class="bar"></div>
                 <div class="bar"></div>
