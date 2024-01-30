@@ -43,9 +43,11 @@
                 </select>
                 <div id="cardFieldsContainer" style="display: none;">
                     <label for="cardNumber">Numero della carta:</label>
-                    <input type="text" id="cardNumber" name="cardNumber">
+                    <input type="text" inputmode="numeric"id="cardNumber" name="cardNumber" minlength="16" maxlength="16" size="16"
+                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
                     <label for="cardCode">CCV:</label>
-                    <input type="text" id="cardCode" name="cardCode">
+                    <input type="text" inputmode="numeric" id="cardCode" name="cardCode" minlength="3" maxlength="3" size="3"
+                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
                 </div>
                 <br><br>
                 <input type="submit" name="submitOrder" value="Conferma Ordine">
