@@ -10,9 +10,6 @@
 	// Recupero dei dati dell'utente
 	if(isset($_SESSION['utente'])) {
 	$mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
-	$query=mysqli_query($conn,"select * from `fattorino` where mail='$mail'");
-	$row=mysqli_fetch_array($query);
-	
  
 	$nome=$_POST['nome'];
 	$cognome=$_POST['cognome'];
@@ -21,13 +18,14 @@
 	$datanascita=$_POST['datanascita'];
 	$luogonascita=$_POST['luogonascita'];
 	$citta=$_POST['citta'];
+	$zona=$_POST["numero"];
 	$disponibilita=$_POST['disponibilita'];
 
 	$giorni = isset($_POST["giorno"]) ? $_POST["giorno"] : array();
     $orariInizio = isset($_POST["orainizio"]) ? $_POST["orainizio"] : array();
     $orariFine = isset($_POST["orafine"]) ? $_POST["orafine"] : array();
  
-	mysqli_query($conn,"update `fattorino` set 
+	mysqli_query($conn,"UPDATE `fattorino` set 
 		nome='$nome',
 		cognome='$cognome',
 		password='$password',
@@ -38,6 +36,11 @@
 		disponibilita = '$disponibilita'
 		where mail='$mail'");
 	
+
+	mysqli_query($conn,"UPDATE `operainfatt` set 
+		numero='$zona'
+		where mailfatt='$mail'");
+
 	if (inserisciOrari($giorni, $orariInizio, $orariFine, $mail, $conn, "flavorasu")) {
     echo "Modifica avvenuta con successo, verrai reindirizzato alla home page";
     ?>

@@ -7,7 +7,10 @@
 	$mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
 	$query=mysqli_query($conn,"select * from `fattorino` where mail='$mail'");
 	$row=mysqli_fetch_array($query);
-}
+
+	$query2=mysqli_query($conn,"select * from `operainfatt` where mailfatt='$mail'");
+	$row2=mysqli_fetch_array($query2);
+	}
 ?>
 
 <html lang="it">
@@ -19,7 +22,7 @@
 	<body>
 		<h2>Edit</h2>
 		<form method="POST" action="../backend/modificaprofilo_fatt.php?id=<?php echo $mail; ?>" onsubmit="return validazione()">
-			<label for="nome">Nome: </label>
+				<label for="nome">Nome: </label>
 			<input type="text" id="nome" name="nome" value="<?php echo $row['nome'];?>" maxlength="20" required>
 			<br><br>
 			<label for="cognome">Cognome: </label>
@@ -49,10 +52,19 @@
             	<option value="trento" <?php echo ($row['citta'] == "Trento") ? "selected" : "";?>>Trento</option>
         	</select>
 			<br><br>
+			<label for="numero">Zona: </label>
+    		<select id="numero" name="numero" required>
+        		<option disabled selected value></option>
+        		<option value="1" <?php echo ($row2['numero'] == "1") ? "selected" : "";?>>1</option>
+        		<option value="2" <?php echo ($row2['numero'] == "2") ? "selected" : "";?>>2</option>
+        		<option value="3" <?php echo ($row2['numero'] == "3") ? "selected" : "";?>>3</option>
+        		<option value="4" <?php echo ($row2['numero'] == "4") ? "selected" : "";?>>4</option>
+        		<option value="5" <?php echo ($row2['numero'] == "5") ? "selected" : "";?>>5</option>
+    		</select>
+			<br><br>
 			Disponibilità:
 			<input type="radio" name="disponibilita" id="s" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="s") echo "checked";?> value="s" required><label for="s">S</label>
         	<input type="radio" name="disponibilita" id="n" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="n") echo "checked";?> value="n"><label for="n">N</label>
-
 
 		<?php
 		//session_start();

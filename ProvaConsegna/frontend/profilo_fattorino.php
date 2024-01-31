@@ -29,6 +29,7 @@ if ($result->num_rows > 0) {
         echo "<p>Cognome: " . $row["cognome"] . "</p>";
         echo "<p>Sesso: " . $row["sesso"] . "</p>";
         echo "<p>Data di nascita: " . $row["datanascita"] . "</p>";
+        echo "<p>Luogo di nascita: " . $row["luogonascita"] . "</p>";
         echo "<p>Città: " . $row["citta"] . "</p>";
         echo "<p>Disponibilità: " . $row["disponibilita"] . "</p>";
         echo "<p>Credito: " . $row["credito"] . "</p>";

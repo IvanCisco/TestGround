@@ -4,7 +4,7 @@
 <script src="../js/javascript.js"></script>
 </head>
 <?php
-	include '../common/connessione_database_base.php';
+	include("../common/connessione.php");
 	include("../common/funzioni.php");
 	session_start();
 	// Recupero dei dati dell'utente
