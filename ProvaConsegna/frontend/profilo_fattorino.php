@@ -11,7 +11,7 @@ session_start();
 if(isset($_SESSION['utente'])) {
 $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in sessione
 ?>
-<p><a href="http://localhost/SITO_NOVEMBRE2023/frontend/Fattorino.php">Torna indietro</a></p>
+<p><a href="Fattorino.php">Torna indietro</a></p>
 <h2>Dati del fattorino</h2>
 
 <?php

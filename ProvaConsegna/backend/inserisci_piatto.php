@@ -60,10 +60,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         } else {
-            echo "Errore durante il caricamento del file.";
+            echo "Errore durante il caricamento del file, non è stata selezionata alcuna immagine .";
+            ?>
+            <p><a href="../frontend/inserisci_piatto.html">Torna indietro</a></p>
+            <?php
         }
     } else {
-        echo "Errore durante il caricamento del file.";
+        echo "Errore durante il caricamento del piatto.";
+            ?>
+            <p><a href="../frontend/inserisci_piatto.html">Torna indietro</a></p>
+            <?php
     }
 }
 
