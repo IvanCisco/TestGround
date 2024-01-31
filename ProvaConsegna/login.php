@@ -11,19 +11,18 @@ session_start();
         </style>
         <link rel="stylesheet" href="css/stile.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/loginstyle.css">
     </head>
     <body>
         <?php
         include("common/connessione.php");
         include("backend/logincheck.php");
         ?>
-        <nav>
-            <ul>
-                <li><img src="images/MainIcon.png" href="index.html" height="40px"></li>
-                <li><a href="index.html">Impero del Cibo</a></li>
-                <li>Benvenuto</li>
-            </ul>
-        </nav>
+        <div>
+            <a href="index.html"><img src="images/MainIcon.png" height="40px"></a>
+            <a href="index.html">Impero del Cibo</a>
+            <a>Benvenuto</a>
+        </div>
         <br><br><br><br><br><br><br><br>
         <div class=login-form>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
