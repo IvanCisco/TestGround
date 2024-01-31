@@ -89,7 +89,7 @@ if (isset($_SESSION['utente'])) {
         //echo "City where fattorino works: $city_where_fattorino_works<br>";
         //echo "Area where fattorino delivers: $area_where_fattorino_delivers<br>";
 
-
+//query commento
   $query = "
 SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
 FROM ordine o
