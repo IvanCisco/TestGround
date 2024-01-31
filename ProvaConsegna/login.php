@@ -9,8 +9,12 @@ session_start();
         <style>
             .error {color: #FF0000;}
         </style>
-        <link rel="stylesheet" href="css/stile.css">
-        <link rel="stylesheet" href="css/style.css">
+        <style>
+            @import url('https://fonts.cdnfonts.com/css/nimbus-sans-l');
+        </style>
+                
+        <!--<link rel="stylesheet" href="css/stile.css">-->
+        <!--<link rel="stylesheet" href="css/style.css">-->
         <link rel="stylesheet" href="css/loginstyle.css">
     </head>
     <body>
@@ -18,9 +22,9 @@ session_start();
         include("common/connessione.php");
         include("backend/logincheck.php");
         ?>
-        <div>
-            <a href="index.html"><img src="images/MainIcon.png" height="40px"></a>
-            <a href="index.html">Impero del Cibo</a>
+        <div class="login-nav">
+            <a class="nu" href="index.html"><img src="images/MainIcon.png" height="40px"></a>
+            <a class="nu" href="index.html">Impero del Cibo</a>
             <a>Benvenuto</a>
         </div>
         <br><br><br><br><br><br><br><br>
@@ -45,11 +49,11 @@ session_start();
                 <button type="submit" name="login">Login</button>
                 <span class="error"><?php echo $loginErr;?></span>
                 <div>
-                    <span><a href="backend/registrazione_acq.php">Crea account acquirente</a></span>
+                    <span><a class="nu" href="backend/registrazione_acq.php">Crea account acquirente</a></span>
                     <br><br>
-                    <span><a href="backend/registrazione_rist.php">Crea account ristorante</a></span>
+                    <span><a class="nu" href="backend/registrazione_rist.php">Crea account ristorante</a></span>
                     <br><br>
-                    <span><a href="backend/registrazione_fatt.php">Crea account fattorino</a></span>
+                    <span><a class="nu" href="backend/registrazione_fatt.php">Crea account fattorino</a></span>
                 </div>
             </form>
     </div>
