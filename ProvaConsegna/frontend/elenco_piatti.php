@@ -28,7 +28,7 @@ if (isset($_GET['nomeristorante'])) {
     $row = $result->fetch_assoc();
     $mail = $row['mail'];
 
-    $stmt = $conn->prepare("SELECT nome,prezzo,descrizione,tipo,elenco FROM pietanza WHERE mail = ?");
+    $stmt = $conn->prepare("SELECT nome,prezzo,descrizione,tipo,immagine,elenco FROM pietanza WHERE mail = ?");
     $stmt->bind_param("s", $mail);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -39,7 +39,7 @@ if (isset($_GET['nomeristorante'])) {
 
         echo "<div class='menu-item'>";
         echo "<p>{$row['nome']} - {$row['prezzo']}- {$row['descrizione']} - {$row['tipo']} - {$row['elenco']}";
-        //echo  "<img src='immagini/delete-icon2.png' onclick=\"confirmDelete('{$row['nome']}', '{$row['prezzo']}', '{$row['descrizione']}')\" alt='Delete'></img></p>";
+        echo "<img src='{$row['immagine']}' style='max-width: 150px; max-height: 150px; margin-left: auto; margin-right: auto;display: inline-block; vertical-align: middle;'>";
         echo "<input type='checkbox' name='selectedPlates[]' value='{$row['nome']}|{$row['prezzo']}'><br>";
 
 }
