@@ -5,26 +5,24 @@ session_start();
 //var_dump($_POST);
 
 if (isset($_POST['submitOrder'])) {
-    // Assuming you have retrieved the necessary data from the form
+    
     $metodoPagamento = $_POST['metodoPagamento'];
 if (isset($_POST['selectedPlates'])) {
-    // Assuming database connection and other configurations are set up
+    
 
-    // Retrieve selected plates from the form
-    //$selected_plates = $_POST['selectedPlates'];
-    //    $selected_plates = $_POST['selectedPlates'];
+    //recupero piatti
     $selected_Plates = json_decode($_POST['selectedPlates'], true);
 }
 
     
     if (isset($_SESSION['utente'])) {
     $mailacq = $_SESSION['utente'];
-    } // Fetch the user's email; replace this with your logic to get the email
-    $data = date("Y-m-d"); // Current date in 'YYYY-MM-DD' format
-    $ora = date("H:i:s"); // Current time in 'HH:MM:SS' format
-    $stato = "in preparazione"; // Set default status
+    } // mail
+    $data = date("Y-m-d"); // data corrente
+    $ora = date("H:i:s"); // ora corrente
+    $stato = "in preparazione"; // sato default
 
-    // Insert into 'ordine' table
+    // Insert in ordine
     //QUESTA è LA INSERT CHE FUNZIONA
     
     $queryOrdine = "INSERT INTO ordine (data, ora, stato, metodopagamento, mailacq) VALUES (?, ?, ?, ?, ?)";
@@ -38,14 +36,15 @@ if (isset($_POST['selectedPlates'])) {
 
     // Insert into 'contiene' table for each selected item
     // QUESTA è LA INSERT CHE  NON FUNZIONA
+    //inseri in contiene quindi lato ristorante
     $queryContiene = "INSERT INTO contiene (nome, mail, data, ora) VALUES (?, ?, ?, ?)";
     $stmtContiene = $conn->prepare($queryContiene);
     
-
+    // se sono stati selezionati piatti
     if (is_array($selected_Plates)) {
      foreach ($selected_Plates as $selectedPlate) {
         
-        // Split the combined values using the pipe separator
+        // divido
         $plateValues = explode('|', $selectedPlate);
 
         // Check if the array has both values (nome and prezzo)
@@ -57,7 +56,7 @@ if (isset($_POST['selectedPlates'])) {
          // Check if the array has both values (nome and prezzo)
     if (isset($plateValues[1])) {
         list($nome, $prezzo) = $plateValues;
-            // Fetch the restaurant's email using the $nome value
+            // recupero la mail del ristorante
         $queryFetchMail = "SELECT mail FROM pietanza WHERE nome = ?";
         $stmtFetchMail = $conn->prepare($queryFetchMail);
         $stmtFetchMail->bind_param("s", $nome);
@@ -70,18 +69,18 @@ if (isset($_POST['selectedPlates'])) {
 
             // check mail 
             if (isset($mailRistorante)) {
-            // Now you have $nome and $prezzo separately for each selected plate
-            // Insert into 'contiene' table
+            
+            // Insert in contiene
             $stmtContiene->bind_param("ssss", $nome, $mailRistorante, $data, $ora);
             $stmtContiene->execute();
-    //echo "Data inserted into contiene successfully.";
+    //echo "Dati inseriti";
         }else{
-            echo "Error: Restaurant email not found for plate $nome.";
+            echo "Errore: Non è stato trovato alcun ristorante per questo piatto  $nome.";
         }
     }
     /*
     if (!$stmtContiene->execute()) {
-    echo "Error: " . $stmtContiene->error;
+    echo "Errore: " . $stmtContiene->error;
     */
 }
 }
@@ -91,7 +90,7 @@ if (isset($_POST['selectedPlates'])) {
 
 
         
-    // Close the statements
+    // chiudo connessione
     $stmtOrdine->close();
     $stmtContiene->close();
 
@@ -101,12 +100,12 @@ echo "Ordine eseguito con successo. Verrai reindirizzato alla lista di ristorant
 header("refresh:5;url=../frontend/acquirente.php");
         
         exit();
-    // Redirect to Acquirente.php after order placement
+    
     //header("Location: Acquirente.php");
     
     /*
 } else {
-    // Redirect to a different page or display an error message if the form was not submitted
+    
    // header("Location: error_page.php");
     echo "sono qui";
     exit();
@@ -115,7 +114,7 @@ header("refresh:5;url=../frontend/acquirente.php");
 
 
 } else {
-    echo "Error processing selectedPlates.";
+    echo "Errore nell'array selectedPlates.";
 }
 session_destroy()
 
