@@ -10,7 +10,7 @@ $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
 
 
 <?php
-// RECUPERO DATI ORDINE 
+// RECUPERO DATI ORDINE preso a carico io fattorino sto andando a recuperarlo, in consegna il ristorante ha confermato il mio ritiro
 $stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato, d.via, d.numero
                             FROM consegna c
                             JOIN ordine o ON c.data = o.data AND c.ora = o.ora
