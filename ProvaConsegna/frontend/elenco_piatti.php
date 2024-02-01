@@ -17,14 +17,14 @@ if (isset($_GET['nomeristorante'])) {
 
 
     //echo $nomeristorante;
-    //controll trovato online per non avere errori sulla connessione
+    //select della mail di ristorante in base al nome
     $stmt = $conn->prepare("SELECT mail FROM ristorante WHERE nome = ?");
-	$stmt->bind_param("s", $nomeristorante); // Assuming $nomeristorante is a string
+	$stmt->bind_param("s", $nomeristorante); 
 	$stmt->execute();
 	$result = $stmt->get_result();
     
     if ($result && $result->num_rows > 0) {
-    // Fetch the mail
+    // assegno a $mail
     $row = $result->fetch_assoc();
     $mail = $row['mail'];
 
@@ -49,10 +49,10 @@ if (isset($_GET['nomeristorante'])) {
         <input type="submit" value="Ordina">
 <?php
 }else {
-    echo "Ristorante not found.";
+    echo "Ristorante non trovato.";
 }
 
-        // Edit icon triggering the edit modal
+        
         }
 }
         ?>
