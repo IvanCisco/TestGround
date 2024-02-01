@@ -11,6 +11,7 @@ session_start();
 if(isset($_SESSION['utente'])) {
 $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in sessione
 
+//select per i dati di acquirente
 $stmt = $conn->prepare("SELECT * FROM acquirente WHERE mail = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
@@ -31,6 +32,7 @@ if ($result->num_rows > 0) {
 } else {
     echo "Utente non loggato";
 }
+//select per l'indirizzo di acquirente
 $stmt = $conn->prepare("SELECT * FROM domicilio WHERE mailacq = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
