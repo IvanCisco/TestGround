@@ -32,10 +32,12 @@
         <?php
         if (isset($_SESSION['utente'])) {
             $mail = $_SESSION['utente'];
+            //visualizzo il menu del ristorante
             $stmt = $conn->prepare("SELECT nome,prezzo,descrizione,tipo,elenco,immagine FROM pietanza WHERE mail = ?");
             $stmt->bind_param("s", $mail);
             $stmt->execute();
             $result = $stmt->get_result();
+            
             $mailmod = str_replace(['@', '.'], '', $mail);
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
