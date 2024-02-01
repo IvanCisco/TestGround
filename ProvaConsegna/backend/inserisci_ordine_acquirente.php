@@ -11,30 +11,31 @@
                 <?php
                 include("../common/connessione.php");
                 if (isset($_POST['selectedPlates'])) {
-                    // Assuming database connection and other configurations are set up
+                    
 
-                    // Retrieve selected plates from the form
+                    // Recupero i piatti selezionati dall'utente
                     $selected_plates = $_POST['selectedPlates'];
 
                     foreach ($selected_plates as $selectedPlate) {
-                        // Split the combined values using the pipe separator
+                        // li divido
                         $plateValues = explode('|', $selectedPlate);
 
-                        // Check if the array has both values (nome and prezzo)
+                        // controllo ci siano sia nome che prezzo e li separo 
                         if (count($plateValues) == 2) {
                             list($nome, $prezzo) = $plateValues;
             
-                            // Now you have $nome and $prezzo separately for each selected plate
+                            // separati uno in $nome l'altro in $prezzo
                             echo "Nome: $nome, Prezzo: $prezzo<br>";
                         } else {
-                            // Handle the case where the array doesn't have the expected number of values
-                            echo "Invalid data format for selected plate: $selectedPlate<br>";
+                            // gestione nel caso in cui l'array non abbia i valori chemi aspetto
+                            echo "I dati selezionati non hanno il formato corretto: $selectedPlate<br>";
                         }
                     }
                 } else {
                     echo "Nessun piatto selezionato o form non inviato.";
                 }
                 ?>
+                <!--campo hidden -->
                 <input type="hidden" name="selectedPlates" id="selectedPlates"value='<?php echo json_encode($_POST['selectedPlates']); ?>'>
             <h3>Metodo di pagamento</h3>
                 <select id="metodoPagamento" name="metodoPagamento" onchange="showHideCardFields()">
