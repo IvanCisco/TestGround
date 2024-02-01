@@ -25,7 +25,7 @@ session_start();
         <div class="login-nav">
             <a class="nu" href="index.html"><img src="images/MainIcon.png" height="40px"></a>
             <a class="nu" href="index.html">Impero del Cibo</a>
-            <a>Benvenuto</a>
+            Benvenuto
         </div>
         <br><br><br><br><br><br><br><br>
         <div class=login-form>
