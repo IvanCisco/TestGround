@@ -90,8 +90,7 @@ if (isset($_SESSION['utente'])) {
         //echo "Area where fattorino delivers: $area_where_fattorino_delivers<br>";
 
 //query commento
-  $query = "
-SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
+$query = "SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
 FROM ordine o
 JOIN contiene c ON o.data = c.data AND o.ora = c.ora
 JOIN operainrist oi ON c.mail = oi.mailrist
@@ -100,9 +99,7 @@ JOIN fattorino f ON of.mailfatt = f.mail
 JOIN ristorante r ON oi.mailrist = r.mail
 WHERE f.mail = ? 
   AND f.citta = ? 
-  
   AND oi.zona = ?
- /* AND f.citta = of.citta -- Check if fattorino works in the same city as the restaurant*/
   AND oi.zona = of.numero -- Check if fattorino delivers in the same area as the restaurant
   AND o.stato in('in preparazione','preso in carico')
   AND TIMESTAMPDIFF(HOUR, CONCAT(o.data, ' ', o.ora), NOW()) < 2";
