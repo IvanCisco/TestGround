@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION['utente'])) {
 $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in sessione
 ?>
-<h2>Ordini presi a carico</h2>
+<h2>Ordini consegnati</h2>
 
 
 
