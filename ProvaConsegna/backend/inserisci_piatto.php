@@ -24,14 +24,14 @@ $file_destination = '../immagini/' . $new_file_name; // Cartella di destinazione
 
 
 
-// Check if form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+    // recupero dati
     $nome = $_POST['nome'];
     $prezzo = $_POST['prezzo'];
     $descrizione = $_POST['descrizione'];
     
-    // File upload
+    // upload file come indicato su ariel
     if ($_FILES['fileToUpload']['error'] == UPLOAD_ERR_OK) {
         $file_name = $_FILES['fileToUpload']['name'];
         $tmp_name = $_FILES['fileToUpload']['tmp_name'];
@@ -40,20 +40,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-        // Move uploaded file
+        // sposto nella cartella il file
         if (move_uploaded_file($tmp_name, $destination)) {
-            // Insert plate details into the database
+            // Insert nel database
             $sql = "INSERT INTO pietanza (nome, prezzo, descrizione, tipo, mail, immagine)
                     VALUES ('$nome', '$prezzo', '$descrizione', 'piatto', '$mail', '$destination')";
             
             if ($conn->query($sql) === TRUE) {
-                echo "Inserimento avvenuto con successo, verrai reindirizzato alla pagina con il tuo menu";
-                // Redirect after successful insertion
+                echo "Inserimento avvenuto con successo, verrai reindirizzato alla pagina con il tuo menu";                
                 ?>
                 <script>
                     setTimeout(function() {
                         window.location.href = '../frontend/ristorante.php';
-                    }, 5000); // Redirect after 5 seconds
+                    }, 5000); //  5 secondi
                 </script>
                 <?php
             } else {
