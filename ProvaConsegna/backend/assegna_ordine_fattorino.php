@@ -8,7 +8,7 @@ if (isset($_SESSION['utente']) && $_SESSION['tipo'] == 'fattorino') {
     $data = $_POST['data'];
     $ora = $_POST['ora'];
 
-    // Perform the assignment in the 'consegna' table
+    // inserimento in consegna
     $queryAssignDeliveryGuy = "INSERT INTO consegna (mailfatt, data, ora) VALUES (?, ?, ?)";
     $stmtAssignDeliveryGuy = $conn->prepare($queryAssignDeliveryGuy);
     $stmtAssignDeliveryGuy->bind_param("sss", $mailFattorino, $data, $ora);

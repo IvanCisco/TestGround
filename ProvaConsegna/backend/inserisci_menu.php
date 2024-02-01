@@ -12,34 +12,35 @@ if (!isset($_SESSION['utente'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if form fields are set and not empty
+    // controllo non siano vuoti
     if (isset($_POST['nome']) && isset($_POST['descrizione']) && isset($_POST['prezzo']) && isset($_POST['selectedPlates'])) {
-        // Retrieve form data
+        // recupero dati dai form
         $nome_menu = $_POST['nome'];
         $descrizione_menu = $_POST['descrizione'];
         $prezzo_menu = $_POST['prezzo'];
         $selected_plates = $_POST['selectedPlates'];
 
-        // Get the logged-in user's email
+        // recupero mail
         $mail = $_SESSION['utente'];
 
-        // Database connection and INSERT query
-        include("../common/connessione.php"); // Ensure this path is correct
+        // connessione database
+        include("../common/connessione.php"); 
 
-        // Construct the elenco (list of plates) from the selected checkboxes
+        // tutti i piatti selezionati vengono separati da virgola in elenco 
         $elenco = implode(", ", $selected_plates);
 
         // Prepare and execute the INSERT query
         //$stmt = $conn->prepare("INSERT INTO pietanza (nome,descrizione,prezzo, tipo, mail, elenco) VALUES ('$nome_menu','$descrizione_menu','$prezzo_menu', 'Menu', '$mail', '$elenco')");
-        $tipo_menu = "Menu"; // Adjust the type as needed
+        $tipo_menu = "Menu"; 
 
         $stmt = $conn->prepare("INSERT INTO pietanza (nome, descrizione, prezzo, tipo, mail, elenco) VALUES (?, ?, ?, ?, ?, ?)");
-        // Bind parameters and execute query
+        
         //$stmt->bind_param("sssss", $nome_menu, $descrizione_menu, $prezzo_menu, $mail, $elenco);
+        //s indica stringa mentre d indica numero a virgola mobile 
         $stmt->bind_param("ssdsss", $nome_menu, $descrizione_menu, $prezzo_menu, $tipo_menu, $mail, $elenco);
         $stmt->execute();
 
-        // Check if the insertion was successful
+        // controllo inserimento
         if ($stmt->affected_rows > 0) {
             echo "inserimento avvenuto con successo, verrai reindirizzato alla pagina con il tuo menu";
     ?>
@@ -48,18 +49,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
     <?php
         } else {
-            echo "Error inserting menu. Please try again.";
+            echo "Error durante l'inserimento del menu, riprova.";
         }
 
-        // Close statement and database connection
+        // chiudo stmt e connessione
         $stmt->close();
         $conn->close();
     } else {
-        // Handle case where form fields are missing
-        echo "Please fill in all the required fields.";
+        // gestione se non ha inserito tutti i campi
+        echo "Assicurarsi di aver compilato tutti i campi";
     }
 } else {
-    // Redirect if accessed directly without form submission
+    // reindirizzo
     header("Location: index.php");
     exit();
 }

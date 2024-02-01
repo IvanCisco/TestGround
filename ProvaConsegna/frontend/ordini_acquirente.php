@@ -45,7 +45,7 @@ $stmt = $conn->prepare( "SELECT data,ora,stato,metodopagamento FROM ordine WHERE
         }
     
 
-    // Close connection
+    // chiudo connessione
     $conn->close();
 }
 

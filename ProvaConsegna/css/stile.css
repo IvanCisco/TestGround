@@ -31,7 +31,7 @@ body {
 */
 body {
     margin: 0;
-    padding-bottom: 60px; /* Adjust this value to accommodate footer height */
+    padding-bottom: 60px; /* altezza footer */
     min-height: 100vh;
     position: relative;
 }
@@ -52,7 +52,7 @@ h1 {
     color: #fff;
     padding: 20px;
     text-align: center;
-    margin: 0; /* Remove any default margins */
+    margin: 0; /*toglie margini di default */
 }
 
 /* Stile per gli elenchi */
@@ -141,10 +141,10 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 60px; /* Adjust this value to set the footer height */
+    height: 60px; /* altezza footer */
 }
 
-/* Other styles for the footer content */
+/* contenuto footer */
 .footer-content {
     margin-bottom: 10px;
 }
@@ -261,7 +261,7 @@ footer {
   cursor: pointer;
 }
 
-/* Basic styling for the slider container and slides */
+/* slider container (forse inutilizzato) */
 .slider-container {
     width: 500px;
     overflow: hidden;
@@ -281,7 +281,7 @@ footer {
     padding: 10px;
 }
 
-/* Styling for the navigation buttons */
+/* pottoni navigazione (forse inutilizzato) */
 .prev, .next {
     position: absolute;
     top: 50%;
@@ -344,11 +344,11 @@ footer {
     /*background-color: lightblue*/
 }
 
-/*Questa modifica fa schifo*/
+
 .login-form {
-    width: 50%; /* Adjust the width as needed */
-    margin: 5% auto; /* Set left and right margins to auto */
-    text-align: center; /* Center the inline content */
+    width: 50%; 
+    margin: 5% auto; 
+    text-align: center; /* centra contenuto della linea */
 }
 
 .lista-ristoranti{

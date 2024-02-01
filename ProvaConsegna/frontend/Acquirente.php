@@ -51,11 +51,11 @@
 include("../common/connessione.php");
 
 //aggiungiamo questa parte per la città
-// Check if the acquirente is logged in
+// se collegato
 if (isset($_SESSION['utente'])) {
     $acquirenteEmail = $_SESSION['utente'];
 
-    // Retrieve the city of the acquirente
+    // recupero la città dell'acquirente
     $cityQuery = "SELECT citta FROM domicilio WHERE mailacq = ?";
     $cityStmt = $conn->prepare($cityQuery);
     $cityStmt->bind_param("s", $acquirenteEmail);
@@ -67,7 +67,7 @@ if (isset($_SESSION['utente'])) {
         $acquirenteCity = $row['citta'];
 
 
-
+//prendo solo i ristaranti della sua città
 $query = "SELECT r.nome 
           FROM ristorante r
           JOIN location l ON r.mail = l.mailrist
@@ -79,18 +79,15 @@ echo "<p>Impossibile eseguire query.</p>"
 . ": " . $conn->error . "</p>";
 }else{
 if ($res->num_rows > 0) {
-    // Output data of each row
+    // Output dati
     while ($row = $res->fetch_assoc()) {
         $nomeristorante = $row["nome"];
         
-        // Convert restaurant name to lowercase and remove spaces to create the file name
-        $filename = strtolower(str_replace(' ', '', $nomeristorante)) . ".php";
+        
         echo "<div class='ristorante'>";
         echo "<h3>" .$nomeristorante . "</h3>";
-        //echo "<p>Descrizione del ristorante.</p>"; // You can fetch and display description from the database too
-        //echo "<a href=" . $filename . "'>Visualizza il menu</a>";
-        //echo "<a href = elenco_piatti.php>Visualizza il menu</a>";  
-        // Pass the restaurant name as a parameter to the menu page
+          
+        // passo il nome come parametro per vedere poi i suoi piatti
         echo "<a href='elenco_piatti.php?nomeristorante={$nomeristorante}'>Visualizza menu</a>";
     
         echo "</div>";
@@ -102,11 +99,11 @@ if ($res->num_rows > 0) {
 }
 }
 
-    // Close connection
+    // Chiudo connesione
     $conn->close();
     ?>
 
-   <!-- <p><a href="carrello.html">Visualizza il carrello</a></p>-->
+   
 </div>
 <?php include("../common/footer.html"); ?>
 </body>

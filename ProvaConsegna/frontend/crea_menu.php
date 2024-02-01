@@ -36,7 +36,7 @@
             if (isset($_SESSION['utente'])) {
                 $mail = $_SESSION['utente'];
 
-                //controll trovato online per non avere errori sulla connessione
+                // select da pietanza in base alla mail e il tipo
                 $stmt = $conn->prepare("SELECT nome,prezzo,descrizione,tipo FROM pietanza WHERE mail = ? and tipo = 'piatto'");
                 $stmt->bind_param("s", $mail);
                 $stmt->execute();
@@ -52,7 +52,7 @@
                         echo "<div>";
                     }
                 } else {
-                    echo "No menu items found.";
+                    echo "Nessun piatto trovato.";
                 }
                 $conn->close();
             } else {
