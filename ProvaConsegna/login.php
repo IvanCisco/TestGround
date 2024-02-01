@@ -13,9 +13,9 @@ session_start();
             @import url('https://fonts.cdnfonts.com/css/nimbus-sans-l');
         </style>
                 
-        <!--<link rel="stylesheet" href="css/stile.css">-->
+        <link rel="stylesheet" href="css/stile.css">
         <!--<link rel="stylesheet" href="css/style.css">-->
-        <link rel="stylesheet" href="css/loginstyle.css">
+        <!--<link rel="stylesheet" href="css/loginstyle.css">-->
     </head>
     <body>
         <?php
