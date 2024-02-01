@@ -36,7 +36,7 @@ if ($conn) {
 
 	  //header("Location:../login.php?status=error&msg=". urlencode($result["msg"]));
 	  //exit();
-	   $errorMessage = $result["msg"]; // Assuming the error message is part of the result
+	   $errorMessage = $result["msg"]; // messaggio d'errore
     echo '<script type="text/javascript">',
     			'showError($errorMessage);',
     			'</script>';
