@@ -10,11 +10,12 @@
         include("../common/connessione.php");
         session_start();
 
+        
         if (isset($_SESSION['utente'])) {
             $mail = $_SESSION['utente'];
 
             //QUERY che seleziona cosa contengono gli ordini
-            $query = "SELECT c.nome, c.data, c.ora
+            $query = "SELECT c.nome, c.data, c.ora, o.stato
                 FROM contiene c
                 JOIN ordine o ON c.data = o.data AND c.ora = o.ora
                 WHERE c.mail = ? 
@@ -27,16 +28,19 @@
             $stmt->execute();
             $result = $stmt->get_result();
 
+            $count = 1;
             if ($result && $result->num_rows > 0) {
-                // se ci sono ordini recuper questi dati
+                // se ci sono ordini recupero questi dati
                 while ($row = $result->fetch_assoc()) {
                     $data = $row['data'];
                     $ora = $row['ora'];
+                    $stato = $row['stato'];
 
                     // Visualizza informazioni ordine
                     echo "<div class='order'>";
-                    echo "<p>Data: $data, Ora: $ora</p>";
+                    echo "<p><strong>Ordine $count</strong> - Data: $data, Ora: $ora</p>";
 
+                    $count++;
                     // Query per gli ordini attuali
             
                     $queryItems = "SELECT nome FROM contiene WHERE mail = ? AND data = ? AND ora = ?";
@@ -52,12 +56,15 @@
                         echo "<p> {$rowItem['nome']}</p>";
                         echo "</div>";
                     }
-                    // Bottone per confermare il ritiro del fattorino
+                    // Bottone per confermare il ritiro del fattorino solo se è stato preso in carico
+                    if ($stato == 'preso in carico') {
                     echo "<form method='post' action='../backend/modify_order_status.php'>";
                     echo "<input type='hidden' name='data' value='$data'>";
                     echo "<input type='hidden' name='ora' value='$ora'>";
                     echo "<input type='submit' name='modifyOrderStatus' value='Consegnato al fattorino'>";
                     echo "</form>";
+                }
+                    echo "<div>Stato: $stato</div>";
                     echo "</div>";
                 }
             } else {
