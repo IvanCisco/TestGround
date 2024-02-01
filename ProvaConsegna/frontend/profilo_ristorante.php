@@ -14,6 +14,7 @@
         if(isset($_SESSION['utente'])) {
             $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in sessione
 
+            //select dati del ristorante
             $stmt = $conn->prepare("SELECT * FROM ristorante WHERE mail = ?");
             $stmt->bind_param("s", $mail);
             $stmt->execute();
@@ -35,6 +36,7 @@
             <h3>Zona </h3>
             <?php
 
+            //select per la zona in cui si trova il ristorante
             $stmt = $conn->prepare("SELECT * FROM operainrist WHERE mailrist = ?");
             $stmt->bind_param("s", $mail);
             $stmt->execute();
@@ -49,6 +51,7 @@
             <h3>Sede Legale </h3>
             <?php
 
+            //select per l'indirizzo della sede legale del ristorante
             $stmt = $conn->prepare("SELECT * FROM sedelegale WHERE mailrist = ?");
             $stmt->bind_param("s", $mail);
             $stmt->execute();
@@ -71,6 +74,7 @@
             <h3>Location</h3>
             <?php
 
+            //select per l'indirizzo in cui si trova il ristorante
             $stmt = $conn->prepare("SELECT * FROM location WHERE mailrist = ?");
             $stmt->bind_param("s", $mail);
             $stmt->execute();
@@ -97,6 +101,7 @@
 
         <h3>I miei orari</h3>
         <?php
+        //select turni del ristorante
         $stmt = $conn->prepare("SELECT * FROM rlavorasu WHERE mailrist = ?");
         $stmt->bind_param("s", $mail);
         $stmt->execute();
