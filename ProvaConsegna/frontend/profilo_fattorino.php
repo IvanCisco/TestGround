@@ -15,6 +15,7 @@ $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
 <h2>Dati del fattorino</h2>
 
 <?php
+//select per i dati del fattorino
 $stmt = $conn->prepare("SELECT * FROM fattorino WHERE mail = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
@@ -39,7 +40,7 @@ if ($result->num_rows > 0) {
 } else {
     echo "Utente non loggato";
 }
-
+//select per la zona in cui ritira il fattorino
 $stmt = $conn->prepare("SELECT * FROM operainfatt WHERE mailfatt = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
@@ -58,7 +59,7 @@ if ($result->num_rows > 0) {
     echo "Utente non loggato";
 }
 
-
+//select per i turni del fattorino
 $stmt = $conn->prepare("SELECT * FROM flavorasu WHERE mailfatt = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
