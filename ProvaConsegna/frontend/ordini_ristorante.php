@@ -13,13 +13,14 @@
         if (isset($_SESSION['utente'])) {
             $mail = $_SESSION['utente'];
 
-            //QUERY CON IL JOIN
+            //QUERY che seleziona cosa contengono gli ordini
             $query = "SELECT c.nome, c.data, c.ora
                 FROM contiene c
                 JOIN ordine o ON c.data = o.data AND c.ora = o.ora
                 WHERE c.mail = ? 
                 AND o.stato = 'in preparazione' or o.stato ='preso in carico'
-                AND TIMESTAMPDIFF(HOUR, CONCAT(c.data, ' ', c.ora), NOW()) < 2";
+                AND TIMESTAMPDIFF(HOUR, CONCAT(c.data, ' ', c.ora), NOW()) < 2
+                ORDER BY c.data, c.ora";
 
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $mail);
