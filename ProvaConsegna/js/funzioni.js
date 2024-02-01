@@ -87,3 +87,21 @@ function validazione() {
     }
     return true;
 }
+
+function mostraCampiCarta() {
+    let metodoPagamento = document.getElementById("metodoPagamento").value;
+    const dati = document.getElementsByClassName("daticarta");
+    if (metodoPagamento == "carta") {
+        document.getElementById("campiCarta").style.display = "block";
+        document.getElementById("campiCarta").style.visibility = "visible";
+        for (const dato of dati) {
+            dato.setAttribute("required", "");
+          }
+    } else {
+        document.getElementById("campiCarta").style.display = "none";
+        document.getElementById("campiCarta").style.visibility = "hidden";
+        for (const dato of dati) {
+            dato.removeAttribute("required");
+          }
+    }
+}

@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <script src="../js/javascript.js"></script>
-</head>
-
-<body>
-
-<p><a href="acquirente.php">Torna indietro</a></p>
-<form action="../backend/inserisci_ordine_acquirente.php" method="POST">
+    <head>
+        <script src="../js/javascript.js"></script>
+    </head>
+    <body>
+        <p><a href="acquirente.php">Torna indietro</a></p>
+        <form action="../backend/inserisci_ordine_acquirente.php" method="POST">
 <?php
     include("../common/connessione.php");
     session_start();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../js/javascript.js"></script>
+        <script src="../js/funzioni.js" async></script>
     </head>
     <body>
         <h1>Riepilogo ordine</h1>
@@ -37,17 +37,18 @@
                 ?>
                 <input type="hidden" name="selectedPlates" id="selectedPlates"value='<?php echo json_encode($_POST['selectedPlates']); ?>'>
             <h3>Metodo di pagamento</h3>
-                <select id="metodoPagamento" name="metodoPagamento" onchange="showHideCardFields()">
+                <select id="metodoPagamento" name="metodoPagamento" onchange="mostraCampiCarta()" required>
+                    <option disabled selected value></option>
                     <option value="contanti">Contanti</option>
                     <option value="carta">Carta</option>
                 </select>
-                <div id="cardFieldsContainer" style="display: none;">
+                <div id="campiCarta" style="display: none; visibility: hidden;">
                     <label for="cardNumber">Numero della carta:</label>
-                    <input type="text" inputmode="numeric"id="cardNumber" name="cardNumber" minlength="16" maxlength="16" size="16"
-                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
+                    <input type="text" inputmode="numeric" class="daticarta" id="cardNumber" name="cardNumber" minlength="16" maxlength="16" size="16"
+                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
                     <label for="cardCode">CCV:</label>
-                    <input type="text" inputmode="numeric" id="cardCode" name="cardCode" minlength="3" maxlength="3" size="3"
-                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
+                    <input type="text" inputmode="numeric" class="daticarta" id="cardCode" name="cardCode" minlength="3" maxlength="3" size="3"
+                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
                 </div>
                 <br><br>
                 <input type="submit" name="submitOrder" value="Conferma Ordine">

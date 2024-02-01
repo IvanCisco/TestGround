@@ -143,11 +143,11 @@ function updateHiddenFieldWithSelectedPlates() {
     }
 
 function prepareSelectedPlates() {
-                // Get the selected plates and update the value of the hidden input field
-                var selectedPlates = document.querySelectorAll('input[name="selectedPlates[]"]:checked');
-                var selectedPlatesArray = Array.from(selectedPlates).map(plate => plate.value);
-                document.getElementById('selectedPlates').value = JSON.stringify(selectedPlatesArray);
-            }
+  // Get the selected plates and update the value of the hidden input field
+  var selectedPlates = document.querySelectorAll('input[name="selectedPlates[]"]:checked');
+  var selectedPlatesArray = Array.from(selectedPlates).map(plate => plate.value);
+  document.getElementById('selectedPlates').value = JSON.stringify(selectedPlatesArray);
+}
 
 function submitForm() {
     // Retrieve selected plates and update the hidden input field

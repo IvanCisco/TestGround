@@ -58,7 +58,6 @@ session_start();
             </form>
     </div>
 
-        <!-- Include the footer -->
     <?php include("common/footer.html"); ?>
     </body>
 </html>
