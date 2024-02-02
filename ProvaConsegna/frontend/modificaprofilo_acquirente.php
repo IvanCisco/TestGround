@@ -22,7 +22,7 @@
 
 	<div class="navbar">
         <li><img src="../images/MainIcon.png" height="40px"></li>
-        <a href="acquirente.php">Torna indietro</a></p>
+        <a href="acquirente.php">Torna indietro</a>
         <a href="../frontend/ordini_acquirente.php">Ordini</a>
         <a href="../frontend/profilo_acquirente.php">Profilo</a>
         <a href="../common/logout.php">Logout</a>

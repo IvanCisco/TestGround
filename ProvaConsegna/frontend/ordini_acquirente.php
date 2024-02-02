@@ -2,12 +2,26 @@
 <html lang="en">
 
 <head>
-    
+  <title>ordini acquirente</title>
+    <link rel="stylesheet" type="text/css" href="../css/stile.css">  
 </head>
 
-<body>
-<p><a href="acquirente.php">Torna indietro</a></p>
 
+
+<body>
+
+    <div class="header">
+    <div class="navbar">
+        <li><img src="../images/MainIcon.png" height="40px"></li>
+        <a href="acquirente.php">Torna indietro</a>
+        <a href="../frontend/profilo_acquirente.php">Profilo</a>
+        <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
+        <a href="../common/logout.php">Logout</a>
+    </div>
+    </div>
+
+<h1>I tuoi ordini</h1>
+<br>
 <?php
 include("../common/connessione.php");
     session_start();
@@ -23,8 +37,9 @@ $stmt = $conn->prepare( "SELECT data,ora,stato,metodopagamento FROM ordine WHERE
 
 
  if ($result && $result->num_rows > 0) {
+    /*
     echo "<h2>I tuoi ordini :</h2>";
-            echo "<ul>";
+            echo "<ul>";*/
     
 	// per ogni riga
     while ($row = $result->fetch_assoc()) {

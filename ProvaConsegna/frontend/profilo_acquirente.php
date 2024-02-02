@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>modificaacq</title>
+<link rel="stylesheet" type="text/css" href="../css/stile.css">
+</head>
+<div class="header">
+    <div class="navbar">
+        <li><img src="../images/MainIcon.png" height="40px"></li>
+        <a href="acquirente.php">Torna indietro</a>
+        <a href="../frontend/ordini_acquirente.php">Ordini</a>
+        <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
+        <a href="../common/logout.php">Logout</a>
+    </div>
+    </div>
 
 
-
-<p><a href="acquirente.php">Torna indietro</a></p>
+<body>
+    <h1>Profilo</h1>
 <?php
 include("../common/connessione.php");
 session_start();
@@ -55,5 +68,5 @@ if ($result->num_rows > 0) {
 
 
 ?>
-
+</body>
 </html>
