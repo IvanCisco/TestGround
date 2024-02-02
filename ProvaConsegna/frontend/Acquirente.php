@@ -10,37 +10,21 @@
     <div class="header">
     <div class="navbar">
         <li><img src="../images/MainIcon.png" height="40px"></li>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="menu-items" id="menuItems">
-                <a href="../frontend/ordini_acquirente.php">Ordini</a>
-                <a href="../frontend/profilo_acquirente.php">Profilo</a>
-                <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
-                <a href="../common/logout.php">Logout</a>
-            </div>
+        <a href="../frontend/ordini_acquirente.php">Ordini</a>
+        <a href="../frontend/profilo_acquirente.php">Profilo</a>
+        <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
+        <a href="../common/logout.php">Logout</a>
+    </div>
         
         
-            <div class="welcome-user">
-            
-            <?php
-                session_start();
-                if (isset($_SESSION['utente'])) {
-                    echo 'Benvenuto ' . $_SESSION['utente'];
-                    //echo 'il tuo tipo è ' . $_SESSION['tipo'] ;// Stampa il nome dell'utente
-                }
-            ?>
-        
-
-            </div>
+    <!--   in teoria si può eliminare    
     </div>
     </div>
     
   
     </div>
     </div>
+-->
 
 <div class="lista-ristoranti">
     <p>Ecco l'elenco dei ristoranti da cui puoi ordinare</p>
@@ -52,8 +36,10 @@ include("../common/connessione.php");
 
 //aggiungiamo questa parte per la città
 // se collegato
+session_start();
 if (isset($_SESSION['utente'])) {
     $acquirenteEmail = $_SESSION['utente'];
+    //echo $acquirenteEmail;
 
     // recupero la città dell'acquirente
     $cityQuery = "SELECT citta FROM domicilio WHERE mailacq = ?";
