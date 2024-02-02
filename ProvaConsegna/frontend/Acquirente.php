@@ -15,6 +15,7 @@
         <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
         <a href="../common/logout.php">Logout</a>
     </div>
+    </div>
         
         
     <!--   in teoria si può eliminare    
