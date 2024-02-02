@@ -357,3 +357,8 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
 .lista-ristoranti{
     margin:5px;
 }
+
+.page-content{
+    background-color: yellow;
+    padding: 20px;
+}

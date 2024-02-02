@@ -4,6 +4,7 @@
 <head>
   <title>ordini acquirente</title>
     <link rel="stylesheet" type="text/css" href="../css/stile.css">  
+    <?php include("../common/footer.html"); ?>
 </head>
 
 
@@ -21,7 +22,7 @@
     </div>
 
 <h1>I tuoi ordini</h1>
-<br>
+<section class="page-content">
 <?php
 include("../common/connessione.php");
     session_start();
@@ -66,6 +67,7 @@ $stmt = $conn->prepare( "SELECT data,ora,stato,metodopagamento FROM ordine WHERE
 
 
 ?>
+</section>
 </body>
 
 </html>

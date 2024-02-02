@@ -16,8 +16,11 @@
         <a href="../common/logout.php">Logout</a>
     </div>
     </div>
-        
-        
+   
+    <h1>Elenco Ristoranti</h1>
+  
+     
+<section class="page-content">
     <!--   in teoria si può eliminare    
     </div>
     </div>
@@ -27,9 +30,8 @@
     </div>
 -->
 
-<div class="lista-ristoranti">
-    <p>Ecco l'elenco dei ristoranti da cui puoi ordinare</p>
 
+    
 
 <?php
 
@@ -91,7 +93,8 @@ if ($res->num_rows > 0) {
     ?>
 
    
-</div>
+
+</section>
 <?php include("../common/footer.html"); ?>
 </body>
 </html>

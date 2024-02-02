@@ -15,6 +15,7 @@
 <head>
 <title>modificaacq</title>
 <link rel="stylesheet" type="text/css" href="../css/stile.css">
+<?php include("../common/footer.html"); ?>
 </head>
 <body>
 	
@@ -29,6 +30,7 @@
     </div>
 
 	<h1>Modifica profilo</h1>
+	<section class="page-content">
 	<form method="POST" action="../backend/modificaprofilo_acq.php?id=<?php echo $mail; ?>">
 		<p><label>Nome: </label><input type="text" value="<?php echo $row['nome']; ?>" name="nome" maxlength="20" required></p>
 		<p><label>Cognome: </label><input type="text" value="<?php echo $row['cognome']; ?>" name="cognome" maxlength="20" required></p>
@@ -65,7 +67,7 @@
 		<input type="submit" name="submit" value="Salva">
 		</form>
 
-	
+	</section>
 </body>
 
 </html>

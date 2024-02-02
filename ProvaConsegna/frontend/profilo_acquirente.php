@@ -3,6 +3,7 @@
 <head>
 <title>modificaacq</title>
 <link rel="stylesheet" type="text/css" href="../css/stile.css">
+<?php include("../common/footer.html"); ?>
 </head>
 <div class="header">
     <div class="navbar">
@@ -17,6 +18,7 @@
 
 <body>
     <h1>Profilo</h1>
+    <section class="page-content">
 <?php
 include("../common/connessione.php");
 session_start();
@@ -68,5 +70,6 @@ if ($result->num_rows > 0) {
 
 
 ?>
+</section>
 </body>
 </html>
