@@ -176,9 +176,11 @@ footer {
     list-style-type: none;
 }
 
+/* IN TEORIA TUTTO DA ELIMINARE 
+PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
 .menu-toggle {
     cursor: pointer;
-    order: 2;/* posizione destra*/
+    order: 2;/* posizione destra
 }
 
 .bar {
@@ -193,7 +195,7 @@ footer {
     display: none;
     position: absolute;
     top: 50px; /* Regola l'altezza in base al menu a scomparsa */
-    right: 0; /* Allinea il menu a destra */
+    right: 0; /* Allinea il menu a destra 
     background-color: #f2f2f2;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -212,7 +214,7 @@ footer {
     background-color: #ddd;
 }
 
-/* Stile per il menu a scomparsa quando è aperto */
+/* Stile per il menu a scomparsa quando è aperto 
 .menu-open {
     display: flex;
     flex-direction: column;
@@ -222,6 +224,7 @@ footer {
     background-color: #f2f2f2;
     padding: 10px;
 }
+*/
 .welcome-user {
     margin-left: 20px; /* Aggiungi spazio a sinistra */
 }
