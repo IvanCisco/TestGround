@@ -1,0 +1,78 @@
+* {
+    font-family: sans-serif;
+    
+}
+
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 10px;
+    color: tomato;
+    font-size: 18px;
+    text-decoration: none;
+    
+}
+
+.contenitore-1 {
+    position: relative;
+    float: left;
+    width: 70%;
+    height: auto;
+}
+
+#img1 {
+    max-height: 100%;
+    max-width: 100%
+}
+
+.contenitore-2 {
+    margin: 0;
+    position: absolute;
+    width: 48%;
+    top: 40%;
+    left: 2%;
+    overflow: hidden;
+}
+
+.headline {
+    color: white;
+}
+
+.cities-wrapper{
+    position: relative;
+    width: 29%;
+    height: auto;
+    float: left;
+}
+
+#header-scegli {
+    position:absolute;
+    top: 0;
+    text-align: center;
+}
+
+#img2 {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.div-cities {
+    position: absolute;
+}
+
+.text-cities {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 2em;
+    color: darkgreen;
+}

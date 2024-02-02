@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inserisci piatto</title>
+</head>
+<body>
+    <p><a href="ristorante.php">Torna indietro</a></p>
+    <h2>Inserimento piatto</h2>
+    <form action="../backend/inserisci_piatto.php" method="POST" enctype="multipart/form-data">
+        <label for="nome">Nome del piatto:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="descrizione">descrizione del piatto :</label>
+        <input type="text" id="descrizione" name="descrizione" required><br><br>
+
+
+        <label for="password">prezzo del piatto:</label>
+        <input type="float" id="prezzo" name="prezzo" required><br><br>
+
+
+        <!--preso da ariel -->
+        <div class="container-xxl position-relative d-flex p-0">
+
+        <div class = "content">
+            
+            <div class="container-fluid px-5">
+                   
+                
+                    Select image to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    
+      
+            
+
+            </div>
+
+            
+        </div>
+
+
+    </div>
+        
+
+        <input type="submit" value="Inserisci">
+    </form>
+</body>
+</html>
