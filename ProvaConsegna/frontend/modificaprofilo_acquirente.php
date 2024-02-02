@@ -13,11 +13,22 @@
 <html>
 <script src="js/javascript.js"></script>
 <head>
-<title>EDIT</title>
-
+<title>modificaacq</title>
+<link rel="stylesheet" type="text/css" href="../css/stile.css">
 </head>
 <body>
-	<p><a href="acquirente.php">Torna indietro</a></p>
+	
+
+
+	<div class="navbar">
+        <li><img src="../images/MainIcon.png" height="40px"></li>
+        <a href="acquirente.php">Torna indietro</a></p>
+        <a href="../frontend/ordini_acquirente.php">Ordini</a>
+        <a href="../frontend/profilo_acquirente.php">Profilo</a>
+        <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
+        <a href="../common/logout.php">Logout</a>
+    </div>
+
 	<h1>Modifica profilo</h1>
 	<form method="POST" action="../backend/modificaprofilo_acq.php?id=<?php echo $mail; ?>">
 		<p><label>Nome: </label><input type="text" value="<?php echo $row['nome']; ?>" name="nome" maxlength="20" required></p>
