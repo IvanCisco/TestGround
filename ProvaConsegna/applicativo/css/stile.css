@@ -6,20 +6,20 @@ header{
     background-color: #f2f2f2;
     padding: 10px;
     /*
-	position: fixed;
-	
+    position: fixed;
+    
     top: 0;
     left: 0;
     z-index: 999;
     width: 100%;
     height: 23px;
-	*/
+    */
 }
 
 
 /*
 body {
-	display: block;
+    display: block;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
@@ -48,6 +48,7 @@ body {
 
 /* Intestazione */
 h1 {
+    flex-grow: 1;
     background-color: #333;
     color: #fff;
     padding: 20px;
@@ -361,4 +362,25 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
 .page-content{
     background-color: yellow;
     padding: 20px;
+}
+
+.titolo{
+    display: flex;
+    align-items: center;
+}
+
+.indietro{
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    
+}
+.freccia {
+    background-color: #333;
+    width: 50px;
+    margin: 0;
+    padding: 0; /* Imposta la larghezza desiderata dell'immagine */
+    height: auto; /* Imposta l'altezza in base alla larghezza mantenendo l'aspetto originale */
+    margin-right: 10px; /* Aggiunge spazio tra l'immagine e il testo */
+   margin-left: 10px;
 }
