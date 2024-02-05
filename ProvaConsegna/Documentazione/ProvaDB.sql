@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 04, 2024 alle 16:37
+-- Creato il: Feb 05, 2024 alle 16:14
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -44,7 +44,8 @@ CREATE TABLE `acquirente` (
 
 INSERT INTO `acquirente` (`mail`, `password`, `nome`, `cognome`, `datareg`, `telefono`, `domicilio`, `istruzioni`) VALUES
 ('laura.bianchi@gmail.com', 'pass', 'Laura', 'Bianchi', '2024-02-04', '2147483647', 2, 'Lasciare alla portineria'),
-('mario.rossi@gmail.com', 'pass', 'Mario', 'Rossi', '2024-02-04', '3325678391', 1, 'Veloci con le consegne');
+('mario.rossi@gmail.com', 'pass', 'Mario', 'Rossi', '2024-02-04', '3325678391', 1, 'Veloci con le consegne'),
+('noto@gmail.com', 'pass', 'Noto', 'Sempre', '2024-02-05', '3317995304', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -163,12 +164,12 @@ CREATE TABLE `indirizzo` (
 --
 
 INSERT INTO `indirizzo` (`id`, `via`, `numero`, `cap`, `citta`) VALUES
+(5, 'Corso Indipendenza', 395, 38484, 'Trento'),
+(6, 'Largo Murani', 30, 218, 'Roma'),
+(4, 'Via Napoli', 5, 40144, 'Roma'),
 (1, 'Via Roma', 10, 20121, 'Milano'),
 (2, 'Via Tal Dei Tali', 5, 301, 'Roma'),
-(3, 'Via Venezia', 16, 38888, 'Milano'),
-(4, 'Via Napoli', 5, 40144, 'Roma'),
-(5, 'Corso Indipendenza', 395, 38484, 'Trento'),
-(6, 'Largo Murani', 30, 218, 'Roma');
+(3, 'Via Venezia', 16, 38888, 'Milano');
 
 -- --------------------------------------------------------
 
@@ -391,7 +392,8 @@ ALTER TABLE `flavorasu`
 -- Indici per le tabelle `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `via` (`via`,`numero`,`cap`,`citta`);
 
 --
 -- Indici per le tabelle `operainfatt`
@@ -441,7 +443,8 @@ ALTER TABLE `rlavorasu`
 -- Indici per le tabelle `turno`
 --
 ALTER TABLE `turno`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `giorno` (`giorno`,`orainizio`,`orafine`);
 
 --
 -- Indici per le tabelle `zona`
@@ -457,7 +460,7 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `turno`

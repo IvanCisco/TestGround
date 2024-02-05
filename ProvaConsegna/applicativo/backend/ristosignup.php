@@ -1,7 +1,7 @@
 <?php
 
 include("../common/connessione.php");
-include("../common/funzioniMunoz.php");
+include("../common/funzioni.php");
 
 $nome = $partitaiva = $ragsoc = $mail = $password = $via = $numero = $cap = $citta = $zona = $viasl = $numerosl = $capsl = $cittasl = "";
 $giorni = $orariApertura = $orariChiusura = array();
