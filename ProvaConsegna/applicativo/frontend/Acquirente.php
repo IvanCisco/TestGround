@@ -45,6 +45,7 @@ if (isset($_SESSION['utente'])) {
     //echo $acquirenteEmail;
 
     // recupero la città dell'acquirente
+    /*
     $cityQuery = "SELECT citta FROM domicilio WHERE mailacq = ?";
     $cityStmt = $conn->prepare($cityQuery);
     $cityStmt->bind_param("s", $acquirenteEmail);
@@ -54,13 +55,35 @@ if (isset($_SESSION['utente'])) {
     if ($cityResult && $cityResult->num_rows > 0) {
         $row = $cityResult->fetch_assoc();
         $acquirenteCity = $row['citta'];
+        */
+        $query = "SELECT i.citta 
+          FROM acquirente AS a
+          JOIN indirizzo AS i ON a.domicilio = i.id
+          WHERE a.mail = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $acquirenteEmail);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
+        // Ora puoi estrarre la città dal risultato
+        if ($row = $result->fetch_assoc()) {
+            $acquirenteCity = $row['citta'];
+            // Fai qualcosa con $citta
+        } else {
+            echo "Errore non è stato possibile recuperare la città dell'acquirente ";
+        }
 
 //prendo solo i ristaranti della sua città
+        /*
 $query = "SELECT r.nome 
           FROM ristorante r
           JOIN location l ON r.mail = l.mailrist
           WHERE citta = '$acquirenteCity'";
+          */
+          $query = "SELECT r.nome 
+          FROM ristorante r
+          JOIN indirizzo i ON r.location = i.id
+          WHERE i.citta = '$acquirenteCity'";
 $res= $conn->query($query);
 if (!$res){
 echo "<p>Impossibile eseguire query.</p>"
@@ -86,7 +109,7 @@ if ($res->num_rows > 0) {
         }
     }
 }
-}
+
 
     // Chiudo connesione
     $conn->close();
