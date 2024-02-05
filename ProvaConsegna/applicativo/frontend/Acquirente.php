@@ -56,14 +56,15 @@ if (isset($_SESSION['utente'])) {
         $row = $cityResult->fetch_assoc();
         $acquirenteCity = $row['citta'];
         */
+        //RECUPER LOA CITTA DELL'ACQUIRENTE
         $query = "SELECT i.citta 
           FROM acquirente AS a
           JOIN indirizzo AS i ON a.domicilio = i.id
           WHERE a.mail = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $acquirenteEmail);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $acquirenteEmail);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         // Ora puoi estrarre la città dal risultato
         if ($row = $result->fetch_assoc()) {
@@ -80,20 +81,43 @@ $query = "SELECT r.nome
           JOIN location l ON r.mail = l.mailrist
           WHERE citta = '$acquirenteCity'";
           */
+          //QUESTA QUERY FUNZIONA PERò MI SERVE ALTRO 
+          /*
           $query = "SELECT r.nome 
           FROM ristorante r
           JOIN indirizzo i ON r.location = i.id
           WHERE i.citta = '$acquirenteCity'";
-$res= $conn->query($query);
-if (!$res){
-echo "<p>Impossibile eseguire query.</p>"
-. "<p>Codice errore " . $conn->errno
-. ": " . $conn->error . "</p>";
-}else{
-if ($res->num_rows > 0) {
-    // Output dati
-    while ($row = $res->fetch_assoc()) {
-        $nomeristorante = $row["nome"];
+          */
+
+          // Imposta la localizzazione in italiano
+setlocale(LC_TIME, 'it_IT');
+          // Recupera il giorno corrente
+$giornoCorrente = strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)
+
+// Recupera l'ora corrente
+$oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con i minuti e i secondi
+
+// Esegui una query per ottenere i ristoranti aperti in quel giorno e in quell'orario
+$query = "SELECT r.nome 
+          FROM ristorante r
+          JOIN indirizzo i ON r.location = i.id
+          JOIN rlavorasu rl ON r.mail = rl.mailrist
+          JOIN turno t ON rl.turno = t.id
+          WHERE i.citta = '$acquirenteCity'
+          AND t.giorno = '$giornoCorrente'
+          AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine";
+
+
+    $res= $conn->query($query);
+    if (!$res){
+    echo "<p>Impossibile eseguire query.</p>"
+    . "<p>Codice errore " . $conn->errno
+    . ": " . $conn->error . "</p>";
+    }else{
+    if ($res->num_rows > 0) {
+        // Output dati
+        while ($row = $res->fetch_assoc()) {
+            $nomeristorante = $row["nome"];
         
         
         echo "<div class='ristorante'>";
@@ -105,7 +129,7 @@ if ($res->num_rows > 0) {
         echo "</div>";
             }
         } else {
-            echo "0 results";
+            echo "nessun ristorante aperto in questo momento";
         }
     }
 }
