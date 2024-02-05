@@ -22,7 +22,6 @@
                 <a href="ordini_ristorante.php">Ordini</a>
                 <a href="../common/logout.php">Logout</a>
             </div>
-            <!--<div class="welcome-user"></div>-->
         </div>
         <h2>Il tuo menu</h2>
         <?php
