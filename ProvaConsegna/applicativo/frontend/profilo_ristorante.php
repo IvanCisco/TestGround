@@ -2,9 +2,22 @@
 <html>
     <head>
         <script src="../js/javascript.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/stile.css">
     </head>
     <body>
-        <p><a href="ristorante.php">Torna indietro</a></p>
+        
+        <div class="header">
+        <div class="navbar">
+            <li><img src="../images/MainIcon.png" height="40px"></li>
+                <a href="ristorante.php">Torna indietro</a>
+                <a href="modificaprofilo_ristorante.php">Modifica Profilo</a>
+                <a href="inserisci_piatto.html">Inserire nuovo piatto</a>
+                <a href="crea_menu.php">Crea menu</a>
+                <a href="ordini_ristorante.php">Ordini</a>
+                <a href="../common/logout.php">Logout</a>
+            </div>
+        </div>
+        <h1>Profilo Ristorante</h1>
         <h3>Dati del ristorante </h3>
 
         <?php
@@ -48,12 +61,34 @@
                 }
             }
             ?>
+
+            <?php
+            //recupero id sedelegale e location
+            $stmt = $conn->prepare("SELECT location, sedelegale FROM ristorante WHERE mail = ?");
+            $stmt->bind_param("s", $mail);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // Dichiarazione delle variabili per memorizzare la location e la sede legale
+            $location = "";
+            $sedeLegale = "";
+
+            // Verifica se ci sono risultati
+            if ($result->num_rows > 0) {
+                // Estrai i dati e memorizzali nelle variabili
+                while ($row = $result->fetch_assoc()) {
+                    $location = $row["location"];
+                    $sedeLegale = $row["sedelegale"];
+                }
+            }
+            ?>
+
             <h3>Sede Legale </h3>
             <?php
 
             //select per l'indirizzo della sede legale del ristorante
-            $stmt = $conn->prepare("SELECT * FROM sedelegale WHERE mailrist = ?");
-            $stmt->bind_param("s", $mail);
+            $stmt = $conn->prepare("SELECT * FROM indirizzo WHERE id = ?");
+            $stmt->bind_param("s", $sedeLegale);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -75,8 +110,8 @@
             <?php
 
             //select per l'indirizzo in cui si trova il ristorante
-            $stmt = $conn->prepare("SELECT * FROM location WHERE mailrist = ?");
-            $stmt->bind_param("s", $mail);
+            $stmt = $conn->prepare("SELECT * FROM indirizzo WHERE id = ?");
+            $stmt->bind_param("s", $location);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -117,7 +152,7 @@
                 echo "<p>fine turno: " . $row["orafine"] . "</p>";
             }
         }else {
-            echo "Utente non loggato";
+            echo "Non è stato trovato alcun turno, recarsi nella sezione modifica profilo per aggiungerne";
         }
         ?>
     </body>
