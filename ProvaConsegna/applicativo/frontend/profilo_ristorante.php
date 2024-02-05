@@ -69,7 +69,6 @@
             $stmt->execute();
             $result = $stmt->get_result();
 
-            // Dichiarazione delle variabili per memorizzare la location e la sede legale
             $location = "";
             $sedeLegale = "";
 
