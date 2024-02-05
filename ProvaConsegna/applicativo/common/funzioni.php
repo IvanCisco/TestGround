@@ -1,109 +1,5 @@
 <?php
 
-
-/* Funzioni relative alla gestione degli utenti */
-/*
-function isUser($conn,$email,$password,$tipo_utente)
-{
-	$risultato= array("msg"=>"","status"=>"ok");
-
-   /* inserire controlli dell'input 
-   if ($tipo_utente=="Acquirente")
-   {
-   $sql = "SELECT * FROM acquirente WHERE mail = '$email' and password = '$password'";
-   
-   $res = $conn->query($sql);
-
-   	if ($res==null) 
-	{
-	        $msg = "Si sono verificati i seguenti errori:<br/>" 
-     		. $res->error;
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;			
-	}elseif($res->num_rows==0 || $res->num_rows>1)
-	{
-			$msg = "Login o password sbagliate";
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;		
-	}elseif($res->num_rows==1)
-	{
-	    $msg = "Login effettuato con successo";
-		$risultato["status"]="ok";
-		$risultato["msg"]=$msg;		
-	}
-    return $risultato;
-
-	}elseif($tipo_utente=="Ristorante")
-   {
-   	$sql = "SELECT * FROM ristorante WHERE mail = '$email' and password = '$password'";
-
-   	$res = $conn->query($sql);
-   	if ($res==null) 
-	{
-	        $msg = "Si sono verificati i seguenti errori:<br/>" 
-     		. $res->error;
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;			
-	}elseif($res->num_rows==0 || $res->num_rows>1)
-	{
-			$msg = "Login o password sbagliate";
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;		
-	}elseif($res->num_rows==1)
-	{
-	    $msg = "Login effettuato con successo";
-		$risultato["status"]="ok";
-		$risultato["msg"]=$msg;		
-	}
-    return $risultato;
-}elseif($tipo_utente=="Fattorino")
-   {
-   	$sql = "SELECT * FROM fattorino WHERE mail = '$email' and password = '$password'";
-
-   	$res = $conn->query($sql);
-   	if ($res==null) 
-	{
-	        $msg = "Si sono verificati i seguenti errori:<br/>" 
-     		. $res->error;
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;			
-	}elseif($res->num_rows==0 || $res->num_rows>1)
-	{
-			$msg = "Login o password sbagliate";
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;		
-	}elseif($res->num_rows==1)
-	{
-	    $msg = "Login effettuato con successo";
-		$risultato["status"]="ok";
-		$risultato["msg"]=$msg;		
-	}
-    return $risultato;
-   }
-}
-
-   /*
-   $res = $conn->query($sql);
-   	if ($res==null) 
-	{
-	        $msg = "Si sono verificati i seguenti errori:<br/>" 
-     		. $res->error;
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;			
-	}elseif($res->num_rows==0 || $res->num_rows>1)
-	{
-			$msg = "Login o password sbagliate";
-			$risultato["status"]="ko";
-			$risultato["msg"]=$msg;		
-	}elseif($res->num_rows==1)
-	{
-	    $msg = "Login effettuato con successo";
-		$risultato["status"]="ok";
-		$risultato["msg"]=$msg;		
-	}
-    return $risultato;
-}
-*/
 function isUser($conn, $email, $password, $tipo_utente) {
     $risultato = array("msg" => "", "status" => "ko");
 
@@ -165,15 +61,34 @@ function inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, $
 		$orarioApertura = $orariApertura[$i];
 		$orarioChiusura = $orariChiusura[$i];
 		if ($tabella == "rlavorasu") {
-			$sql = "INSERT INTO " . $tabella . " (mailrist, giorno, orainizio, orafine) VALUES ('$mail', '$giorno', '$orarioApertura', '$orarioChiusura')";
+			$sql = "INSERT INTO rlavorasu (mailrist, turno)
+					SELECT '$mail', id
+					FROM turno
+					WHERE giorno = '$giorno'
+					AND orainizio = '$orainizio'
+					AND orafine = '$orafine'";
 		} else {
-			$sql = "INSERT INTO " . $tabella . " (mailfatt, giorno, orainizio, orafine) VALUES ('$mail', '$giorno', '$orarioApertura', '$orarioChiusura')";
+			$sql = "INSERT INTO flavorasu (mailfatt, turno)
+					SELECT '$mail', id
+					FROM turno
+					WHERE giorno = '$giorno'
+					AND orainizio = '$orainizio'
+					AND orafine = '$orafine'";
 		}
 		
-		if ($conn->query($sql) == FALSE) {
+		if ($conn->query($sql) == FALSE || inserisciInTurno($giorno, $orainizio, $orafine == FALSE)){
 			echo "Error " . $sql . "<br>" . $conn->error;
 			return FALSE;
 		}
+	}
+	return TRUE;
+}
+
+function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
+	$sql = "INSERT IGNORE INTO turno (giorno, orainizio, orafine) VALUES ('$giorno', '$orainizio', '$orafine');";
+	if ($conn->query($sql) == FALSE) {
+		echo "Error " . $sql . "<br>" . $conn->error;
+		return FALSE;
 	}
 	return TRUE;
 }

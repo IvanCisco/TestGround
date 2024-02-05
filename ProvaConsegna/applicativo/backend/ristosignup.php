@@ -30,11 +30,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mailExists($mail, $conn, "ristorante")) {
         $alreadyErr = "Questa mail è già associata a un account! Inserisci una email diversa o effettua il login.";
     } else {
-        $sql1 = "INSERT INTO ristorante (mail, password, partitaiva, nome, ragsoc)
-            VALUES ('$mail', '$password', '$partitaiva', '$nome', '$ragsoc')";
-        $sql2 = "INSERT INTO operainrist (mailrist, zona) VALUES ('$mail', '$zona')";
-        $sql3 = "INSERT INTO sedelegale (mailrist, via, numero, cap, citta) VALUES ('$mail', '$viasl', '$numerosl', '$capsl', '$citta')";
-        $sql4 = "INSERT INTO location (mailrist, via, numero, cap, citta) VALUES ('$mail', '$via', '$numero', '$cap', '$citta')";
+        $sql1 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$via', '$numero', '$cap', '$citta');";
+        $sql2 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$viasl', '$numerosl', '$capsl', '$cittasl');";
+        $sql4 = "INSERT INTO operainrist (mailrist, zona) VALUES ('$mail', '$zona')";
+        $sql3 = "INSERT INTO ristorante (mail, password, partitaiva, nome, ragsoc, location, sedelegale)
+                SELECT '$mail', '$password', '$partitaiva', '$nome', '$ragsoc', id AS location, id AS sedelegale
+                FROM indirizzo
+                WHERE location IN (
+                    SELECT id
+                    FROM indirizzo
+                    WHERE via = '$via'
+                    AND numero = '$numero'
+                    AND cap = '$cap'
+                    AND citta = '$citta'
+                    )
+                AND sedelegale IN (
+                    SELECT id
+                    FROM indirizzo
+                    WHERE via = '$viasl'
+                    AND numero = '$numerosl'
+                    AND cap = '$capsl'
+                    AND citta = '$cittasl'
+                    )";
         if ($conn->query($sql1) == TRUE and $conn->query($sql2) == TRUE and $conn->query($sql3) == TRUE and $conn->query($sql4) == TRUE and inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, "rlavorasu")) {
             //unset($_SESSION['giorno']);
             //unset($_SESSION['orainizio']);
