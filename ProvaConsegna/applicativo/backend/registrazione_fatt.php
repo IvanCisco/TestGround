@@ -16,7 +16,7 @@ session_start();
         include "../common/connessione.php";
         include "../backend/fattsignupcheck.php";
         ?>
-        <p><a href="http://localhost/SITO_NOVEMBRE2023/login.php">Torna indietro</a></p>
+        <p><a href="../login.php">Torna indietro</a></p>
         <div id="form">
             <h1>Registrazione fattorino</h1>
             <p><span class="error">* Campi obbligatori</span></p>
