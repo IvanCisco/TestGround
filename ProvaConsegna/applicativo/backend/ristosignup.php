@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //unset($_SESSION['giorno']);
             //unset($_SESSION['orainizio']);
             //unset($_SESSION['orafine']);
-            header("Location: http://localhost/SITO_NOVEMBRE2023/login.php?status=success");
+            header("Location: ../login.php?status=ristosignupsuccess");
         } else {
             echo "Error " . $sql1 . "<br>" . $conn->error;
             echo "Error " . $sql2 . "<br>" . $conn->error;
