@@ -56,7 +56,7 @@ if (isset($_SESSION['utente'])) {
         $row = $cityResult->fetch_assoc();
         $acquirenteCity = $row['citta'];
         */
-        //RECUPER LOA CITTA DELL'ACQUIRENTE
+        //RECUPER LA CITTA DELL'ACQUIRENTE
         $query = "SELECT i.citta 
           FROM acquirente AS a
           JOIN indirizzo AS i ON a.domicilio = i.id
