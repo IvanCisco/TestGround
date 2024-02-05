@@ -86,13 +86,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $alreadyErr = "Questa email è già associata a un account!";
     } else {
-        $sql1 = "INSERT INTO acquirente (nome, cognome, mail, password, telefono, datareg)
-        VALUES ('$nome', '$cognome', '$mail', '$password', '$telefono', '$datareg');";
-        $sql2 = " INSERT INTO domicilio (mailacq, via, numero, cap, citta)
-        VALUES ('$mail', '$via', '$numero', '$cap', '$citta');";
+        $sql2 = "INSERT INTO acquirente (nome, cognome, mail, password, telefono, datareg, domicilio)
+            SELECT '$nome', '$cognome', '$mail', '$password', '$telefono', '$datareg', id
+            FROM indirizzo
+            WHERE via = '$via'
+            AND numero ='$numero'
+            AND cap = '$cap'
+            AND citta = '$citta'";
+        $sql1 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$via', '$numero', '$cap', '$citta')";
 
         if ($conn->query($sql1) == TRUE and $conn->query($sql2) == TRUE) {
-            header("Location: http://localhost/SITO_NOVEMBRE2023/login.php?acq_signup=success");
+            header("Location: ../login.php");
         } else {
             echo "Error ". $sql . "<br>" . $conn->error;
         }
