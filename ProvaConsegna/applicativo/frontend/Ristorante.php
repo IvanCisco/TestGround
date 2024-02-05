@@ -11,14 +11,10 @@
         <script src="../js/javascript.js"></script>
     </head>
     <body>
+        <div class="header">
         <div class="navbar">
             <li><img src="../images/MainIcon.png" height="40px"></li>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="menu-items" id="menuItems">
+            
                 <a href="profilo_ristorante.php">Profilo</a>
                 <a href="modificaprofilo_ristorante.php">Modifica Profilo</a>
                 <a href="inserisci_piatto.html">Inserire nuovo piatto</a>
@@ -26,7 +22,6 @@
                 <a href="ordini_ristorante.php">Ordini</a>
                 <a href="../common/logout.php">Logout</a>
             </div>
-            <div class="welcome-user"></div>
         </div>
         <h2>Il tuo menu</h2>
         <?php

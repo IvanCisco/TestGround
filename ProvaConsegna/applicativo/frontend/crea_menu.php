@@ -6,7 +6,16 @@
         <link rel="stylesheet" type="text/css" href="../css/stile.css">
     </head>
     <body>
-        <p><a href="ristorante.php">Torna indietro</a></p>
+        <div class="header">
+        <div class="navbar">
+            <li><img src="../images/MainIcon.png" height="40px"></li>
+                <a href="ristorante.php">Torna indietro</a>
+                <a href="modificaprofilo_ristorante.php">Modifica Profilo</a>
+                <a href="crea_menu.php">Crea menu</a>
+                <a href="ordini_ristorante.php">Ordini</a>
+                <a href="../common/logout.php">Logout</a>
+            </div>
+        </div>
         <h2>Crea un Menu</h2>
         <form action="../backend/inserisci_menu.php" method="POST">
             

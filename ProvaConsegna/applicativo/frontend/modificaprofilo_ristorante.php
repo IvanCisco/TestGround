@@ -13,11 +13,22 @@
 <html>
 <script src="js/javascript.js"></script>
 <head>
-<title>EDIT</title>
+<title>EDIT ristorante</title>
 <script src="js/funzioni.js" async></script>
+<link rel="stylesheet" type="text/css" href="../css/stile.css">
 </head>
 <body>
-	<p><a href="ristorante.php">Torna indietro</a></p>
+	<div class="header">
+        <div class="navbar">
+            <li><img src="../images/MainIcon.png" height="40px"></li>
+                <a href="ristorante.php">Torna indietro</a>
+                <a href="modificaprofilo_ristorante.php">Modifica Profilo</a>
+                <a href="inserisci_piatto.html">Inserire nuovo piatto</a>
+                <a href="crea_menu.php">Crea menu</a>
+                <a href="ordini_ristorante.php">Ordini</a>
+                <a href="../common/logout.php">Logout</a>
+            </div>
+        </div>
 	<h2>Modifica il tuo profilo</h2>
 	<form method="POST" action="../backend/modificaprofilo_ris.php?id=<?php echo $mail; ?>">
 		<p><label>Password:</label><input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required></p>
@@ -47,12 +58,31 @@
         <option value="5" <?php echo ($row["zona"] == "5") ? "selected" : "";?>>5</option>
     </select>
 	
-		
+	<?php
+            //recupero id sedelegale e location
+            $stmt = $conn->prepare("SELECT location, sedelegale FROM ristorante WHERE mail = ?");
+            $stmt->bind_param("s", $mail);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $location = "";
+            $sedeLegale = "";
+
+            // Verifica se ci sono risultati
+            if ($result->num_rows > 0) {
+                // Estrai i dati e memorizzali nelle variabili
+                while ($row = $result->fetch_assoc()) {
+                    $location = $row["location"];
+                    $sedeLegale = $row["sedelegale"];
+                }
+            }
+            ?>
+
 	<?php
 	//session_start();
 	if(isset($_SESSION['utente'])) {
 	$mail = $_SESSION['utente'];
-	$query=mysqli_query($conn,"select * from `location` where mailrist='$mail'");
+	$query=mysqli_query($conn,"select * from `indirizzo` where id='$location'");
 	$rowLocation=mysqli_fetch_array($query);
 	}
 	?>
@@ -79,7 +109,7 @@
 	//session_start();
 	if(isset($_SESSION['utente'])) {
 	$mail = $_SESSION['utente'];
-	$query=mysqli_query($conn,"select * from `sedelegale` where mailrist='$mail'");
+	$query=mysqli_query($conn,"select * from `indirizzo` where id='$sedeLegale'");
 	$rowSedelegale=mysqli_fetch_array($query);
 	}
 	?>
