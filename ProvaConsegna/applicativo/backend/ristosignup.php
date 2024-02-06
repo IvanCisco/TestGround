@@ -34,24 +34,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql2 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$viasl', '$numerosl', '$capsl', '$cittasl');";
         $sql4 = "INSERT INTO operainrist (mailrist, zona) VALUES ('$mail', '$zona')";
         $sql3 = "INSERT INTO ristorante (mail, password, partitaiva, nome, ragsoc, location, sedelegale)
-                SELECT '$mail', '$password', '$partitaiva', '$nome', '$ragsoc', id AS location, id AS sedelegale
-                FROM indirizzo
-                WHERE location IN (
-                    SELECT id
+                SELECT '$mail', '$password', '$partitaiva', '$nome', '$ragsoc', 
+                    (SELECT id
                     FROM indirizzo
                     WHERE via = '$via'
                     AND numero = '$numero'
                     AND cap = '$cap'
                     AND citta = '$citta'
-                    )
-                AND sedelegale IN (
-                    SELECT id
+                    ) AS location,
+                    (SELECT id
                     FROM indirizzo
                     WHERE via = '$viasl'
                     AND numero = '$numerosl'
                     AND cap = '$capsl'
                     AND citta = '$cittasl'
-                    )";
+                    ) AS sedelegale;";
         if ($conn->query($sql1) == TRUE and $conn->query($sql2) == TRUE and $conn->query($sql3) == TRUE and $conn->query($sql4) == TRUE and inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, "rlavorasu")) {
             //unset($_SESSION['giorno']);
             //unset($_SESSION['orainizio']);

@@ -65,18 +65,18 @@ function inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, $
 					SELECT '$mail', id
 					FROM turno
 					WHERE giorno = '$giorno'
-					AND orainizio = '$orainizio'
-					AND orafine = '$orafine'";
+					AND orainizio = '$orarioApertura'
+					AND orafine = '$orarioChiusura'";
 		} else {
 			$sql = "INSERT INTO flavorasu (mailfatt, turno)
 					SELECT '$mail', id
 					FROM turno
 					WHERE giorno = '$giorno'
-					AND orainizio = '$orainizio'
-					AND orafine = '$orafine'";
+					AND orainizio = '$orarioApertura'
+					AND orafine = '$orarioChiusura'";
 		}
 		
-		if ($conn->query($sql) == FALSE || inserisciInTurno($giorno, $orainizio, $orafine == FALSE)){
+		if ($conn->query($sql) == FALSE || inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) == FALSE) {
 			echo "Error " . $sql . "<br>" . $conn->error;
 			return FALSE;
 		}
@@ -85,7 +85,7 @@ function inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, $
 }
 
 function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
-	$sql = "INSERT IGNORE INTO turno (giorno, orainizio, orafine) VALUES ('$giorno', '$orainizio', '$orafine');";
+	$sql = "INSERT IGNORE INTO turno (giorno, orainizio, orafine) VALUES ('$giorno', '$orarioApertura', '$orarioChiusura');";
 	if ($conn->query($sql) == FALSE) {
 		echo "Error " . $sql . "<br>" . $conn->error;
 		return FALSE;
