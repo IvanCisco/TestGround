@@ -9,11 +9,8 @@ session_start();
         <style>
             .error {color: #FF0000;}
         </style>
-        <style>
-            @import url('https://fonts.cdnfonts.com/css/nimbus-sans-l');
-        </style>
-                
         <link rel="stylesheet" href="css/stile.css">
+        <link href="https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro" rel="stylesheet">
         <!--<link rel="stylesheet" href="css/style.css">-->
         <!--<link rel="stylesheet" href="css/loginstyle.css">-->
     </head>
