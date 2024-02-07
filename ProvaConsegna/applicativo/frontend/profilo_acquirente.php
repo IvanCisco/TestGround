@@ -19,6 +19,7 @@
 <body>
     <h1>Profilo</h1>
     <section class="page-content">
+        <h3>Dati</h3>
 <?php
 include("../common/connessione.php");
 session_start();
@@ -47,9 +48,30 @@ if ($result->num_rows > 0) {
 } else {
     echo "Utente non loggato";
 }
+?>
+
+<h3>Indirizzo</h3>
+<?php
+//RECUPERO ID DOMICILIO DELL'ACQUIRENTE
+            $stmt = $conn->prepare("SELECT domicilio FROM acquirente WHERE mail = ?");
+            $stmt->bind_param("s", $mail);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $domicilio = "";
+
+            // Verifica se ci sono risultati
+            if ($result->num_rows > 0) {
+                // Estrai i dati e memorizzali nelle variabili
+                while ($row = $result->fetch_assoc()) {
+                    $domicilio = $row["domicilio"];
+                }
+            }
+            
+
 //select per l'indirizzo di acquirente
-$stmt = $conn->prepare("SELECT * FROM domicilio WHERE mailacq = ?");
-$stmt->bind_param("s", $mail);
+$stmt = $conn->prepare("SELECT * FROM indirizzo WHERE id = ?");
+$stmt->bind_param("s", $domicilio);
 $stmt->execute();
 $result = $stmt->get_result();
 
