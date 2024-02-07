@@ -29,7 +29,8 @@
                 <a href="../common/logout.php">Logout</a>
             </div>
         </div>
-	<h2>Modifica il tuo profilo</h2>
+	<h1>Modifica il tuo profilo</h1>
+	<section class="page-content">
 	<form method="POST" action="../backend/modificaprofilo_ris.php?id=<?php echo $mail; ?>">
 		<p><label>Password:</label><input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required></p>
 		<p><label>Nome:</label><input type="text" value="<?php echo $row['nome']; ?>" name="nome" maxlength="30" required></p>
@@ -156,7 +157,7 @@
 		<input type="submit" name="submit">
 		</form>
 
-	
+	</section>
 </body>
 
 </html>
