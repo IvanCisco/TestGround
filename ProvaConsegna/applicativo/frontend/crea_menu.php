@@ -16,7 +16,8 @@
                 <a href="../common/logout.php">Logout</a>
             </div>
         </div>
-        <h2>Crea un Menu</h2>
+        <h1>Crea un Menu</h1>
+        <section class="page-content">
         <form action="../backend/inserisci_menu.php" method="POST">
             
             <div class="form-group">
@@ -77,5 +78,7 @@
             
             <input type="submit" value="Inserisci">
         </form>
+    </section>
+    <?php include("../common/footer.html"); ?>
     </body>
 </html>
