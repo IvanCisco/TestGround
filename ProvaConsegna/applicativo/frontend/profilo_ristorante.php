@@ -18,6 +18,7 @@
             </div>
         </div>
         <h1>Profilo Ristorante</h1>
+        <section class="page-content">
         <h3>Dati del ristorante </h3>
 
         <?php
@@ -154,5 +155,6 @@
             echo "Non è stato trovato alcun turno, recarsi nella sezione modifica profilo per aggiungerne";
         }
         ?>
+    </section>
     </body>
 </html>
