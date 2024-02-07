@@ -43,7 +43,8 @@
             </div>
     </div>
 
-    <h2>ordini disponibili nella tua zona</h2>
+    <h1>Ordini disponibili nella tua zona</h1>
+    <section class="page-content">
 <?php
 /*
 opera in fatt ha dentro mail fattorino e zona
@@ -158,6 +159,7 @@ $conn->close();
 }
 
 ?>
+</section>
 <?php include("../common/footer.html"); ?>
 </body>
 </html>
