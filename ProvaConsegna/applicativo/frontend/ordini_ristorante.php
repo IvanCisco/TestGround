@@ -16,6 +16,9 @@
                 <a href="../common/logout.php">Logout</a>
             </div>
         </div>
+
+        <h1>Ordini Ristorante</h1>
+        <section class="page-content">
         <?php
         include("../common/connessione.php");
         session_start();
@@ -83,5 +86,7 @@
             }
         }
         ?>
+    </section>
+    <?php include("../common/footer.html"); ?>
     </body>
 </html>
