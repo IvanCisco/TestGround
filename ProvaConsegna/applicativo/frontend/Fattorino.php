@@ -49,7 +49,7 @@
 opera in fatt ha dentro mail fattorino e zona
 mentre la città è in fattorino 
 
-opera in rist ha mail e numero zona
+opera in rist ha mail e zona zona
 mail rist si collega a location da cui posso prendere la zona e città
 */
 // connetto al database
@@ -67,8 +67,8 @@ if (isset($_SESSION['utente'])) {
     $stmtFattorino->execute();
     $resultcittaFattorino = $stmtFattorino->get_result();
 
-    // select numero zona da operainfatt in base alla mail
-    $queryareaFattorino = "SELECT numero FROM operainfatt WHERE mailfatt = ?";
+    // select zona zona da operainfatt in base alla mail
+    $queryareaFattorino = "SELECT zona FROM operainfatt WHERE mailfatt = ?";
     $stmtFattorino = $conn->prepare($queryareaFattorino);
     $stmtFattorino->bind_param("s", $mail);
     $stmtFattorino->execute();
@@ -79,43 +79,41 @@ if (isset($_SESSION['utente'])) {
         $city_where_fattorino_works = $row['citta'];
     if ($resultareaFattorino && $resultareaFattorino->num_rows > 0) {
         $row = $resultareaFattorino->fetch_assoc();
-        $area_where_fattorino_delivers = $row['numero'];
+        $area_where_fattorino_delivers = $row['zona'];
         
         
         //echo "citta lavoro $city_where_fattorino_works<br>";
         //echo "zona lavoro $area_where_fattorino_delivers<br>";
 
-<<<<<<< HEAD
+
         //Debugging output
         //echo "City where fattorino works: $city_where_fattorino_works<br>";
         //echo "Area where fattorino delivers: $area_where_fattorino_delivers<br>";
 
 //query commento
-$query = "SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
-=======
+ 
         // join tra ordine,contiene,operainrist,operainfatt,fattorino,ristorante
         // usiamo data e ora per distinguere gli ordini
         // il fattorino vedrà solo ordini della città in cui lavora e ristoranti della sua zona
         // lo stato può essere in preparazione e allora potrà prenderlo in carico
         // oppure può essere preso in carico e non potrà prenderlo lui 
+
   $query = "
 SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
->>>>>>> 1e1f124761c15b3494af788393bbb532b6373b20
+/*>>>>>>> 1e1f124761c15b3494af788393bbb532b6373b20*/
 FROM ordine o
 JOIN contiene c ON o.data = c.data AND o.ora = c.ora
 JOIN operainrist oi ON c.mail = oi.mailrist
-JOIN operainfatt of ON oi.zona = of.numero
+JOIN operainfatt of ON oi.zona = of.zona
 JOIN fattorino f ON of.mailfatt = f.mail
 JOIN ristorante r ON oi.mailrist = r.mail
 WHERE f.mail = ? 
   AND f.citta = ? 
   AND oi.zona = ?
-<<<<<<< HEAD
-  AND oi.zona = of.numero -- Check if fattorino delivers in the same area as the restaurant
-=======
+  AND oi.zona = of.zona -- Check if fattorino delivers in the same area as the restaurant
+
  /* AND f.citta = of.citta */
-  AND oi.zona = of.numero 
->>>>>>> 1e1f124761c15b3494af788393bbb532b6373b20
+  AND oi.zona = of.zona 
   AND o.stato in('in preparazione','preso in carico')
   AND TIMESTAMPDIFF(HOUR, CONCAT(o.data, ' ', o.ora), NOW()) < 2";
 
