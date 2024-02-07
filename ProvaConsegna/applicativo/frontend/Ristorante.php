@@ -23,6 +23,7 @@
                 <a href="../common/logout.php">Logout</a>
             </div>
         </div>
+        <section class="page-content">
         <h2>Il tuo menu</h2>
         <?php
         if (isset($_SESSION['utente'])) {
@@ -61,6 +62,7 @@
             exit();
         }
         ?>
+    </section>
         <?php include("../common/footer.html"); ?>
     </body>
 </html>
