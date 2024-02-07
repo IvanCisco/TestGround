@@ -23,8 +23,8 @@
                 <a href="../common/logout.php">Logout</a>
             </div>
         </div>
+        <h1>Il tuo menu</h1>
         <section class="page-content">
-        <h2>Il tuo menu</h2>
         <?php
         if (isset($_SESSION['utente'])) {
             $mail = $_SESSION['utente'];
