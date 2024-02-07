@@ -15,7 +15,8 @@
                 <a href="../common/logout.php">Logout</a>
             </div>
         </div>
-    <h2>Inserimento piatto</h2>
+    <h1>Inserimento piatto</h1>
+    <section class="page-content">
     <form action="../backend/inserisci_piatto.php" method="POST" enctype="multipart/form-data">
         <label for="nome">Nome del piatto:</label>
         <input type="text" id="nome" name="nome" required><br><br>
@@ -53,5 +54,9 @@
 
         <input type="submit" value="Inserisci">
     </form>
+</section>
+<!-- NON VA PERCHè NON è PHP
+<?php include("../common/footer.html"); ?>
+-->
 </body>
 </html>
