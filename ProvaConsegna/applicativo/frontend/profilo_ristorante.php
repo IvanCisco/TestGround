@@ -156,5 +156,6 @@
         }
         ?>
     </section>
+    <?php include("../common/footer.html"); ?>
     </body>
 </html>
