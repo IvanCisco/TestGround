@@ -44,7 +44,23 @@
 	//session_start();
 	if(isset($_SESSION['utente'])) {
 	$mail = $_SESSION['utente'];
-	$query=mysqli_query($conn,"select * from `domicilio` where mailacq='$mail'");
+
+	//RECUPERO ID DOMICILIO DELL'ACQUIRENTE
+            $stmt = $conn->prepare("SELECT domicilio FROM acquirente WHERE mail = ?");
+            $stmt->bind_param("s", $mail);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $domicilio = "";
+
+            // Verifica se ci sono risultati
+            if ($result->num_rows > 0) {
+                // Estrai i dati e memorizzali nelle variabili
+                while ($row = $result->fetch_assoc()) {
+                    $domicilio = $row["domicilio"];
+                }
+            }
+	$query=mysqli_query($conn,"select * from `indirizzo` where id='$domicilio'");
 	$row=mysqli_fetch_array($query);
 	}
 	?>
