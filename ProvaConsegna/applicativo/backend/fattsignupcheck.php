@@ -1,5 +1,7 @@
 <?php
 
+include("../common/connessione.php");
+
 $nomeErr = $cognomeErr = $sessoErr = $datanascitaErr = $mailErr = $passwordErr = $luogonascitaErr = $alreadyErr = "";
 $nome = $cognome = $sesso = $datanascita = $mail = $password = $luogonascita = $zona = "";
 
@@ -61,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $sql1 = "INSERT INTO fattorino (nome, cognome, mail, password, sesso, datanascita, luogonascita, citta)
                     VALUES ('$nome', '$cognome', '$mail', '$password', '$sesso', '$dataNascita', '$luogoNascita', '$citta')";
-        if ($conn->query($sql1) == TRUE and zonaInsert($zone, $mail)) {
+        if ($conn->query($sql1) == TRUE and zonaInsert($zone, $mail, $conn)) {
             header("Location: ../login.php?status=fattsignupsuccess");
         } else {
             echo "Error " . $sql1 . "<br>" . $conn->error;
@@ -79,10 +81,9 @@ function test_input($data) {
     return $data;
 }
 
-function zonaInsert($zone, $mail) {
-    include "../common/connessione.php";
+function zonaInsert($zone, $mail, $conn) {
     for ($i=0; $i < count($zone); $i++) {
-        $sql = "INSERT INTO operainfatt (mailfatt, numero) VALUES ('$mail', '$zone[$i]')";
+        $sql = "INSERT INTO operainfatt (mailfatt, zona) VALUES ('$mail', '$zone[$i]')";
         if ($conn->query($sql) === FALSE) {
             return FALSE;
         }

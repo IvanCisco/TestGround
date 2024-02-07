@@ -13,8 +13,7 @@ session_start();
     </head>
     <body>
         <?php
-        include "../common/connessione.php";
-        include "../backend/fattsignupcheck.php";
+        include("fattsignupcheck.php");
         ?>
         <p><a href="../login.php">Torna indietro</a></p>
         <div id="form">
@@ -22,11 +21,11 @@ session_start();
             <p><span class="error">* Campi obbligatori</span></p>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return validazione()">
                 <label for="nome">Nome: </label>
-                <input type="text" id="nome" name="nome" maxlength="20" pattern="[a-zA-Z-' ]+" required>
+                <input type="text" id="nome" name="nome" maxlength="20" required>
                 <span class="error">* <?php echo $nomeErr;?></span>
                 <br><br>
                 <label for="cognome">Cognome: </label>
-                <input type="text" id="cognome" name="cognome" maxlength="20" pattern="[a-zA-Z-' ]+" required>
+                <input type="text" id="cognome" name="cognome" maxlength="20" required>
                 <span class="error">* <?php echo $cognomeErr;?></span>
                 <br><br>
                 Sesso: 
@@ -36,7 +35,7 @@ session_start();
                 <span class="error">* <?php echo $sessoErr;?></span>
                 <br><br>
                 <label for="datanascita">Data di nascita: </label>
-                <input type="date" id="datanascita" name="datanascita" action="checkAge()" required>
+                <input type="date" id="datanascita" name="datanascita" required>
                 <span class="error">* <?php echo $datanascitaErr;?></span>
                 <br><br>
                 <label for="mail">Mail: </label>
@@ -48,7 +47,7 @@ session_start();
                 <span class="error">* <?php echo $passwordErr;?></span>
                 <br><br>
                 <label for="luogonascita">Luogo di nascita: </label>
-                <input type="text" id="luogonascita" name="luogonascita" maxlength="25" pattern="[a-zA-Z-' ]+" required>
+                <input type="text" id="luogonascita" name="luogonascita" maxlength="25" required>
                 <span class="error">* <?php echo $luogonascitaErr;?></span>
                 <br><br>
                 <label for="citta">In quale città vorresti operare?</label>

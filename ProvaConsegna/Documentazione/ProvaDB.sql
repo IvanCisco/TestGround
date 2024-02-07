@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 05, 2024 alle 16:14
+-- Creato il: Feb 07, 2024 alle 22:46
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -44,8 +44,7 @@ CREATE TABLE `acquirente` (
 
 INSERT INTO `acquirente` (`mail`, `password`, `nome`, `cognome`, `datareg`, `telefono`, `domicilio`, `istruzioni`) VALUES
 ('laura.bianchi@gmail.com', 'pass', 'Laura', 'Bianchi', '2024-02-04', '2147483647', 2, 'Lasciare alla portineria'),
-('mario.rossi@gmail.com', 'pass', 'Mario', 'Rossi', '2024-02-04', '3325678391', 1, 'Veloci con le consegne'),
-('noto@gmail.com', 'pass', 'Noto', 'Sempre', '2024-02-05', '3317995304', 1, NULL);
+('mario.rossi@gmail.com', 'pass', 'Mario', 'Rossi', '2024-02-04', '3325678391', 1, 'Veloci con le consegne');
 
 -- --------------------------------------------------------
 
@@ -122,7 +121,7 @@ CREATE TABLE `fattorino` (
   `datanascita` date NOT NULL,
   `luogonascita` char(25) NOT NULL,
   `citta` enum('Milano','Roma','Palermo','Torino','Cagliari','Trento') DEFAULT NULL,
-  `disponibilita` enum('S','N') DEFAULT NULL,
+  `disponibilita` enum('S','N') NOT NULL DEFAULT 'N',
   `credito` float(4,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -154,8 +153,8 @@ CREATE TABLE `flavorasu` (
 CREATE TABLE `indirizzo` (
   `id` int(11) NOT NULL,
   `via` char(25) NOT NULL,
-  `numero` int(3) NOT NULL,
-  `cap` int(5) NOT NULL,
+  `numero` varchar(3) NOT NULL,
+  `cap` varchar(5) NOT NULL,
   `citta` enum('Milano','Roma','Palermo','Torino','Cagliari','Trento') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -164,12 +163,13 @@ CREATE TABLE `indirizzo` (
 --
 
 INSERT INTO `indirizzo` (`id`, `via`, `numero`, `cap`, `citta`) VALUES
-(5, 'Corso Indipendenza', 395, 38484, 'Trento'),
-(6, 'Largo Murani', 30, 218, 'Roma'),
-(4, 'Via Napoli', 5, 40144, 'Roma'),
-(1, 'Via Roma', 10, 20121, 'Milano'),
-(2, 'Via Tal Dei Tali', 5, 301, 'Roma'),
-(3, 'Via Venezia', 16, 38888, 'Milano');
+(5, 'Corso Indipendenza', '395', '38484', 'Trento'),
+(9, 'Largo Murani', '30', '00218', 'Roma'),
+(6, 'Largo Murani', '30', '218', 'Roma'),
+(4, 'Via Napoli', '5', '40144', 'Roma'),
+(1, 'Via Roma', '10', '20121', 'Milano'),
+(2, 'Via Tal Dei Tali', '5', '301', 'Roma'),
+(3, 'Via Venezia', '16', '38888', 'Milano');
 
 -- --------------------------------------------------------
 
@@ -429,8 +429,8 @@ ALTER TABLE `pietanza`
 ALTER TABLE `ristorante`
   ADD PRIMARY KEY (`mail`),
   ADD UNIQUE KEY `partitaiva` (`partitaiva`),
-  ADD KEY `location` (`location`),
-  ADD KEY `sedelegale` (`sedelegale`);
+  ADD KEY `ristorante_ibfk_1` (`location`),
+  ADD KEY `ristorante_ibfk_2` (`sedelegale`);
 
 --
 -- Indici per le tabelle `rlavorasu`
@@ -460,13 +460,13 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT per la tabella `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Limiti per le tabelle scaricate
@@ -536,8 +536,8 @@ ALTER TABLE `pietanza`
 -- Limiti per la tabella `ristorante`
 --
 ALTER TABLE `ristorante`
-  ADD CONSTRAINT `ristorante_ibfk_1` FOREIGN KEY (`location`) REFERENCES `indirizzo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ristorante_ibfk_2` FOREIGN KEY (`sedelegale`) REFERENCES `indirizzo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ristorante_ibfk_1` FOREIGN KEY (`location`) REFERENCES `indirizzo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ristorante_ibfk_2` FOREIGN KEY (`sedelegale`) REFERENCES `indirizzo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limiti per la tabella `rlavorasu`

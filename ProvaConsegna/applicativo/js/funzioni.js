@@ -15,13 +15,16 @@ function getAge(dataNascita) {
     if (m < 0 || (m === 0  && oggi.getDate() < compleanno.getDate())) {
         eta--;
     }
-    return eta
+    return eta;
 }
 
-function checkbox(zone, document) {
+function checkbox(zone) {
     if (!zone.has("zone[]")) {
         document.getElementById("checkErr").style.visibility = "visible";
         return false;
+    } else {
+        document.getElementById("checkErr").style.visibility = "hidden";
+        return true;
     }
 }
 
@@ -82,7 +85,7 @@ function validazione() {
         return false;
     }
 
-    if (!checkbox(zone, document)) {
+    if (!checkbox(zone)) {
         return false;
     }
     return true;
