@@ -105,5 +105,7 @@
         </div>
 		<input type="submit" name="submit">
 		</form>
+
 	</body>
+		<?php include("../common/footer.html"); ?>
 </html>
