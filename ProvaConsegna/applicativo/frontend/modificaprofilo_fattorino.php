@@ -16,11 +16,24 @@
 <html lang="it">
 	<script src="../js/javascript.js"></script>
 	<head>
-		<title>EDIT</title>
+		<title>modificaprofilo_fattorino</title>
 		<script src="../js/funzioni.js" async></script>
+		<link rel="stylesheet" type="text/css" href="../css/stile.css">
 	</head>
+	<div class="header">
+    <div class="navbar">
+        <li><img src="../images/MainIcon.png" height="40px"></li>
+        <a href="Fattorino.php">Torna indietro</a>
+        <a href="profilo_fattorino.php">Profilo</a>
+        <a href="modificaprofilo_fattorino.php">Modifica Profilo</a>
+        <a href="ordini_acarico.php">Ordini a carico</a>
+        <a href="ordini_consegnati.php">Ordini consegnati</a>
+        <a href="../common/logout.php">Logout</a>
+        </div>
+    </div>
+		<h1>Modifica Profilo</h1>
+<section class="page-content">
 	<body>
-		<h2>Edit</h2>
 		<form method="POST" action="../backend/modificaprofilo_fatt.php?id=<?php echo $mail; ?>" onsubmit="return validazione()">
 				<label for="nome">Nome: </label>
 			<input type="text" id="nome" name="nome" value="<?php echo $row['nome'];?>" maxlength="20" required>
@@ -52,28 +65,21 @@
             	<option value="trento" <?php echo ($row['citta'] == "Trento") ? "selected" : "";?>>Trento</option>
         	</select>
 			<br><br>
-			<label for="numero">Zona: </label>
-    		<select id="numero" name="numero" required>
+			<label for="zona">Zona: </label>
+    		<select id="zona" name="zona" required>
         		<option disabled selected value></option>
-        		<option value="1" <?php echo ($row2['numero'] == "1") ? "selected" : "";?>>1</option>
-        		<option value="2" <?php echo ($row2['numero'] == "2") ? "selected" : "";?>>2</option>
-        		<option value="3" <?php echo ($row2['numero'] == "3") ? "selected" : "";?>>3</option>
-        		<option value="4" <?php echo ($row2['numero'] == "4") ? "selected" : "";?>>4</option>
-        		<option value="5" <?php echo ($row2['numero'] == "5") ? "selected" : "";?>>5</option>
+        		<option value="1" <?php echo ($row2['zona'] == "1") ? "selected" : "";?>>1</option>
+        		<option value="2" <?php echo ($row2['zona'] == "2") ? "selected" : "";?>>2</option>
+        		<option value="3" <?php echo ($row2['zona'] == "3") ? "selected" : "";?>>3</option>
+        		<option value="4" <?php echo ($row2['zona'] == "4") ? "selected" : "";?>>4</option>
+        		<option value="5" <?php echo ($row2['zona'] == "5") ? "selected" : "";?>>5</option>
     		</select>
 			<br><br>
 			Disponibilità:
 			<input type="radio" name="disponibilita" id="s" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="s") echo "checked";?> value="s" required><label for="s">S</label>
         	<input type="radio" name="disponibilita" id="n" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="n") echo "checked";?> value="n"><label for="n">N</label>
 
-		<?php
-		//session_start();
-		if(isset($_SESSION['utente'])) {
-		$mail = $_SESSION['utente'];
-		$query=mysqli_query($conn,"select * from `domicilio` where mailacq='$mail'");
-		$row=mysqli_fetch_array($query);
-		}
-		?>
+
 		<div class="tab" id="orari">
             <h2>I miei orari</h2>
             <div id="dynamicFieldContainer">
