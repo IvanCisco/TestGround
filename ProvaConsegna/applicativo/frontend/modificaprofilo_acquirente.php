@@ -1,21 +1,9 @@
 <!DOCTYPE html>
-<?php
-	include("../common/connessione.php");
-	session_start();
-	// Recupero dei dati dell'utente
-	if(isset($_SESSION['utente'])) {
-	$mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
-	$query=mysqli_query($conn,"select * from `acquirente` where mail='$mail'");
-	$row=mysqli_fetch_array($query);
-}
-?>
-
 <html>
 <script src="js/javascript.js"></script>
 <head>
 <title>modificaacq</title>
 <link rel="stylesheet" type="text/css" href="../css/stile.css">
-<?php include("../common/footer.html"); ?>
 </head>
 <body>
 	
@@ -29,6 +17,8 @@
         <a href="../common/logout.php">Logout</a>
     </div>
 
+	<?php include("../backend/display_acq_info.php");?>
+
 	<h1>Modifica profilo</h1>
 	<section class="page-content">
 	<form method="POST" action="../backend/modificaprofilo_acq.php?id=<?php echo $mail; ?>">
@@ -38,32 +28,6 @@
 		<p><label>telefono: </label><input type="text" inputmode="numeric" value="<?php echo $row['telefono']; ?>" name="telefono" maxlength="10"
 		onkeypress="return (event.key !=8 && event.key ==0 || (event.key >= 0 && event.key <= 9))" required></p>
 		<p><label>Istruzioni: </label><textarea name="istruzioni" maxlength="40"><?php echo $row['istruzioni']; ?></textarea></p>
-		
-
-	<?php
-	//session_start();
-	if(isset($_SESSION['utente'])) {
-	$mail = $_SESSION['utente'];
-
-	//RECUPERO ID DOMICILIO DELL'ACQUIRENTE
-            $stmt = $conn->prepare("SELECT domicilio FROM acquirente WHERE mail = ?");
-            $stmt->bind_param("s", $mail);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            $domicilio = "";
-
-            // Verifica se ci sono risultati
-            if ($result->num_rows > 0) {
-                // Estrai i dati e memorizzali nelle variabili
-                while ($row = $result->fetch_assoc()) {
-                    $domicilio = $row["domicilio"];
-                }
-            }
-	$query=mysqli_query($conn,"select * from `indirizzo` where id='$domicilio'");
-	$row=mysqli_fetch_array($query);
-	}
-	?>
 
 		<p><label>Via: </label><input type="text" value="<?php echo $row['via']; ?>" name="via" maxlength="25" required></p>
 		<p><label>Numero: </label><input type="text" value="<?php echo $row['numero']; ?>" name="numero"
@@ -84,6 +48,7 @@
 		</form>
 
 	</section>
+	<?php include("../common/footer.html");?>
 </body>
 
 </html>
