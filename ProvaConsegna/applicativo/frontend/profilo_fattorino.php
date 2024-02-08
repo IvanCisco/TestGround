@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+<header>
+    <link rel="stylesheet" type="text/css" href="../css/stile.css">
+</header>
 
 
 
@@ -11,9 +13,21 @@ session_start();
 if(isset($_SESSION['utente'])) {
 $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in sessione
 ?>
-<p><a href="Fattorino.php">Torna indietro</a></p>
-<h2>Dati del fattorino</h2>
 
+<div class="header">
+    <div class="navbar">
+        <li><img src="../images/MainIcon.png" height="40px"></li>
+        <a href="Fattorino.php">Torna indietro</a></p>
+        <a href="profilo_fattorino.php">Profilo</a>
+        <a href="modificaprofilo_fattorino.php">Modifica Profilo</a>
+        <a href="ordini_acarico.php">Ordini a carico</a>
+        <a href="ordini_consegnati.php">Ordini consegnati</a>
+        <a href="../common/logout.php">Logout</a>
+        </div>
+    </div>
+<h1>Dati del fattorino</h1>
+<section class="page-content">
+    <body>
 <?php
 //select per i dati del fattorino
 $stmt = $conn->prepare("SELECT * FROM fattorino WHERE mail = ?");
@@ -53,7 +67,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         
-        echo "<p>Zona: " . $row["numero"] . "</p>";
+        echo "<p>Zona: " . $row["zona"] . "</p>";
         }
 }else {
     echo "Utente non loggato";
@@ -75,11 +89,14 @@ if ($result->num_rows > 0) {
           echo "<p>fine turno: " . $row["orafine"] . "</p>";
         }
 }else {
-    echo "Utente non loggato";
+    echo "Non è stato inserito alcun turno";
 }
 
 
 
 ?>
+</section>
+<?php include("../common/footer.html"); ?>
+</body>
 
 </html>
