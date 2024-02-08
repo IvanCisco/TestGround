@@ -33,10 +33,12 @@ $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
 
 <?php
 // RECUPERO DATI ORDINE preso a carico io fattorino sto andando a recuperarlo, in consegna il ristorante ha confermato il mio ritiro
-$stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato, d.via, d.numero
+$stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato, i.via, i.numero
                             FROM consegna c
                             JOIN ordine o ON c.data = o.data AND c.ora = o.ora
-                            JOIN domicilio d on o.mailacq = d.mailacq
+                            /*JOIN domicilio d on o.mailacq = d.mailacq*/
+                            JOIN acquirente a on a.mail = o.mailacq
+                            JOIN indirizzo i on i.id = a.domicilio
                             WHERE c.mailfatt = ? AND o.stato='preso in carico' or o.stato = 'in consegna'");
     $stmt->bind_param("s", $mail);
     $stmt->execute();
