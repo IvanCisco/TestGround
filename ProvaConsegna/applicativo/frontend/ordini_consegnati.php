@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Ordini a carico</title>
+        <link rel="stylesheet" type="text/css" href="../css/stile.css">
+    </head>
+
+
 <?php
 include("../common/connessione.php");
 session_start();
@@ -5,9 +13,21 @@ session_start();
 if(isset($_SESSION['utente'])) {
 $mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in sessione
 ?>
-<h2>Ordini consegnati</h2>
+<div class="header">
+    <div class="navbar">
+        <li><img src="../images/MainIcon.png" height="40px"></li>
+        <a href="Fattorino.php">Torna indietro</a>
+        <a href="profilo_fattorino.php">Profilo</a>
+        <a href="modificaprofilo_fattorino.php">Modifica Profilo</a>
+        <a href="ordini_acarico.php">Ordini a carico</a>
+        <a href="ordini_consegnati.php">Ordini consegnati</a>
+        <a href="../common/logout.php">Logout</a>
+        </div>
+    </div>
+<h1>Ordini consegnati</h1>
 
-
+<body>
+    <section class="page-content">
 
 <?php
 
@@ -42,3 +62,6 @@ $stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato
     echo "Utente non loggato";
 }
 ?>
+</section>
+</body>
+</html>
