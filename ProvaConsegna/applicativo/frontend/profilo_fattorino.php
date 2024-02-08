@@ -96,7 +96,7 @@ if ($result->num_rows > 0) {
 
 ?>
 </section>
-<?php include("../common/footer.html"); ?>
 </body>
+<?php include("../common/footer.html"); ?>
 
 </html>

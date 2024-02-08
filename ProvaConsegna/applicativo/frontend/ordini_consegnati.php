@@ -64,4 +64,5 @@ $stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato
 ?>
 </section>
 </body>
+<?php include("../common/footer.html"); ?>
 </html>
