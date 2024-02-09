@@ -34,6 +34,7 @@ body {
     padding-bottom: 60px; /* altezza footer */
     min-height: 100vh;
     position: relative;
+    flex-direction: column;
 }
 .login-container {
     text-align: center;
@@ -135,14 +136,16 @@ a:hover {
     text-decoration: underline;
 }
 
+/*FOOTER */
 footer {
     background-color: #f2f2f2;
     padding: 20px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
     width: 100%;
     height: 60px; /* altezza footer */
+    position: absolute; /* Posizionamento fisso */
+    bottom: 0; /* Posizionamento in basso */
+    /*flex-shrink: 0;*/
 }
 
 /* contenuto footer */
@@ -151,7 +154,7 @@ footer {
 }
 
 .footer-content p {
-    margin: 5px 0;
+    margin: 5px 0;/* margine solo sopra e sotto di 5, no destra sinistra*/
 }
 
 .footer-content a {

@@ -9,13 +9,7 @@
 	
 
 
-	<div class="navbar">
-        <li><img src="../images/MainIcon.png" height="40px"></li>
-        <a href="acquirente.php">Torna indietro</a>
-        <a href="../frontend/ordini_acquirente.php">Ordini</a>
-        <a href="../frontend/profilo_acquirente.php">Profilo</a>
-        <a href="../common/logout.php">Logout</a>
-    </div>
+	<?php include("../common/navbar_acquirente.php"); ?>
 
 	<?php include("../backend/display_acq_info.php");?>
 
