@@ -121,7 +121,7 @@ input[type="float"]  {
     right: 10px; /* Regola la distanza dalla destra */
 }
 
-/* Puoi anche definire altre proprietà CSS per lo stile dell'icona del carrello, come larghezza e altezza */
+/* Puoi anche definire altre proprietÃ  CSS per lo stile dell'icona del carrello, come larghezza e altezza */
 .cart-icon img {
     width: 30px; /* Larghezza desiderata */
     height: 30px; /* Altezza desiderata */
@@ -185,7 +185,7 @@ footer {
 }
 
 /* IN TEORIA TUTTO DA ELIMINARE 
-PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
+PERCHÃ¨ C'Ã¨ STATA LA MODIFICA DELLA NAVBAR
 .menu-toggle {
     cursor: pointer;
     order: 2;/* posizione destra
@@ -222,7 +222,7 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
     background-color: #ddd;
 }
 
-/* Stile per il menu a scomparsa quando è aperto 
+/* Stile per il menu a scomparsa quando Ã¨ aperto 
 .menu-open {
     display: flex;
     flex-direction: column;
