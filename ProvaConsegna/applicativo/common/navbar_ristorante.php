@@ -3,7 +3,7 @@
 <div class="header">
         <div class="navbar">
             <li><img src="../images/MainIcon.png" height="40px"></li>
-                <a href="ristorante.php">Torna indietro</a>
+                <a href="ristorante.php">Home</a>
                 <a href="profilo_ristorante.php">Profilo</a>
                 <a href="modificaprofilo_ristorante.php">Modifica Profilo</a>
                 <a href="inserisci_piatto.html">Inserire nuovo piatto</a>
