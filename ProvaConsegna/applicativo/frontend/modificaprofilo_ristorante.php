@@ -8,16 +8,6 @@
 <link rel="stylesheet" type="text/css" href="../css/stile.css">
 </head>
 <body>
-	<?php include("../common/navbar_ristorante.php"); ?>
-	<h1>Modifica il tuo profilo</h1>
-	<section class="page-content">
-	<form method="POST" action="../backend/modificaprofilo_ris.php?id=<?php echo $mail; ?>">
-		<p><label>Password:</label><input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required></p>
-		<p><label>Nome:</label><input type="text" value="<?php echo $row['nome']; ?>" name="nome" maxlength="30" required></p>
-		<p><label>Ragione Sociale:</label><input type="text" value="<?php echo $row['ragsoc']; ?>" name="ragsoc" maxlength="20" requiired></p>
-		<p><label>Partita IVA:</label><input type="text" inputmode="numeric" value="<?php echo $row['partitaiva']; ?>" name="partitaiva" minlength="11" maxlength="11" size="11"
-		onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required></p>
-
     <head>
         <script src="js/javascript.js"></script>
         <title>EDIT ristorante</title>
