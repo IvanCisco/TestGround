@@ -30,6 +30,7 @@ body {
 }
 */
 body {
+    padding: 0;
     margin: 0;
     padding-bottom: 60px; /* altezza footer */
     min-height: 100vh;
@@ -85,8 +86,9 @@ button {
 
 /* Stile per le caselle di testo */
 input[type="text"],
-input[type="number"] {
-    width: 100%;
+input[type="number"],
+input[type="float"]  {
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -139,13 +141,15 @@ a:hover {
 /*FOOTER */
 footer {
     background-color: #f2f2f2;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
+    box-sizing: border-box;
     width: 100%;
     height: 60px; /* altezza footer */
     position: absolute; /* Posizionamento fisso */
     bottom: 0; /* Posizionamento in basso */
     /*flex-shrink: 0;*/
+
 }
 
 /* contenuto footer */
@@ -365,6 +369,9 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
 .page-content{
     background-color: yellow;
     padding: 20px;
+    width: 100%; /* Imposta la larghezza al 100% */
+    box-sizing: border-box; /* Considera il padding nell'impostazione della larghezza */
+
 }
 
 .titolo{
@@ -387,3 +394,4 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
     margin-right: 10px; /* Aggiunge spazio tra l'immagine e il testo */
    margin-left: 10px;
 }
+

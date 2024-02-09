@@ -11,21 +11,23 @@
         <section class="page-content">
         <form action="../backend/inserisci_menu.php" method="POST">
             
-            <div class="form-group">
-            <label for="nome">Nome del Menu:</label>
-            <input type="text" id="nome" name="nome" required><br><br>
-            </div>
             
-            <div class="form-group">
+            <p><label for="nome">Nome del Menu:</label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            </p>
+            
+
+            
+            <p>
             <label for="nome">Descrizione del Menu:</label>
             <input type="text" id="descrizione" name="descrizione" required>
             <br><br>
-            </div>
+            </p>
 
-            <div class="form-group">
+           <p>
             <label for="prezzo">prezzo del Menu:</label>
             <input type="float" id="prezzo" name="prezzo" required><br><br>
-            </div>
+            </p>
 
             <h3 class="section-heading">Lista dei Piatti</h3>
             <div class="plate-list">
