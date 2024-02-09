@@ -148,7 +148,7 @@
 		</form>
 
 	</section>
-	<?php include("../common/footer.html"); ?>
 </body>
+	<?php include("../common/footer.html"); ?>
 
 </html>

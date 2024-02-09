@@ -85,8 +85,9 @@ button {
 
 /* Stile per le caselle di testo */
 input[type="text"],
-input[type="number"] {
-    width: 100%;
+input[type="number"],
+input[type="float"]  {
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -365,6 +366,7 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
 .page-content{
     background-color: yellow;
     padding: 20px;
+
 }
 
 .titolo{
@@ -387,3 +389,4 @@ PERCHè C'è STATA LA MODIFICA DELLA NAVBAR
     margin-right: 10px; /* Aggiunge spazio tra l'immagine e il testo */
    margin-left: 10px;
 }
+
