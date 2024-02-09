@@ -106,12 +106,9 @@
                 </div>
 		        <input type="submit" name="submit">
 		    </form>
-
-
 	</section>
 </body>
 	    <?php include("../common/footer.html"); ?>
-    </body>
 
 
 </html>

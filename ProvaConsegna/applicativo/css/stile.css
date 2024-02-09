@@ -203,7 +203,7 @@ PERCHÃ¨ C'Ã¨ STATA LA MODIFICA DELLA NAVBAR
     display: none;
     position: absolute;
     top: 50px; /* Regola l'altezza in base al menu a scomparsa */
-    right: 0; /* Allinea il menu a destra 
+    /* Allinea il menu a destra 
     background-color: #f2f2f2;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
