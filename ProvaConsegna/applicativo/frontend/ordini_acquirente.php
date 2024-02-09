@@ -11,16 +11,7 @@
 
 <body>
 
-    <div class="header">
-    <div class="navbar">
-        <li><img src="../images/MainIcon.png" height="40px"></li>
-        <!--<a href="acquirente.php">Torna indietro</a>-->
-       
-        <a href="../frontend/profilo_acquirente.php">Profilo</a>
-        <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
-        <a href="../common/logout.php">Logout</a>
-    </div>
-    </div>
+    <?php include("../common/navbar_acquirente.php"); ?>
 
     <div class="titolo">
          <a href="acquirente.php" class="indietro"><img src="../immagini/back.png" alt="Freccia indietro" class="freccia"></a>

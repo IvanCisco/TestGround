@@ -5,15 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../css/stile.css">
 <?php include("../common/footer.html"); ?>
 </head>
-<div class="header">
-    <div class="navbar">
-        <li><img src="../images/MainIcon.png" height="40px"></li>
-        <a href="acquirente.php">Torna indietro</a>
-        <a href="../frontend/ordini_acquirente.php">Ordini</a>
-        <a href="../frontend/modificaprofilo_acquirente.php">Modifica Profilo</a>
-        <a href="../common/logout.php">Logout</a>
-    </div>
-    </div>
+<?php include("../common/navbar_acquirente.php"); ?>
 
 
 <body>
