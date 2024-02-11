@@ -19,7 +19,7 @@
         include("../backend/display_risto_info.php");?>
 	    <h1>Modifica il tuo profilo</h1>
 	    <section class="page-content">
-	        <form method="POST" action="../backend/modificaprofilo_ris.php?id=<?php echo $mail; ?>">
+	        <form method="POST" action="../backend/modificaprofilo_ris2.php?id=<?php echo $mail; ?>">
 		        <label for="password">Password:</label>
                 <input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required>
                 <br><br>
@@ -42,13 +42,13 @@
                 <option value="5" <?php echo ($row["zona"] == "5") ? "selected" : "";?>>5</option>
                 </select>
 
-		        <p><label>Via:</label><input type="text" value="<?php echo $row['via']; ?>" name="via_location" maxlength="25" required></p>
-		        <p><label>Numero:</label><input type="text" value="<?php echo $row['numero']; ?>" name="numero_location" maxlength="3" size="3"
+		        <p><label>Via:</label><input type="text" value="<?php echo $row['via']; ?>" name="via" maxlength="25" required></p>
+		        <p><label>Numero:</label><input type="text" value="<?php echo $row['numero']; ?>" name="numero" maxlength="3" size="3"
 		        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required></p>
-		        <p><label>CAP:</label><input type="text" value="<?php echo $row['cap']; ?>" name="cap_location" minlength="5" maxlength="5" size="5"
+		        <p><label>CAP:</label><input type="text" value="<?php echo $row['cap']; ?>" name="cap" minlength="5" maxlength="5" size="5"
 		        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required></p>
 		        <label for="citta">Città: </label>
-                <select id="citta" name="citta_location" required>
+                <select id="citta" name="citta" required>
                     <option value="milano" <?php echo ($row["citta"] == "Milano") ? "selected" : "";?>>Milano</option>
                     <option value="roma" <?php echo ($row["citta"] == "Roma") ? "selected" : "";?>>Roma</option>
                     <option value="palermo" <?php echo ($row["citta"] == "Palermo") ? "selected" : "";?>>Palermo</option>
@@ -59,13 +59,13 @@
 
 	            <h3>Sede Legale</h3>
 
-		        <p><label>Via:</label><input type="text" value="<?php echo $row['viasl']; ?>" name="via_sedelegale" maxlength="25" required></p>
-		        <p><label>Numero:</label><input type="text" inputmode="numeric" value="<?php echo $row['numerosl']; ?>" name="numero_sedelegale" maxlength="3" size="3"
+		        <p><label>Via:</label><input type="text" value="<?php echo $row['viasl']; ?>" name="viasl" maxlength="25" required></p>
+		        <p><label>Numero:</label><input type="text" inputmode="numeric" value="<?php echo $row['numerosl']; ?>" name="numerosl" maxlength="3" size="3"
 		        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required></p>
-		        <p><label>CAP:</label><input type="text" inputmode="numeric" value="<?php echo $row['capsl']; ?>" name="cap_sedelegale" minlength="5" maxlength="5" size="5"
+		        <p><label>CAP:</label><input type="text" inputmode="numeric" value="<?php echo $row['capsl']; ?>" name="capsl" minlength="5" maxlength="5" size="5"
 		        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required></p>
-		        <label for="citta_sedelegale">Città: </label>
-                <select id="citta_sedelegale" name="citta_sedelegale" required>
+		        <label for="cittasl">Città: </label>
+                <select id="citta_sedelegale" name="cittasl" required>
                     <option value="milano" <?php echo ($row["cittasl"] == "Milano") ? "selected" : "";?>>Milano</option>
                     <option value="roma" <?php echo ($row["cittasl"] == "Roma") ? "selected" : "";?>>Roma</option>
                     <option value="palermo" <?php echo ($row["cittasl"] == "Palermo") ? "selected" : "";?>>Palermo</option>
@@ -96,7 +96,9 @@
                         </div>
                     <button type="button" onclick="aggiungiCampo()">+</button>
                 </div>
-		        <input type="submit" name="submit">
+                <br>
+		        <input type="submit" name="submit" value="Salva">
+                <span><input type="reset" value="Annulla">
 		    </form>
 	</section>
 </body>

@@ -52,36 +52,40 @@ function mailExists($mail, $conn, $table) {
 		return TRUE;
 	}
 	return FALSE;
-	}
+}
 	
 function inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, $tabella) {
-	$contatore = count($giorni);
-	for ($i = 0; $i < $contatore; $i++) {
-		$giorno = $giorni[$i];
-		$orarioApertura = $orariApertura[$i];
-		$orarioChiusura = $orariChiusura[$i];
-		if ($tabella == "rlavorasu") {
-			$sql = "INSERT INTO rlavorasu (mailrist, turno)
-					SELECT '$mail', id
-					FROM turno
-					WHERE giorno = '$giorno'
-					AND orainizio = '$orarioApertura'
-					AND orafine = '$orarioChiusura'";
-		} else {
-			$sql = "INSERT INTO flavorasu (mailfatt, turno)
-					SELECT '$mail', id
-					FROM turno
-					WHERE giorno = '$giorno'
-					AND orainizio = '$orarioApertura'
-					AND orafine = '$orarioChiusura'";
-		}
+	if (empty($giorni) || empty($orariApertura) || empty($orariChiusura)) {
+		return true;
+	} else {
+		$contatore = count($giorni);
+		for ($i = 0; $i < $contatore; $i++) {
+			$giorno = $giorni[$i];
+			$orarioApertura = $orariApertura[$i];
+			$orarioChiusura = $orariChiusura[$i];
+			if ($tabella == "rlavorasu") {
+				$sql = "INSERT INTO rlavorasu (mailrist, turno)
+						SELECT '$mail', id
+						FROM turno
+						WHERE giorno = '$giorno'
+						AND orainizio = '$orarioApertura'
+						AND orafine = '$orarioChiusura'";
+			} else {
+				$sql = "INSERT INTO flavorasu (mailfatt, turno)
+						SELECT '$mail', id
+						FROM turno
+						WHERE giorno = '$giorno'
+						AND orainizio = '$orarioApertura'
+						AND orafine = '$orarioChiusura'";
+			}
 		
-		if ($conn->query($sql) == FALSE || inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) == FALSE) {
-			echo "Error " . $sql . "<br>" . $conn->error;
-			return FALSE;
+			if ($conn->query($sql) == FALSE || inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) == FALSE) {
+				echo "Error " . $sql . "<br>" . $conn->error;
+				return FALSE;
+			}
 		}
+		return TRUE;
 	}
-	return TRUE;
 }
 
 function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
