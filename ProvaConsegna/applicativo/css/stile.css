@@ -395,3 +395,8 @@ PERCHÃ¨ C'Ã¨ STATA LA MODIFICA DELLA NAVBAR
    margin-left: 10px;
 }
 
+.wrapperInfoRist {
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+}
