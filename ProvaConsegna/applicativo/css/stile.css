@@ -367,7 +367,7 @@ PERCHÃ¨ C'Ã¨ STATA LA MODIFICA DELLA NAVBAR
 }
 
 .page-content{
-    background-color: greenyellow;
+    /*background-color: greenyellow;*/
     padding: 20px;
     width: 100%; /* Imposta la larghezza al 100% */
     box-sizing: border-box; /* Considera il padding nell'impostazione della larghezza */
