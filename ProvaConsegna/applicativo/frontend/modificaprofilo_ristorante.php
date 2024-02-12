@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html>
-
-<script src="js/javascript.js"></script>
-<head>
-<title>EDIT ristorante</title>
-<script src="js/funzioni.js" async></script>
-<link rel="stylesheet" type="text/css" href="../css/stile.css">
-</head>
-<body>
     <head>
-        <script src="js/javascript.js"></script>
         <title>EDIT ristorante</title>
-        <script src="js/funzioni.js" async></script>
+        <script src="../js/funzioni.js" async></script>
         <link rel="stylesheet" type="text/css" href="../css/stile.css">
     </head>
     <body>
 	    <?php include ("../common/navbar_ristorante.php");
-        include("../backend/display_risto_info.php");?>
+        include("../backend/display_risto_info.php");
+        ?>
 	    <h1>Modifica il tuo profilo</h1>
 	    <section class="page-content">
-	        <form method="POST" action="../backend/modificaprofilo_ris2.php?id=<?php echo $mail; ?>">
+	        <form method="POST" action="../backend/modificaprofilo_ris.php?id=<?php echo $mail;?>">
 		        <label for="password">Password:</label>
                 <input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required>
                 <br><br>
@@ -75,6 +67,9 @@
                 </select>
 		        <div class="tab" id="orari">
                     <h2>I miei orari</h2>
+                    <div class="orariRist">
+                        <?php include("../backend/visualizza_orari_ristorante2.php");?>
+                    </div>
                         <div id="dynamicFieldContainer">
                             <div class="dynamicField">
                                 <label for="giorno">Giorno: </label>
@@ -98,7 +93,7 @@
                 </div>
                 <br>
 		        <input type="submit" name="submit" value="Salva">
-                <span><input type="reset" value="Annulla">
+                <span><input type="reset" value="Annulla modifiche">
 		    </form>
 	</section>
 </body>

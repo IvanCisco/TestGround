@@ -54,7 +54,7 @@ if (!isset($_SESSION["utente"])) {
             $conn->query($sql3);
             inserisciOrari($giorni, $orariInizio, $orariFine, $mail, $conn, "rlavorasu");
             $conn->commit();
-            head("Location: ../frontend/profilo_ristorante");           
+            header("Location: ../frontend/profilo_ristorante.php");           
         } catch (\Throwable $e) {
             $conn->rollback();
         }
