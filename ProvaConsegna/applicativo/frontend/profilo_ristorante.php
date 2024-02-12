@@ -33,8 +33,11 @@
                     <p><?php echo $row['cittasl'];?></p>
                 </div>
             </div>
-            <div class="orariRisto">
-                <h2>Orari di esercizio</h2>
+            <div class="wrapperOrariRisto">
+                <div class="orariRisto">
+                    <h2>Orari di esercizio</h2>
+                    <?php include("../backend/visualizza_orari_ristorante.php");?>
+                </div>
             </div>
         </section>
     </body>
