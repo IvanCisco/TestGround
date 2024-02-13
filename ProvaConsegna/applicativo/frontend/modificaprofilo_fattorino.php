@@ -1,31 +1,19 @@
 <!DOCTYPE html>
-<?php
-	include("../common/connessione.php");
-	session_start();
-	// Recupero dei dati dell'utente
-	if(isset($_SESSION['utente'])) {
-	$mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
-	$query=mysqli_query($conn,"select * from `fattorino` where mail='$mail'");
-	$row=mysqli_fetch_array($query);
-
-	$query2=mysqli_query($conn,"select * from `operainfatt` where mailfatt='$mail'");
-	$row2=mysqli_fetch_array($query2);
-	}
-?>
-
 <html lang="it">
-	<script src="../js/javascript.js"></script>
 	<head>
 		<title>modificaprofilo_fattorino</title>
 		<script src="../js/funzioni.js" async></script>
+		<script src="../js/javascript.js"></script>
 		<link rel="stylesheet" type="text/css" href="../css/stile.css">
 	</head>
-	<?php include("../common/navbar_fattorino.php"); ?>
-		<h1>Modifica Profilo</h1>
-<section class="page-content">
 	<body>
+		<?php
+		include("../common/navbar_fattorino.php");
+		?>
+		<h1>Modifica Profilo</h1>
+		<section class="page-content">
 		<form method="POST" action="../backend/modificaprofilo_fatt.php?id=<?php echo $mail; ?>" onsubmit="return validazione()">
-				<label for="nome">Nome: </label>
+			<label for="nome">Nome: </label>
 			<input type="text" id="nome" name="nome" value="<?php echo $row['nome'];?>" maxlength="20" required>
 			<br><br>
 			<label for="cognome">Cognome: </label>
