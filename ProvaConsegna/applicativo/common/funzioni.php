@@ -55,29 +55,26 @@ function mailExists($mail, $conn, $table) {
 }
 	
 function inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, $tabella) {
-	if (empty($giorni) || empty($orariApertura) || empty($orariChiusura)) {
-		return TRUE;
-	} else {
-		$contatore = count($giorni);
-		for ($i = 0; $i < $contatore; $i++) {
-			$giorno = $giorni[$i];
-			$orarioApertura = $orariApertura[$i];
-			$orarioChiusura = $orariChiusura[$i];
-			$sql = "INSERT INTO '{$tabella}' (mail, turno)
-					SELECT '$mail', id
-					FROM turno
-					WHERE giorno = '$giorno'
-					AND orainizio = '$orarioApertura'
-					AND orafine = '$orarioChiusura'";
+	$contatore = count($giorni);
+	for ($i = 0; $i < $contatore; $i++) {
+		$giorno = $giorni[$i];
+		$orarioApertura = $orariApertura[$i];
+		$orarioChiusura = $orariChiusura[$i];
+		$sql = "INSERT INTO $tabella (mail, turno)
+				SELECT '$mail', id
+				FROM turno
+				WHERE giorno = '$giorno'
+				AND orainizio = '$orarioApertura'
+				AND orafine = '$orarioChiusura'";
 		
-			if (inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) == FALSE || $conn->query($sql) == FALSE) {
-				echo "Error " . $sql . "<br>" . $conn->error;
-				return FALSE;
-			}
+		if (inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) == FALSE || $conn->query($sql) == FALSE) {
+			echo "Error " . $sql . "<br>" . $conn->error;
+			return FALSE;
 		}
-		return TRUE;
 	}
+	return TRUE;
 }
+
 
 function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
 	$sql = "INSERT IGNORE INTO turno (giorno, orainizio, orafine) VALUES ('$giorno', '$orarioApertura', '$orarioChiusura');";

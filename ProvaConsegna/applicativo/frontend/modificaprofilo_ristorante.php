@@ -11,7 +11,7 @@
         ?>
 	    <h1>Modifica il tuo profilo</h1>
 	    <section class="page-content">
-	        <form method="POST" action="../backend/modificaprofilo_ris.php?id=<?php echo $mail;?>">
+	        <form method="POST" action="../backend/modificaprofilo_ris.php">
 		        <label for="password">Password:</label>
                 <input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required>
                 <br><br>

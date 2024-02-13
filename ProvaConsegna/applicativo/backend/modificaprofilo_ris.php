@@ -49,11 +49,12 @@ if (!isset($_SESSION["utente"])) {
                                                 AND sedelegale.cap = '$capsl'
                                                 AND sedelegale.citta = '$cittasl')
                         WHERE mail = '$mail';";
+            inserisciOrari($giorni, $orariInizio, $orariFine, $mail, $conn, "rlavorasu");
             $conn->query($sql1);
             $conn->query($sql2);
             $conn->query($sql3);
-            inserisciOrari($giorni, $orariInizio, $orariFine, $mail, $conn, "rlavorasu");
             $conn->commit();
+            echo "Casino.";
             header("Location: ../frontend/profilo_ristorante.php");           
         } catch (\Throwable $e) {
             $conn->rollback();

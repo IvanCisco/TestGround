@@ -122,9 +122,11 @@ function eliminaOrari(giorno, orainizio, orafine, mail, tabella) {
                     if (risultato.successo) {
                         alert("Eliminazione avvenuta con successo");
                         console.log("Eliminazione avvenuta con successo!");
+                        location.reload();
                         let itemCancellato = document.getElementById(giorno + orainizio + orafine);
                         if (itemCancellato) {
                             itemCancellato.parentNode.removeChild(itemCancellato);
+                            itemCancellato.style.display = 'none';
                         } 
                     } else {
                         alert("Errore nella cancellazione: " + risultato.errore);
