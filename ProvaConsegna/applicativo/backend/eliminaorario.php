@@ -11,17 +11,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail = $dati["email"];
         $tabella = $dati["tab"];
 
-        $sql = "DELETE FROM '{$tabella}' 
+        $sql = "DELETE FROM $tabella 
                 WHERE mail = '$mail'
-                AND id = (
+                AND turno = (
                     SELECT id
                     FROM turno
                     WHERE giorno = '$giorno'
                     AND orainizio = '$orainizio'
                     AND orafine = '$orafine');";
         if ($conn->query($sql)) {
-            echo "piatto eliminato con successo!";
+            $risposta = array("successo" => TRUE);
+            echo json_encode($risposta);
+        } else {
+            $risposta = array("successo" => FALSE, "errore" => "Esecuzione della query non riuscita.");
+            echo json_encode($risposta);
         }
+    } else {
+        $risposta = array("successo" => FALSE, "errore" => "Uno dei parametri non è stato impostato.");
     }
     $conn->close();
 }
