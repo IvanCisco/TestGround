@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 07, 2024 alle 22:46
+-- Creato il: Feb 13, 2024 alle 17:12
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -140,7 +140,7 @@ INSERT INTO `fattorino` (`mail`, `password`, `nome`, `cognome`, `sesso`, `datana
 --
 
 CREATE TABLE `flavorasu` (
-  `mailfatt` varchar(40) NOT NULL,
+  `mail` varchar(40) NOT NULL,
   `turno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -276,7 +276,7 @@ CREATE TABLE `ristorante` (
 --
 
 INSERT INTO `ristorante` (`mail`, `password`, `partitaiva`, `nome`, `ragsoc`, `location`, `sedelegale`) VALUES
-('ristorante1@gmail.com', 'pass', '2147483647', 'La Trattoria', 'Ragione di essere', 3, 5),
+('ristorante1@gmail.com', 'pass', '2147483647', 'La Trattoria', 'Raggiana', 3, 5),
 ('ristorante2@gmail.com', 'pass', '57382958372', 'Pizzeria Napoli', 'Ragione in tutto', 4, 6);
 
 -- --------------------------------------------------------
@@ -286,9 +286,19 @@ INSERT INTO `ristorante` (`mail`, `password`, `partitaiva`, `nome`, `ragsoc`, `l
 --
 
 CREATE TABLE `rlavorasu` (
-  `mailrist` varchar(40) NOT NULL,
+  `mail` varchar(40) NOT NULL,
   `turno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `rlavorasu`
+--
+
+INSERT INTO `rlavorasu` (`mail`, `turno`) VALUES
+('ristorante1@gmail.com', 6),
+('ristorante1@gmail.com', 13),
+('ristorante1@gmail.com', 18),
+('ristorante1@gmail.com', 22);
 
 -- --------------------------------------------------------
 
@@ -320,7 +330,11 @@ INSERT INTO `turno` (`id`, `giorno`, `orainizio`, `orafine`) VALUES
 (10, 'Lunedì', '00:00:00', '00:45:00'),
 (11, 'Lunedì', '00:00:00', '00:50:00'),
 (12, 'Lunedì', '00:00:00', '00:55:00'),
-(13, 'Lunedì', '00:00:00', '01:00:00');
+(13, 'Lunedì', '00:00:00', '01:00:00'),
+(20, 'Martedì', '09:00:00', '18:00:00'),
+(21, 'Mercoledì', '09:00:00', '18:00:00'),
+(22, 'Giovedì', '11:00:00', '23:00:00'),
+(18, 'Sabato', '11:00:00', '15:00:00');
 
 -- --------------------------------------------------------
 
@@ -385,7 +399,7 @@ ALTER TABLE `fattorino`
 -- Indici per le tabelle `flavorasu`
 --
 ALTER TABLE `flavorasu`
-  ADD PRIMARY KEY (`mailfatt`,`turno`),
+  ADD PRIMARY KEY (`mail`,`turno`),
   ADD KEY `turno` (`turno`);
 
 --
@@ -436,7 +450,7 @@ ALTER TABLE `ristorante`
 -- Indici per le tabelle `rlavorasu`
 --
 ALTER TABLE `rlavorasu`
-  ADD PRIMARY KEY (`mailrist`,`turno`),
+  ADD PRIMARY KEY (`mail`,`turno`),
   ADD KEY `turno` (`turno`);
 
 --
@@ -460,13 +474,13 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT per la tabella `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Limiti per le tabelle scaricate
@@ -503,7 +517,7 @@ ALTER TABLE `contiene`
 -- Limiti per la tabella `flavorasu`
 --
 ALTER TABLE `flavorasu`
-  ADD CONSTRAINT `flavorasu_ibfk_1` FOREIGN KEY (`mailfatt`) REFERENCES `fattorino` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `flavorasu_ibfk_1` FOREIGN KEY (`mail`) REFERENCES `fattorino` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `flavorasu_ibfk_2` FOREIGN KEY (`turno`) REFERENCES `turno` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -543,7 +557,7 @@ ALTER TABLE `ristorante`
 -- Limiti per la tabella `rlavorasu`
 --
 ALTER TABLE `rlavorasu`
-  ADD CONSTRAINT `rlavorasu_ibfk_1` FOREIGN KEY (`mailrist`) REFERENCES `ristorante` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rlavorasu_ibfk_1` FOREIGN KEY (`mail`) REFERENCES `ristorante` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rlavorasu_ibfk_2` FOREIGN KEY (`turno`) REFERENCES `turno` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

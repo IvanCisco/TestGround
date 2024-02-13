@@ -108,3 +108,22 @@ function mostraCampiCarta() {
           }
     }
 }
+
+function eliminaOrari(giorno, orainizio, orafine, mail, tabella) {
+    if (confirm("Sei sicuro di voler cancellare questo orario?")) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                alert("Eliminazione avvenuta con successo");
+                let itemCancellato = document.getElementById(giorno + orainizio + orafine);
+                if (itemCancellato) {
+                    itemCancellato.parentNode.removeChild(itemCancellato);
+                }
+            } else {
+                alert("Errore nella cancellazione.");
+            }
+        };
+        xmlhttp.open("POST", "eliminaorario.php", true);
+        xmlhttp.send(JSON.stringify({g: giorno, inizio: orainizio, fine: orafine, email: mail, tab: tabella}));
+    }
+}
