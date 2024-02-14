@@ -36,7 +36,10 @@
             <div class="wrapperOrariRisto">
                 <div class="orariRisto">
                     <h2>Orari di esercizio</h2>
-                    <?php include("../backend/visualizza_orari_ristorante.php");?>
+                    <?php
+                    $tabella = "rlavorasu";
+                    include("../backend/visualizza_orari.php");
+                    ?>
                 </div>
             </div>
         </section>

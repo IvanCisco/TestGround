@@ -1,9 +1,9 @@
 <?php
 $sql = "SELECT giorno, orainizio, orafine
         FROM  turno
-        WHERE turno.id IN (
+        WHERE id IN (
             SELECT turno
-            FROM rlavorasu
+            FROM $tabella
             WHERE mail = '$mail');";
 $risultato = $conn->query($sql);
 if ($risultato->num_rows > 0) {

@@ -68,7 +68,10 @@
 		        <div class="tab" id="orari">
                     <h2>I miei orari</h2>
                     <div class="orariRist">
-                        <?php include("../backend/visualizza_orari_ristorante2.php");?>
+                        <?php
+                        $tabella = "rlavorasu";
+                        include("../backend/visualizza_orari2.php");
+                        ?>
                     </div>
                         <div id="dynamicFieldContainer">
                             <div class="dynamicField">

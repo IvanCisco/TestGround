@@ -9,6 +9,7 @@
 	<body>
 		<?php
 		include("../common/navbar_fattorino.php");
+		include("../backend/display_fatto_info.php");
 		?>
 		<h1>Modifica Profilo</h1>
 		<section class="page-content">
@@ -43,23 +44,25 @@
             	<option value="trento" <?php echo ($row['citta'] == "Trento") ? "selected" : "";?>>Trento</option>
         	</select>
 			<br><br>
-			<label for="zona">Zona: </label>
-    		<select id="zona" name="zona" required>
-        		<option disabled selected value></option>
-        		<option value="1" <?php echo ($row2['zona'] == "1") ? "selected" : "";?>>1</option>
-        		<option value="2" <?php echo ($row2['zona'] == "2") ? "selected" : "";?>>2</option>
-        		<option value="3" <?php echo ($row2['zona'] == "3") ? "selected" : "";?>>3</option>
-        		<option value="4" <?php echo ($row2['zona'] == "4") ? "selected" : "";?>>4</option>
-        		<option value="5" <?php echo ($row2['zona'] == "5") ? "selected" : "";?>>5</option>
-    		</select>
-			<br><br>
 			Disponibilità:
-			<input type="radio" name="disponibilita" id="s" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="s") echo "checked";?> value="s" required><label for="s">S</label>
-        	<input type="radio" name="disponibilita" id="n" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="n") echo "checked";?> value="n"><label for="n">N</label>
+			<input type="radio" name="disponibilita" id="s" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="S") echo "checked";?> value="s" required><label for="s">S</label>
+        	<input type="radio" name="disponibilita" id="n" <?php if (isset($row["disponibilita"]) && $row["disponibilita"]=="N") echo "checked";?> value="n"><label for="n">N</label>
+			<br><br>
+			<label for="zona">Zone di operatività: </label>
+    		<span class="error" id="checkErr" style="visibility:hidden;">Seleziona almeno una zona</span>
+			<br><br>
+			<?php include("../backend/visualizza_zone.php");?>
+			<br>
 
 
 		<div class="tab" id="orari">
             <h2>I miei orari</h2>
+			<div class="orariFatt">
+				<?php 
+				$tabella = "flavorasu";
+				include("../backend/visualizza_orari2.php");
+				?>
+			</div>
             <div id="dynamicFieldContainer">
                 <div class="dynamicField">
                     <label for="giorno0">Giorno: </label>
