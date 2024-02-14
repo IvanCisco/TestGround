@@ -31,6 +31,50 @@ session_start();
 if (isset($_SESSION['utente'])) {
     $mail = $_SESSION['utente'];
 
+    //select disponibilita del fattorino
+    $queryDisponibilita = "SELECT disponibilita FROM fattorino WHERE mail=?";
+    $stmtFattorino = $conn->prepare($queryDisponibilita);
+    $stmtFattorino->bind_param("s", $mail);
+    $stmtFattorino->execute();
+    $resultdisponibilitaFattorino = $stmtFattorino->get_result();
+
+    if ($resultdisponibilitaFattorino && $resultdisponibilitaFattorino->num_rows > 0) {
+        $row = $resultdisponibilitaFattorino->fetch_assoc();
+        $disp = $row['disponibilita'];
+        }
+
+    if ($disp == "N") {
+        echo ("Attualmente la tua disponibilità si trova su N, non puoi accettare alcun ordine. Recati nella sezione modifica profilo per attivarla");
+        } else {
+
+            //RECUPERO DATA E ORA CORRENTI 
+        // Imposta la localizzazione in italiano
+        setlocale(LC_TIME, 'it_IT');
+        // Recupera il giorno corrente
+        $giornoCorrente = strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)
+
+        // Recupera l'ora corrente
+        $oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con i minuti e i secondi
+
+        // Esegui una query per controllare se il fattorino è in turno in questo momento di questo giorno 
+        $query = "SELECT t.giorno, t.orainizio. t.orafine 
+          FROM turno t
+          JOIN flavorasu fl ON t.id = fl.id
+          JOIN fattorino f ON f.mail = fl.mailfatt
+          WHERE f.citta = '$mail'
+          AND t.giorno = '$giornoCorrente'
+          AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine";
+
+          $res= $conn->query($query);
+            if (!$res){
+            echo "<p>Impossibile eseguire query.</p>"
+            . "<p>Codice errore " . $conn->errno
+            . ": " . $conn->error . "</p>";
+            }else{
+            if ($res->num_rows > 0) {
+                // Output dati
+                while ($row = $res->fetch_assoc()) {
+
     // select citta da fattorino in base alla mail 
     $querycittaFattorino = "SELECT citta FROM fattorino WHERE mail = ?";
     $stmtFattorino = $conn->prepare($querycittaFattorino);
@@ -68,6 +112,8 @@ if (isset($_SESSION['utente'])) {
         // il fattorino vedrà solo ordini della città in cui lavora e ristoranti della sua zona
         // lo stato può essere in preparazione e allora potrà prenderlo in carico
         // oppure può essere preso in carico e non potrà prenderlo lui 
+
+        
 
   $query = "
 SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
@@ -117,6 +163,7 @@ if ($result && $result->num_rows > 0) {
         echo "</div>";
     }
 }
+}
 } else {
     echo "Nessun ordine trovato";
     //echo "sbagliato";
@@ -127,6 +174,12 @@ $conn->close();
 }
 }
 }
+}
+}
+} else {
+    echo ("utente non loggato");
+}
+
 
 ?>
 </section>
