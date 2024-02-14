@@ -57,9 +57,9 @@ if (isset($_SESSION['utente'])) {
         $oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con i minuti e i secondi
 
         // Esegui una query per controllare se il fattorino è in turno in questo momento di questo giorno 
-        $query = "SELECT t.giorno, t.orainizio. t.orafine 
+        $query = "SELECT t.giorno, t.orainizio, t.orafine 
           FROM turno t
-          JOIN flavorasu fl ON t.id = fl.id
+          JOIN flavorasu fl ON t.id = fl.turno
           JOIN fattorino f ON f.mail = fl.mailfatt
           WHERE f.citta = '$mail'
           AND t.giorno = '$giornoCorrente'
@@ -173,6 +173,10 @@ $stmt->close();
 $conn->close();
 }
 }
+} else {
+        // Nessun risultato trovato
+        echo "I tuoi turni non coincidono con l'orario e il giorno attuale, puoi modificarli nella sezione Modifica Profilo.";
+
 }
 }
 }
