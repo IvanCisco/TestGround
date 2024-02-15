@@ -82,10 +82,19 @@ $query = "SELECT r.nome
           */
 
           // Imposta la localizzazione in italiano
-setlocale(LC_TIME, 'it_IT');
-          // Recupera il giorno corrente
-$giornoCorrente = /*strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)*/ "Giovedì";
-
+          date_default_timezone_set("Europe/Rome");
+          $dataOdiernaING = date("l");
+          $iNGToITA = array(
+              'Monday' => 'Lunedì',
+              'Tuesday' => 'Martedì',
+              'Wednesday' => 'Mercoledì',
+              'Thursday' => 'Giovedì',
+              'Friday' => 'Venerdì',
+              'Saturday' => 'Sabato',
+              'Sunday' => 'Domenica'
+          );
+  
+          $giornoCorrente = $iNGToITA[$dataOdiernaING];
 // Recupera l'ora corrente
 $oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con i minuti e i secondi
 

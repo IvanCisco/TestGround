@@ -45,7 +45,7 @@
 
                 //RECUPERO DATA E ORA CORRENTI 
                 // Imposta la localizzazione in italiano
-                //date_default_timezone_set("Europe/Rome");
+                date_default_timezone_set("Europe/Rome");
                 $dataOdiernaING = date("l");
                 $iNGToITA = array(
                     'Monday' => 'Lunedì',
