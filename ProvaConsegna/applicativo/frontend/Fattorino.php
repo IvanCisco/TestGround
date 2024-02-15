@@ -60,7 +60,7 @@ if (isset($_SESSION['utente'])) {
         $query = "SELECT t.giorno, t.orainizio, t.orafine 
           FROM turno t
           JOIN flavorasu fl ON t.id = fl.turno
-          JOIN fattorino f ON f.mail = fl.mailfatt
+          JOIN fattorino f ON f.mail = fl.mail
           WHERE f.citta = '$mail'
           AND t.giorno = '$giornoCorrente'
           AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine";

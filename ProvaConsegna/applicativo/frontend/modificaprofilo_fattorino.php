@@ -13,7 +13,7 @@
 		?>
 		<h1>Modifica Profilo</h1>
 		<section class="page-content">
-		<form method="POST" action="../backend/modificaprofilo_fatt.php?id=<?php echo $mail; ?>" onsubmit="return validazione()">
+		<form method="POST" action="../backend/modificaprofilo_fatt.php" onsubmit="return validazione()">
 			<label for="nome">Nome: </label>
 			<input type="text" id="nome" name="nome" value="<?php echo $row['nome'];?>" maxlength="20" required>
 			<br><br>
@@ -76,17 +76,17 @@
                         <option value="Sabato">Sabato</option>
                         <option value="Domenica">Domenica</option>
                     </select>
-                    <label for="orainizio0">Orario di apertura: </label>
+                    <label for="orainizio0">Orario di inizio: </label>
                     <input type="time" id="orainizio0" name="orainizio[]" step="300">
-                    <label for="orafine0">Orario di chiusura: </label>
+                    <label for="orafine0">Orario di fine: </label>
                     <input type="time" id="orafine0" name="orafine[]" step="300">
                 </div>
             </div>
             <button type="button" onclick="aggiungiCampo()">+</button>
-        </div>
-		<input type="submit" name="submit">
+       	 </div>
+		<input type="submit" name="submit" value="Salva">
 		</form>
 	</section>
-		<?php include("../common/footer.html"); ?>
+		<?php include("../common/footer.html");?>
 	</body>
 </html>

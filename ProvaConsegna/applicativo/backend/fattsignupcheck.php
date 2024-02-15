@@ -80,13 +80,4 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
-
-function zonaInsert($zone, $mail, $conn) {
-    for ($i=0; $i < count($zone); $i++) {
-        $sql = "INSERT INTO operainfatt (mailfatt, zona) VALUES ('$mail', '$zone[$i]')";
-        if ($conn->query($sql) === FALSE) {
-            return FALSE;
-        }
-    }
-    return TRUE;
-}
+?>

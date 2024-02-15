@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
 }
 
 //select per i turni del fattorino
-$stmt = $conn->prepare("SELECT * FROM flavorasu WHERE mailfatt = ?");
+$stmt = $conn->prepare("SELECT * FROM flavorasu WHERE mail = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
 $result = $stmt->get_result();

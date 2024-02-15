@@ -85,4 +85,13 @@ function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
 	return TRUE;
 }
 
+function zonaInsert($zone, $mail, $conn, $tabella) {
+    for ($i=0; $i < count($zone); $i++) {
+        $sql = "INSERT INTO $tabella (mailfatt, zona) VALUES ('$mail', '$zone[$i]')";
+        if ($conn->query($sql) === FALSE) {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
 ?>
