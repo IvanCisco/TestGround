@@ -2,9 +2,13 @@
 <html>
     <head>
         <script src="../js/javascript.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/stile.css">
     </head>
     <body>
-        <p><a href="acquirente.php">Torna indietro</a></p>
+        <!--<p><a href="acquirente.php">Torna indietro</a></p>-->
+        <?php include("../common/navbar_acquirente.php"); ?>
+        <h1>Menu</h1>
+        <section class="page-content">
         <form action="../backend/inserisci_ordine_acquirente.php" method="POST">
 <?php
     include("../common/connessione.php");
@@ -54,5 +58,6 @@ if (isset($_GET['nomeristorante'])) {
 }
         ?>
     </form>
+    </section>
         </body>
 </html>
