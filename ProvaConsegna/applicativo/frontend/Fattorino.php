@@ -115,8 +115,7 @@ if (isset($_SESSION['utente'])) {
 
         
 
-  $query = "
-SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
+  $query = "SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
 FROM ordine o
 JOIN contiene c ON o.data = c.data AND o.ora = c.ora
 JOIN operainrist oi ON c.mail = oi.mail
