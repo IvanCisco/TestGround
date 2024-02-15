@@ -2,9 +2,12 @@
 <html>
     <head>
         <script src="../js/funzioni.js" async></script>
+         <link rel="stylesheet" type="text/css" href="../css/stile.css">
     </head>
     <body>
+        <?php include("../common/navbar_acquirente.php"); ?>
         <h1>Riepilogo ordine</h1>
+        <section class="page-content">
         <div>
             <h3>Piatti e menu selezionati</h2>
             <form method="post" action="../backend/process_order.php">
@@ -54,6 +57,8 @@
                 <br><br>
                 <input type="submit" name="submitOrder" value="Conferma Ordine">
             </form>
-        </div>    
+        </div>
+      </section> 
+      <?php include("../common/footer.html"); ?>
     </body>
 </html>
