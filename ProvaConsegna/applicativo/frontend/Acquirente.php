@@ -130,7 +130,7 @@ $query = "SELECT r.nome
         echo "</div>";
             }
         } else {
-            echo "nessun ristorante aperto in questo momento";
+            echo "Nessun ristorante aperto in questo momento.";
         }
     }
 }
