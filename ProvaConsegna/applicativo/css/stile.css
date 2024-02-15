@@ -1,3 +1,7 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
 /* Stile globale per il corpo della pagina */
 header{
     display: flex;
