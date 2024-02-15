@@ -57,8 +57,6 @@
         <input type="submit" value="Inserisci">
     </form>
 </section>
-<!-- NON VA PERCHè NON è PHP
 <?php include("../common/footer.html"); ?>
--->
 </body>
 </html>

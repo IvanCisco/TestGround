@@ -61,7 +61,7 @@ if (isset($_SESSION['utente'])) {
           FROM turno t
           JOIN flavorasu fl ON t.id = fl.turno
           JOIN fattorino f ON f.mail = fl.mail
-          WHERE f.citta = '$mail'
+          WHERE f.citta = 'Milano'
           AND t.giorno = '$giornoCorrente'
           AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine";
 
@@ -83,7 +83,7 @@ if (isset($_SESSION['utente'])) {
     $resultcittaFattorino = $stmtFattorino->get_result();
 
     // select zona zona da operainfatt in base alla mail
-    $queryareaFattorino = "SELECT zona FROM operainfatt WHERE mailfatt = ?";
+    $queryareaFattorino = "SELECT zona FROM operainfatt WHERE mail = ?";
     $stmtFattorino = $conn->prepare($queryareaFattorino);
     $stmtFattorino->bind_param("s", $mail);
     $stmtFattorino->execute();
@@ -117,13 +117,12 @@ if (isset($_SESSION['utente'])) {
 
   $query = "
 SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
-/*>>>>>>> 1e1f124761c15b3494af788393bbb532b6373b20*/
 FROM ordine o
 JOIN contiene c ON o.data = c.data AND o.ora = c.ora
-JOIN operainrist oi ON c.mail = oi.mailrist
+JOIN operainrist oi ON c.mail = oi.mail
 JOIN operainfatt of ON oi.zona = of.zona
-JOIN fattorino f ON of.mailfatt = f.mail
-JOIN ristorante r ON oi.mailrist = r.mail
+JOIN fattorino f ON of.mail = f.mail
+JOIN ristorante r ON oi.mail = r.mail
 WHERE f.mail = ? 
   AND f.citta = ? 
   AND oi.zona = ?
@@ -177,6 +176,8 @@ $conn->close();
         // Nessun risultato trovato
         echo "I tuoi turni non coincidono con l'orario e il giorno attuale, puoi modificarli nella sezione Modifica Profilo.";
         echo $oraCorrente;
+        echo $giornoCorrente;
+        echo $mail;
         var_dump($res);
 }
 }

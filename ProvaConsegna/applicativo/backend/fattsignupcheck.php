@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $sql1 = "INSERT INTO fattorino (nome, cognome, mail, password, sesso, datanascita, luogonascita, citta)
                     VALUES ('$nome', '$cognome', '$mail', '$password', '$sesso', '$dataNascita', '$luogoNascita', '$citta')";
-        if ($conn->query($sql1) == TRUE and zonaInsert($zone, $mail, $conn)) {
+        if ($conn->query($sql1) == TRUE and zonaInsert($zone, $mail, $conn, "operainfatt")) {
             header("Location: ../login.php?status=fattsignupsuccess");
         } else {
             echo "Error " . $sql1 . "<br>" . $conn->error;
