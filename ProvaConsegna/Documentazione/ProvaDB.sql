@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 13, 2024 alle 17:12
+-- Creato il: Feb 15, 2024 alle 17:27
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -131,7 +131,7 @@ CREATE TABLE `fattorino` (
 
 INSERT INTO `fattorino` (`mail`, `password`, `nome`, `cognome`, `sesso`, `datanascita`, `luogonascita`, `citta`, `disponibilita`, `credito`) VALUES
 ('giulia.rossi@gmail.com', 'pass', 'Giulia', 'Rossi', 'F', '1998-03-25', 'Roma', 'Roma', 'N', 9.75),
-('luca.verdi@gmail.com', 'pass', 'Luca', 'Verdi', 'M', '1995-08-18', 'Napoli', 'Milano', 'S', 12.50);
+('luca.verdi@gmail.com', 'pass', 'Lucianello', 'Verdi', 'M', '1995-08-18', 'Napoli', 'Milano', 'S', 12.50);
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,7 @@ INSERT INTO `indirizzo` (`id`, `via`, `numero`, `cap`, `citta`) VALUES
 --
 
 CREATE TABLE `operainfatt` (
-  `mailfatt` varchar(40) NOT NULL,
+  `mail` varchar(40) NOT NULL,
   `zona` enum('1','2','3','4','5') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -186,9 +186,12 @@ CREATE TABLE `operainfatt` (
 -- Dump dei dati per la tabella `operainfatt`
 --
 
-INSERT INTO `operainfatt` (`mailfatt`, `zona`) VALUES
+INSERT INTO `operainfatt` (`mail`, `zona`) VALUES
 ('giulia.rossi@gmail.com', '2'),
-('luca.verdi@gmail.com', '1');
+('luca.verdi@gmail.com', '1'),
+('luca.verdi@gmail.com', '2'),
+('luca.verdi@gmail.com', '4'),
+('luca.verdi@gmail.com', '5');
 
 -- --------------------------------------------------------
 
@@ -197,7 +200,7 @@ INSERT INTO `operainfatt` (`mailfatt`, `zona`) VALUES
 --
 
 CREATE TABLE `operainrist` (
-  `mailrist` varchar(40) NOT NULL,
+  `mail` varchar(40) NOT NULL,
   `zona` enum('1','2','3','4','5') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -205,7 +208,7 @@ CREATE TABLE `operainrist` (
 -- Dump dei dati per la tabella `operainrist`
 --
 
-INSERT INTO `operainrist` (`mailrist`, `zona`) VALUES
+INSERT INTO `operainrist` (`mail`, `zona`) VALUES
 ('ristorante1@gmail.com', '4'),
 ('ristorante2@gmail.com', '4');
 
@@ -253,7 +256,8 @@ CREATE TABLE `pietanza` (
 
 INSERT INTO `pietanza` (`nome`, `mail`, `prezzo`, `descrizione`, `tipo`, `elenco`, `immagine`) VALUES
 ('Carbonara', 'ristorante2@gmail.com', 12.00, 'Spaghetti con uova, guanciale e pecorino', 'piatto', NULL, NULL),
-('Margherita', 'ristorante1@gmail.com', 8.50, 'Mozzarella, pomodoro, basilico', 'piatto', NULL, NULL);
+('Margherita', 'ristorante1@gmail.com', 8.50, 'Mozzarella, pomodoro, basilico', 'piatto', NULL, NULL),
+('Menu Strepitoso', 'ristorante1@gmail.com', 12.80, 'Un menu fuori di testa!', 'menu', 'Margherita', NULL);
 
 -- --------------------------------------------------------
 
@@ -276,7 +280,7 @@ CREATE TABLE `ristorante` (
 --
 
 INSERT INTO `ristorante` (`mail`, `password`, `partitaiva`, `nome`, `ragsoc`, `location`, `sedelegale`) VALUES
-('ristorante1@gmail.com', 'pass', '2147483647', 'La Trattoria', 'Raggiana', 3, 5),
+('ristorante1@gmail.com', 'pass', '2147483647', 'La Trattoria', 'Raggiano', 3, 5),
 ('ristorante2@gmail.com', 'pass', '57382958372', 'Pizzeria Napoli', 'Ragione in tutto', 4, 6);
 
 -- --------------------------------------------------------
@@ -289,16 +293,6 @@ CREATE TABLE `rlavorasu` (
   `mail` varchar(40) NOT NULL,
   `turno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `rlavorasu`
---
-
-INSERT INTO `rlavorasu` (`mail`, `turno`) VALUES
-('ristorante1@gmail.com', 6),
-('ristorante1@gmail.com', 13),
-('ristorante1@gmail.com', 18),
-('ristorante1@gmail.com', 22);
 
 -- --------------------------------------------------------
 
@@ -331,9 +325,13 @@ INSERT INTO `turno` (`id`, `giorno`, `orainizio`, `orafine`) VALUES
 (11, 'Lunedì', '00:00:00', '00:50:00'),
 (12, 'Lunedì', '00:00:00', '00:55:00'),
 (13, 'Lunedì', '00:00:00', '01:00:00'),
+(30, 'Martedì', '04:00:00', '07:10:00'),
 (20, 'Martedì', '09:00:00', '18:00:00'),
+(31, 'Mercoledì', '06:20:00', '12:45:00'),
 (21, 'Mercoledì', '09:00:00', '18:00:00'),
+(29, 'Giovedì', '06:20:00', '18:55:00'),
 (22, 'Giovedì', '11:00:00', '23:00:00'),
+(32, 'Sabato', '10:00:00', '23:30:00'),
 (18, 'Sabato', '11:00:00', '15:00:00');
 
 -- --------------------------------------------------------
@@ -413,14 +411,14 @@ ALTER TABLE `indirizzo`
 -- Indici per le tabelle `operainfatt`
 --
 ALTER TABLE `operainfatt`
-  ADD PRIMARY KEY (`mailfatt`,`zona`),
+  ADD PRIMARY KEY (`mail`,`zona`),
   ADD KEY `zona` (`zona`);
 
 --
 -- Indici per le tabelle `operainrist`
 --
 ALTER TABLE `operainrist`
-  ADD PRIMARY KEY (`mailrist`,`zona`),
+  ADD PRIMARY KEY (`mail`,`zona`),
   ADD KEY `zona` (`zona`);
 
 --
@@ -474,13 +472,13 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT per la tabella `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Limiti per le tabelle scaricate
@@ -524,14 +522,14 @@ ALTER TABLE `flavorasu`
 -- Limiti per la tabella `operainfatt`
 --
 ALTER TABLE `operainfatt`
-  ADD CONSTRAINT `operainfatt_ibfk_1` FOREIGN KEY (`mailfatt`) REFERENCES `fattorino` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `operainfatt_ibfk_1` FOREIGN KEY (`mail`) REFERENCES `fattorino` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `operainfatt_ibfk_2` FOREIGN KEY (`zona`) REFERENCES `zona` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `operainrist`
 --
 ALTER TABLE `operainrist`
-  ADD CONSTRAINT `operainrist_ibfk_1` FOREIGN KEY (`mailrist`) REFERENCES `ristorante` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `operainrist_ibfk_1` FOREIGN KEY (`mail`) REFERENCES `ristorante` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `operainrist_ibfk_2` FOREIGN KEY (`zona`) REFERENCES `zona` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

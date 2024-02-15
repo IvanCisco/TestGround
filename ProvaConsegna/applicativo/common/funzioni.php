@@ -87,7 +87,7 @@ function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
 
 function zonaInsert($zone, $mail, $conn, $tabella) {
     for ($i=0; $i < count($zone); $i++) {
-        $sql = "INSERT INTO $tabella (mailfatt, zona) VALUES ('$mail', '$zone[$i]')";
+        $sql = "INSERT IGNORE INTO $tabella (mail, zona) VALUES ('$mail', '{$zone[$i]}')";
         if ($conn->query($sql) === FALSE) {
             return FALSE;
         }
