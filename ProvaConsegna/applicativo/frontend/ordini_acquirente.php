@@ -14,7 +14,6 @@
     <?php include("../common/navbar_acquirente.php"); ?>
 
     <div class="titolo">
-         <a href="acquirente.php" class="indietro"><img src="../immagini/back.png" alt="Freccia indietro" class="freccia"></a>
         <h1>I tuoi ordini</h1>
     </div>
 <section class="page-content">
