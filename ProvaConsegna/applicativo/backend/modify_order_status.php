@@ -32,7 +32,7 @@ if (isset($_POST['modifyOrderStatus'])) {
             } elseif ($tipo == 'fattorino') {
                 if ($currentStatus == 'in preparazione') {
                     $newStato = "preso in carico";
-                    include("./assegna_ordine_fattorino.php"); // Gestione assegnamento a fattorino
+                    include("assegna_ordine_fattorino.php"); // Gestione assegnamento a fattorino
                 } elseif ($currentStatus == 'in consegna') {
                     $newStato = 'consegnato';
                     $prezzototale_query = "SELECT SUM(pietanza.prezzo) AS prezzo_totale

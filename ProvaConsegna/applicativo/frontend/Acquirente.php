@@ -131,10 +131,6 @@ $query = "SELECT r.nome
             }
         } else {
             echo "nessun ristorante aperto in questo momento";
-            echo $acquirenteCity;
-            echo $giornoCorrente;
-            echo $oraCorrente;
-            var_dump($res);
         }
     }
 }
