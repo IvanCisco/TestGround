@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
     echo "Utente non loggato";
 }
 //select per la zona in cui ritira il fattorino
-$stmt = $conn->prepare("SELECT * FROM operainfatt WHERE mailfatt = ?");
+$stmt = $conn->prepare("SELECT * FROM operainfatt WHERE mail = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
 }
 
 //select per i turni del fattorino
-$stmt = $conn->prepare("SELECT * FROM flavorasu WHERE mail = ?");
+/*$stmt = $conn->prepare("SELECT * FROM flavorasu WHERE mail = ?");
 $stmt->bind_param("s", $mail);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -81,7 +81,9 @@ if ($result->num_rows > 0) {
         }
 }else {
     echo "Non è stato inserito alcun turno";
-}
+}*/
+$tabella = "flavorasu";
+include("../backend/visualizza_orari.php");
 
 
 
