@@ -51,7 +51,7 @@ if (isset($_SESSION['utente'])) {
         // Imposta la localizzazione in italiano
         setlocale(LC_TIME, 'it_IT');
         // Recupera il giorno corrente
-        $giornoCorrente = strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)
+        $giornoCorrente = /*strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)*/ "Giovedì";
 
         // Recupera l'ora corrente
         $oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con i minuti e i secondi
@@ -176,7 +176,8 @@ $conn->close();
 } else {
         // Nessun risultato trovato
         echo "I tuoi turni non coincidono con l'orario e il giorno attuale, puoi modificarli nella sezione Modifica Profilo.";
-
+        echo $oraCorrente;
+        var_dump($res);
 }
 }
 }

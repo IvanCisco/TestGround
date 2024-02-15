@@ -84,7 +84,7 @@ $query = "SELECT r.nome
           // Imposta la localizzazione in italiano
 setlocale(LC_TIME, 'it_IT');
           // Recupera il giorno corrente
-$giornoCorrente = strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)
+$giornoCorrente = /*strftime("%A"); //"%A" restituisce il nome del giorno della settimana in italiano (es. Lunedì, Martedì, etc.)*/ "Giovedì";
 
 // Recupera l'ora corrente
 $oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con i minuti e i secondi
@@ -93,7 +93,7 @@ $oraCorrente = date("H:i:s"); // "H:i:s" restituisce l'ora in formato 24 ore con
 $query = "SELECT r.nome 
           FROM ristorante r
           JOIN indirizzo i ON r.location = i.id
-          JOIN rlavorasu rl ON r.mail = rl.mailrist
+          JOIN rlavorasu rl ON r.mail = rl.mail
           JOIN turno t ON rl.turno = t.id
           WHERE i.citta = '$acquirenteCity'
           AND t.giorno = '$giornoCorrente'
@@ -122,6 +122,10 @@ $query = "SELECT r.nome
             }
         } else {
             echo "nessun ristorante aperto in questo momento";
+            echo $acquirenteCity;
+            echo $giornoCorrente;
+            echo $oraCorrente;
+            var_dump($res);
         }
     }
 }

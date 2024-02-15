@@ -2,7 +2,7 @@
 
 $sql = "SELECT zona
         FROM operainfatt
-        WHERE mailfatt = '$mail'";
+        WHERE mail = '$mail'";
 
 $risultato = $conn->query($sql);
 if ($risultato->num_rows >= 0) {
