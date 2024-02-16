@@ -148,7 +148,7 @@ footer {
     padding: 10px;
     text-align: center;
     box-sizing: border-box;
-    width: 95%;
+    width: 100%;
     height: 60px; /* altezza footer */
     position: absolute; /* Posizionamento fisso */
     bottom: 0; /* Posizionamento in basso */
