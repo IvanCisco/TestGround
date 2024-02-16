@@ -86,12 +86,40 @@ function inserisciInTurno($giorno, $orarioApertura, $orarioChiusura, $conn) {
 }
 
 function zonaInsert($zone, $mail, $conn, $tabella) {
-    for ($i=0; $i < count($zone); $i++) {
-        $sql = "INSERT IGNORE INTO $tabella (mail, zona) VALUES ('$mail', '{$zone[$i]}')";
-        if ($conn->query($sql) === FALSE) {
-            return FALSE;
+    // Zone in cui il fattorino opera già
+    $zoneEsistenti = array();
+    $sql = "SELECT zona FROM $tabella WHERE mail = '$mail'";
+    $risultato = $conn->query($sql);
+    if ($risultato->num_rows > 0) {
+        while ($row = $risultato->fetch_assoc()) {
+            $zoneEsistenti[] = $row['zona'];
         }
     }
+
+    foreach ($zoneEsistenti as $zonaEsistente) {
+        // Controlla se le zone di operatività dopo la modifica sono le stesse
+        $isSelected = in_array($zonaEsistente, $zone);
+       
+        if (!$isSelected) {
+            // La zona non è più selezionata dopo la modifica. Elimina il relativo record.
+            $sql = "DELETE FROM $tabella WHERE mail = '$mail' AND zona = '$zonaEsistente'";
+            if ($conn->query($sql) === FALSE) {
+                return FALSE;
+            }
+        }
+    }
+   
+    foreach ($zone as $nuovaZona) {
+        // Controlla se questa zona deve essere inserita tra quelle di operatività
+        if (!in_array($nuovaZona, $zoneEsistenti)) {
+            // È una nuova zona selezionata. Inserisci il record.
+            $sql = "INSERT INTO $tabella (mail, zona) VALUES ('$mail', '$nuovaZona')";
+            if ($conn->query($sql) === FALSE) {
+                return FALSE;
+            }
+        }
+    }
+   
     return TRUE;
 }
 ?>
