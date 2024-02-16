@@ -27,10 +27,9 @@
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     //stampo le pietanze di quel ristorante
-                    echo "<div class='menu-item'>";
-                    echo "<p>{$row['nome']} - {$row['prezzo']}- {$row['descrizione']} - {$row['tipo']} - {$row['elenco']}";
+                    echo "<p class=\"menu-item\" id=\"" . $mail . str_replace(' ', '', $row['nome']) . str_replace('.', '', $row['prezzo']) . "\"> " . $row['nome'] . " - " . $row['prezzo'] . " - " . $row['descrizione'] . " - " . $row['tipo'] . " - " . $row['elenco'] . "";
                     echo "<img src='{$row['immagine']}' style='max-width: 150px; max-height: 150px; margin-left: auto; margin-right: auto;display: inline-block; vertical-align: middle;'>";
-                    echo "<img src='../immagini/delete-icon2.png' onclick=\"confirmDelete('{$row['nome']}', '{$row['prezzo']}', '{$row['descrizione']}')\" alt='Delete'></img></p>";
+                    echo "<img src='../immagini/delete-icon2.png' onclick=\"confirmDelete('$mail','{$row['nome']}', '{$row['prezzo']}','{$row['descrizione']}')\" alt='Delete'></img></p>";
         ?>
                     <div class="modal" id="myModal">
                         <div class="modal-content">
@@ -39,7 +38,6 @@
                         </div>
                     </div>
                     <?php
-                    echo "</div>";
                 }
             } else {
                 echo "No menu items found.";
