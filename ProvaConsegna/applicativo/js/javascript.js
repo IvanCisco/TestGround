@@ -85,32 +85,39 @@ function confirmDelete(mail, nome, prezzo, descrizione) {
     xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-          console.log("Item deleted successfully");
-          //document.getElementById("message").innerText = "Eliminazione avvenuta con successo, verrà ricaricato il menu";
-          openModal("Eliminzione avvenuta con successo, verrà ricaricato il menu con le modifiche");
-          console.log(xhr.responseText);
-          let risultato = JSON.parse(xhr.responseText);
-          let itemCancellato = document.getElementById(mail + nome.replace(/ /g, '') + prezzo.replace('.', ''));
-          console.log(itemCancellato);
-          if (risultato.successo) {
-            if (itemCancellato) {
-              console.log("sono dentro")
-              itemCancellato.remove();
-            } 
-          } else {
-            openModal("Error deleting item");
-            console.error("Errore durante l'eliminazione");
-            // Handle error
-            console.error("Errore nella cancellazione: " + risultato.errore);
-          }
+        console.log("Item deleted successfully");
+                  //document.getElementById("message").innerText = "Eliminazione avvenuta con successo, verrà ricaricato il menu";
+                  openModal("Eliminzione avvenuta con successo, verrà ricaricato il menu con le modifiche");
+                  /*redirectdelay(5000, 'ristorante.php');*/
+        console.log(xhr.responseText);
+                  let risultato = JSON.parse(xhr.responseText);
+        let itemCancellato = document.getElementById(mail + nome.replace(/ /g, '') + prezzo.replace('.', ''));
+
+        console.log(itemCancellato);
+        if (risultato.successo) {
+          
+          
+                      if (itemCancellato) {
+                          /*itemCancellato.parentNode.removeChild(itemCancellato);*/
+                          /*itemCancellato.style.display = 'none';*/
+            console.log("sono dentro")
+            itemCancellato.remove();
+                      } 
+        } else {
+          openModal("Error deleting item");
+          console.error("Errore durante l'eliminazione");
+          // Handle error
+          console.error("Errore nella cancellazione: " + risultato.errore);
         }
       }
-    };
-    xhr.open("POST", "../backend/elimina_piatto.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(`nome=${nome}&prezzo=${prezzo}&descrizione=${descrizione}`);
+          }
+      };
+      xhr.open("POST", "../backend/elimina_piatto.php", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(`nome=${nome}&prezzo=${prezzo}&descrizione=${descrizione}`);
   }
 }
+
 
 
   //POP UP finestra con errore

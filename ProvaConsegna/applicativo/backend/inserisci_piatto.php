@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Errore durante il caricamento del file, non è stata selezionata alcuna immagine .";
             ?>
-            <p><a href="../frontend/inserisci_piatto.html">Torna indietro</a></p>
+            <p><a href="../frontend/inserisci_piatto.php">Torna indietro</a></p>
             <?php
         }
     } else {

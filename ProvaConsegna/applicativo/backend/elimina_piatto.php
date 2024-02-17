@@ -1,42 +1,43 @@
 <?php
 include("../common/connessione.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // recupero dati
-    $nome = $_POST['nome'];
-    $prezzo = $_POST['prezzo'];
-    $descrizione = $_POST['descrizione'];
-	
+    $dati = json_decode(file_get_contents("php://input"), TRUE);
 
+    if ($dati !== null && isset($dati["maill"]) && isset($dati["nomee"]) && isset($dati["prezzoo"]) && isset($dati["descrizionee"]) && isset($dati["tipoo"]) && isset($dati["elencoo"])) {
+        $mail = $dati["maill"];
+        $nome = $dati["nomee"];
+        $prezzo = number_format(floatval($dati["prezzoo"]), 2);
+        $descrizione = $dati["descrizionee"];
+        $tipo = $dati["tipoo"];
+        $elenco = $dati["elencoo"];
 
-    // query di delete con i dati che ho appena recuperato
-    $deleteQuery = "DELETE FROM pietanza WHERE nome = ? AND prezzo = ? AND descrizione = ?";
-    //$deleteQuery = "DELETE FROM pietanza WHERE nome = '$nome' AND prezzo = '$prezzo' AND descrizione = '$descrizione'";
-    
-    
-    $stmt = $conn->prepare($deleteQuery);
-    
-    if ($stmt) {
-        // paramentri 
-        $stmt->bind_param('sss',$nome, $prezzo, $descrizione);
-        //codici di risposta per eseguire l'azione
-        if ($stmt->execute()) {
-            http_response_code(200);
-            /*echo "Piatto eliminato con successo";*/
-		    $risposta = array("successo"=>TRUE);
-		    echo json_encode($risposta);
+        if ($tipo == "menu") {
+            $sql = "DELETE FROM pietanza
+                    WHERE mail = '$mail'
+                    AND nome = '$nome'
+                    AND prezzo = $prezzo
+                    AND descrizione = '$descrizione'
+                    AND tipo = '$tipo'
+                    AND elenco = '$elenco'";
         } else {
-            http_response_code(500);
-            echo "Errore durante l'eliminazion: " . $conn->error;
-		    $risposta = array("successo" => FALSE, "errore" => "Esecuzione della query non riuscita o parametri mal settati.");
-            echo json_encode($risposta);
+            $sql = "DELETE FROM pietanza
+                    WHERE mail = '$mail'
+                    AND nome = '$nome'
+                    AND prezzo = $prezzo
+                    AND descrizione = '$descrizione'
+                    AND tipo = '$tipo'";
         }
-
-        // chiudo la connesione
-        $stmt->close();
+        if ($response = $conn->query($sql)) {
+            $risposta = array("successo" => TRUE, "errore" => $response . " SQL: " . $sql);
+            echo json_encode($risposta);
+        } else {
+            $risposta = array("successo" => FALSE, "errore" => "Connessione al database non riuscita. Query non eseguita.");
+            echo json_encode($risposta);
+        } 
     } else {
-        http_response_code(500);
-        echo "Errore : " . $conn->error;
+        $risposta = array("successo" => FALSE, "errore" => "Uno dei parametri non è stato impostato");
+        echo json_encode($risposta);
     }
-    $conn->close();
 }
 ?>

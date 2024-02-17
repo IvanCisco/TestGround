@@ -139,3 +139,33 @@ function eliminaOrari(giorno, orainizio, orafine, mail, tabella) {
         xmlhttp.send(JSON.stringify({g: giorno, inizio: orainizio, fine: orafine, email: mail, tab: tabella}));
     }
 }
+
+function eliminaPiatto(mail, id, nome, prezzo, descrizione, tipo, elenco) {
+    if (confirm("Sei sicuro di voler eliminare questo " + tipo + "?")) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "../backend/elimina_piatto.php", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+                if (xmlhttp.status == 200) {
+                    console.log(xmlhttp.responseText);
+                    let risultato = JSON.parse(xmlhttp.responseText);
+                    if (risultato.successo) {
+                        alert("Eliminazione avvenuta con successo. Risposta: " + risultato.errore);
+                        console.log("Eliminazione avvenuta con successo");
+                        let itemCancellato = document.getElementById(id);
+                        console.log("Questo è l'ID dell'elemento che cancello: " + id);
+                        if (itemCancellato) {
+                            itemCancellato.remove();
+                        }
+                    } else {
+                        alert("Errore nella cancellazione: " + risultato.errore);
+                        console.error("Errore nella cancellazione: " + risultato.errore);
+                        console.log("Parametri in arrivo: " + mail + " " + id + " " + nome + " " + prezzo + " " + descrizione + " " + tipo + " " + elenco);
+                    }
+                }
+            }
+        };
+        xmlhttp.send(JSON.stringify({maill: mail, nomee: nome, prezzoo: prezzo, descrizionee: descrizione, tipoo: tipo, elencoo: elenco}));
+    }
+}
