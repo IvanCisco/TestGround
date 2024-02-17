@@ -169,3 +169,25 @@ function eliminaPiatto(mail, id, nome, prezzo, descrizione, tipo, elenco) {
         xmlhttp.send(JSON.stringify({maill: mail, nomee: nome, prezzoo: prezzo, descrizionee: descrizione, tipoo: tipo, elencoo: elenco}));
     }
 }
+
+document.getElementById('prezzo').addEventListener('input', function(event) {
+    formatCurrency(event.target);
+});
+
+function formatCurrency(input) {
+    let inputVal = input.value;
+
+    // Rimuovi tutto ciò che non è un numero
+    inputVal = inputVal.replace(/\D/g, '');
+
+    // Limita l'input a 4 numeri
+    inputVal = inputVal.substring(0, 4);
+
+    // Se l'input è più lungo di due numeri, inserisci un punto dopo il secondo numero
+    if (inputVal.length > 2) {
+        inputVal = inputVal.substring(0, 2) + '.' + inputVal.substring(2);
+    }
+
+    // Mostra la stringa formattata
+    input.value = inputVal;
+}
