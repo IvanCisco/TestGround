@@ -1,6 +1,7 @@
 <?php
 
 include("../common/connessione.php");
+include("../common/funzioni.php");
 
 $nomeErr = $cognomeErr = $sessoErr = $datanascitaErr = $mailErr = $passwordErr = $luogonascitaErr = $alreadyErr = "";
 $nome = $cognome = $sesso = $datanascita = $mail = $password = $luogonascita = $zona = "";
