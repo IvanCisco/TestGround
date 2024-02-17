@@ -28,7 +28,7 @@
                 <label for="descrizione">descrizione del piatto :</label>
                 <input type="text" id="descrizione" name="descrizione" required>
                 <br><br>
-                <label for="password">prezzo del piatto:</label>
+                <label for="prezzo">prezzo del piatto:</label>
                 <input type="text" inputmode="numeric" id="prezzo" name="prezzo" required>
                 <br><br>
                 <!--preso da ariel -->

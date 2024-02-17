@@ -170,11 +170,13 @@ function eliminaPiatto(mail, id, nome, prezzo, descrizione, tipo, elenco) {
     }
 }
 
-document.getElementById('prezzo').addEventListener('input', function(event) {
-    formatCurrency(event.target);
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('prezzo').addEventListener('input', function(event) {
+        formattaPrezzo(event.target);
+    });
 });
 
-function formatCurrency(input) {
+function formattaPrezzo(input) {
     let inputVal = input.value;
 
     // Rimuovi tutto ciò che non è un numero
