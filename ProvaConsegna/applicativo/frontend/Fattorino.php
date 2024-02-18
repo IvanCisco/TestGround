@@ -42,7 +42,7 @@
             }
 
             if ($disp == "N") {
-                echo ("Attualmente la tua disponibilità si trova su N, non puoi accettare alcun ordine. Recati nella sezione modifica profilo per attivarla");
+                echo "<p class=\"error\">Attualmente la tua disponibilità si trova su N, non puoi accettare alcun ordine. Recati nella sezione modifica profilo per attivarla</p>";
             } else {
 
                 //RECUPERO DATA E ORA CORRENTI 
@@ -196,13 +196,13 @@
                                         }
                                     
                                     } else {
-                                    echo "Nessun ordine trovato";
+                                    echo "<p class=\"error\">Nessun ordine trovato</p>";
                                     //echo "sbagliato";
                          }
                     }    
                         
                 } else {
-                    echo "Non sei in turno";
+                    echo "<p class=\"error\">Non sei in turno</p>";
                 }
                 $stmt->close();
                 $conn->close();

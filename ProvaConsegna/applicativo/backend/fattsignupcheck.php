@@ -54,12 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $citta = $_POST["citta"];
     $zone = $_POST["zone"];
 
-    //Controllo se esiste già un account associato alla mail fornita
-    $controllo_mail = "SELECT * FROM fattorino WHERE mail = '$mail'";
-    $result = $conn->query($controllo_mail);
 
-
-    if ($result->num_rows > 0) {
+    if (mailExists($mail, $conn, "fattorino")) {
         $alreadyErr = "Questa email è già associata a un account!";
     } else {
         $sql1 = "INSERT INTO fattorino (nome, cognome, mail, password, sesso, datanascita, luogonascita, citta)

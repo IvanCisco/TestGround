@@ -56,7 +56,7 @@
 
 
 		<div class="tab" id="orari">
-            <h2>I miei orari</h2>
+            <h2>I miei turni</h2>
 			<div class="orariFatt">
 				<?php 
 				$tabella = "flavorasu";
