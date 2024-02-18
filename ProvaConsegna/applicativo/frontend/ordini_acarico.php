@@ -57,10 +57,10 @@ $stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato, i.via, i.numer
             $contatoreOrdine++;
         }
     } else {
-        echo "Nessun ordine preso a carico.";
+        echo "<p class=\"error\">Nessun ordine preso a carico.</p>";
     }
 } else {
-    echo "Utente non loggato";
+    header("Location: ../index.html");
 }
 ?>
 </section>

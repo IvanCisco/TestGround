@@ -31,11 +31,11 @@
                             echo "Nome: $nome, Prezzo: $prezzo<br>";
                         } else {
                             // gestione nel caso in cui l'array non abbia i valori chemi aspetto
-                            echo "I dati selezionati non hanno il formato corretto: $selectedPlate<br>";
+                            echo "<p class=\"error\">I dati selezionati non hanno il formato corretto: $selectedPlate</p>";
                         }
                     }
                 } else {
-                    echo "Nessun piatto selezionato o form non inviato.";
+                    echo "<p class=\"error\">Nessun piatto selezionato o form non inviato.</p>";
                 }
                 ?>
                 <!--campo hidden -->

@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
     }
 }
 } else {
-    echo "Utente non loggato";
+    header("Location: ../index.html");
 }
 ?>
 
@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
         
     }
 }else {
-    echo "Utente non loggato";
+    header("Location: ../index.html");
 }
 
 

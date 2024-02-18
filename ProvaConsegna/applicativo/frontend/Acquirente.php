@@ -63,7 +63,7 @@ if (isset($_SESSION['utente'])) {
             $acquirenteCity = $row['citta'];
             // Fai qualcosa con $citta
         } else {
-            echo "Errore non è stato possibile recuperare la città dell'acquirente ";
+            echo "<p class=\"error\">Errore! non è stato possibile recuperare la città dell'acquirente.</p>";
         }
 
 //prendo solo i ristaranti della sua città
@@ -111,7 +111,7 @@ $query = "SELECT r.nome
 
     $res= $conn->query($query);
     if (!$res){
-    echo "<p>Impossibile eseguire query.</p>"
+    echo "<p class=\"error\">Impossibile eseguire query.</p>"
     . "<p>Codice errore " . $conn->errno
     . ": " . $conn->error . "</p>";
     }else{
@@ -130,7 +130,7 @@ $query = "SELECT r.nome
         echo "</div>";
             }
         } else {
-            echo "Nessun ristorante aperto in questo momento.";
+            echo "<p class=\"error\">Nessun ristorante aperto in questo momento.</p>";
         }
     }
 }

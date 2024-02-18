@@ -11,6 +11,6 @@ if ($risultato->num_rows > 0) {
         echo "<p>" . $row['giorno'] . "   " . $row['orainizio'] . " - " . $row['orafine'] . "</p>";
     }
 } else {
-    echo "<p>Non ci sono orari da mostrare.</p>";
+    echo "<p class=\"error\">Non ci sono orari da mostrare.</p>";
 }
 ?>

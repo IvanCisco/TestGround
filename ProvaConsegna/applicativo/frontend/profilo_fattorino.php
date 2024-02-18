@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
     }
 }
 } else {
-    echo "Utente non loggato";
+    header("Location: ../index.html");
 }
 //select per la zona in cui ritira il fattorino
 $stmt = $conn->prepare("SELECT * FROM operainfatt WHERE mail = ?");
@@ -61,7 +61,7 @@ if ($result->num_rows > 0) {
         echo "<p>Zona: " . $row["zona"] . "</p>";
         }
 }else {
-    echo "Utente non loggato";
+    header("Location: ../index.html");
 }
 
 //select per i turni del fattorino

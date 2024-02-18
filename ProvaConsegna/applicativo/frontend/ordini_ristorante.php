@@ -72,7 +72,7 @@
                     echo "</div>";
                 }
             } else {
-                echo "Nessun ordine, verrai reindirizzato alla home.";
+                echo "<p class=\"error\">Nessun ordine, verrai reindirizzato alla home.</p>";
                 header("refresh:5;url=../frontend/Ristorante.php");
             }
         }

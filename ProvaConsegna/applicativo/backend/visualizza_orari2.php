@@ -12,6 +12,6 @@ if ($risultato->num_rows > 0) {
         echo "<img src='../immagini/delete-icon2.png' onclick=\"eliminaOrari('{$row['giorno']}','{$row['orainizio']}', '{$row['orafine']}', '{$mail}', '{$tabella}')\"></img></p>";
     }
 } else {
-    echo "<p>Non ci sono orari da mostrare.</p>";
+    echo "<p class=\"error\">Non ci sono orari da mostrare.</p>";
 }
 ?>

@@ -50,7 +50,7 @@ if (isset($_GET['nomeristorante'])) {
         <input type="submit" value="Ordina">
 <?php
 }else {
-    echo "Ristorante non trovato.";
+    echo "<p class=\"error\">Ristorante non trovato.</p>";
 }
 
         

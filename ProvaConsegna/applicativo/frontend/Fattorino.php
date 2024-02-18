@@ -209,7 +209,7 @@
             }
 
         }  else {
-            echo ("utente non loggato");
+            header("Location: ../index.html");
         }
         
         ?>

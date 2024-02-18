@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // reindirizzo
-    header("Location: index.php");
+    header("Location: ../index.html");
     exit();
 }
 ?>

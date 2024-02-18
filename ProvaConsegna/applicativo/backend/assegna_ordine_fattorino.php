@@ -22,6 +22,6 @@ if (isset($_SESSION['utente']) && $_SESSION['tipo'] == 'fattorino') {
 
     $stmtAssignDeliveryGuy->close();
 } else {
-    echo "Errore: Accesso non autorizzato";
+    header("Location: ../index.html");
 }
 ?>

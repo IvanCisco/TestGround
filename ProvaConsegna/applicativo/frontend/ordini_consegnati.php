@@ -46,10 +46,10 @@ $stmt = $conn->prepare("SELECT c.data, c.ora, o.mailacq, o.stato
             $orderCounter++; // incremento il contatore 
         }
     } else {
-        echo "Nessun ordine consegnato.";
+        echo "<p class=\"error\">Nessun ordine consegnato.</p>";
     }
 } else {
-    echo "Utente non loggato";
+    header("Location: ../index.html");
 }
 ?>
 </section>
