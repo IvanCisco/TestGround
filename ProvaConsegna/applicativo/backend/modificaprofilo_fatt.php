@@ -40,7 +40,7 @@ if (!isset($_SESSION["utente"])) {
             $conn->commit();
             header("Location: ../frontend/profilo_fattorino.php");
         } catch (\Throwable $e) {
-            echo "C'è stato un cazzo di errore bro.";
+            echo "C'è stato un errore.";
             echo "Questo è il contenuto di zone: " . count($zone);
             var_dump(zonaInsert($zone, $mail, $conn, "operainfatt"));
             $conn->rollback();
