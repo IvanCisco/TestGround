@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql1 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$via', '$numero', '$cap', '$citta');";
         $sql2 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$viasl', '$numerosl', '$capsl', '$cittasl');";
         $sql3 = "INSERT INTO ristorante (mail, password, partitaiva, nome, ragsoc, location, sedelegale, zona)
-                SELECT '$mail', '$password', '$partitaiva', '$nome', '$ragsoc', 
+                SELECT '$mail', '$password', '$partitaiva', '$nome', '$ragsoc',
                     (SELECT id
                     FROM indirizzo
                     WHERE via = '$via'
@@ -47,15 +47,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     AND numero = '$numerosl'
                     AND cap = '$capsl'
                     AND citta = '$cittasl'
-                    ) AS sedelegale;";
+                    ) AS sedelegale,
+                    '$zona';";
         if ($conn->query($sql1) == TRUE and $conn->query($sql2) == TRUE and $conn->query($sql3) == TRUE and inserisciOrari($giorni, $orariApertura, $orariChiusura, $mail, $conn, "rlavorasu")) {
             //unset($_SESSION['giorno']);
             //unset($_SESSION['orainizio']);
             //unset($_SESSION['orafine']);
             header("Location: ../login.php?status=ristosignupsuccess");
         } else {
-            echo "Error " . $sql1 . "<br>" . $conn->error;
-            echo "Error " . $sql2 . "<br>" . $conn->error;
+            /*echo "Error " . $sql1 . "<br>" . $conn->error;
+            echo "Error " . $sql2 . "<br>" . $conn->error;*/
+            echo $nome . $partitaiva .
+            $ragsoc .
+            $mail .
+            $password .
+            $via .
+            $numero .
+            $cap .
+            $citta .
+            $zona .
+        
+            $giorni .
+            $orariApertura .
+            $orariChiusura .
+        
+            $viasl .
+            $numerosl .
+            $capsl .
+            $cittas;
         }
     }
     $conn->close();

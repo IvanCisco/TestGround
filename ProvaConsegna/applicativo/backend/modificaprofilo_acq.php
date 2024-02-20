@@ -36,8 +36,8 @@ if (!isset($_SESSION["utente"])) {
                                                 AND indirizzo.cap = '$cap'
                                                 AND indirizzo.citta = '$citta')
 						WHERE mail = '$mail'";
-			$conn-query($sql1);
-			$conn-query($sql2);
+			$conn->query($sql1);
+			$conn->query($sql2);
 			$conn->commit();
             header("Location: ../frontend/profilo_acquirente.php");           
         } catch (\Throwable $e) {

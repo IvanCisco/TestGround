@@ -15,7 +15,7 @@
 
 	<h1>Modifica profilo</h1>
 	<section class="page-content">
-	<form method="POST" action="../backend/modificaprofilo_acq.php?id=<?php echo $mail; ?>">
+	<form method="POST" action="../backend/modificaprofilo_acq.php">
 		<p><label>Nome: </label><input type="text" value="<?php echo $row['nome']; ?>" name="nome" maxlength="20" required></p>
 		<p><label>Cognome: </label><input type="text" value="<?php echo $row['cognome']; ?>" name="cognome" maxlength="20" required></p>
 		<p><label>Password: </label><input type="text" value="<?php echo $row['password']; ?>" name="password" maxlength="30" required></p>

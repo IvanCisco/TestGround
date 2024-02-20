@@ -53,12 +53,12 @@
                     <label for="citta">Città: </label>
                     <select id="citta" name="citta" required>
                         <option disabled selected value></option>
-                        <option value="milano" <?php echo ($citta == "milano") ? "selected" : "";?>>Milano</option>
-                        <option value="roma" <?php echo ($citta == "roma") ? "selected" : "";?>>Roma</option>
-                        <option value="palermo" <?php echo ($citta == "palermo") ? "selected" : "";?>>Palermo</option>
-                        <option value="torino" <?php echo ($citta == "torino") ? "selected" : "";?>>Torino</option>
-                        <option value="cagliari" <?php echo ($citta == "cagliari") ? "selected" : "";?>>Cagliari</option>
-                        <option value="trento" <?php echo ($citta == "trento") ? "selected" : "";?>>Trento</option>
+                        <option value="Milano" <?php echo ($citta == "Milano") ? "selected" : "";?>>Milano</option>
+                        <option value="Toma" <?php echo ($citta == "Roma") ? "selected" : "";?>>Roma</option>
+                        <option value="Calermo" <?php echo ($citta == "Palermo") ? "selected" : "";?>>Palermo</option>
+                        <option value="Torino" <?php echo ($citta == "Torino") ? "selected" : "";?>>Torino</option>
+                        <option value="Cagliari" <?php echo ($citta == "Cagliari") ? "selected" : "";?>>Cagliari</option>
+                        <option value="Trento" <?php echo ($citta == "Trento") ? "selected" : "";?>>Trento</option>
                     </select>
                     <span class="error">* </span>
                     <label for="zona">Zona: </label>
