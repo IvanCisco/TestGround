@@ -115,7 +115,7 @@
                              //var_dump($zone);
                             //qui mi dava un errore di conversione, quindi ho insierito questo controllo che appunto controlla che $zone sia un array e se lo è verrà poi richiamato nella query
                              if (is_array($zone) && count($zone) > 0) {
-                                $zone_clause = "AND oi.zona IN (" . implode(',', array_fill(0, count($zone), '?')) . ")";
+                                $zone_clause = "AND r.zona IN (" . implode(',', array_fill(0, count($zone), '?')) . ")";
                                 } else {
                                  $zone_clause = "";
                                 }
@@ -135,7 +135,7 @@
                                     $query = "SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
                                             FROM ordine o
                                             JOIN contiene c ON o.data = c.data AND o.ora = c.ora
-                                            JOIN ristorante r ON oi.mail = r.mail
+                                            JOIN ristorante r ON c.mail = r.mail
                                             JOIN operainfatt of ON r.zona = of.zona
                                             JOIN fattorino f ON of.mail = f.mail
                                             JOIN flavorasu fl ON f.mail = fl.mail
