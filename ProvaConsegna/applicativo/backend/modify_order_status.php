@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/stile.css">
+</head>
 <?php
 
 
@@ -13,8 +16,7 @@ if (isset($_POST['modifyOrderStatus'])) {
     if (isset($_SESSION['utente'])) {
         $mail = $_SESSION['utente'];
         $tipo = $_SESSION['tipo'];
-        //echo $mail;
-        //echo $tipo;
+
         // Aggiorna lo stato dell'ordine
 
         $currentStatusQuery = "SELECT stato FROM ordine WHERE data = ? AND ora = ?";
@@ -106,19 +108,19 @@ if (isset($_POST['modifyOrderStatus'])) {
             }
         } else {
             if ($tipo == 'ristorante') {
-                echo "Errore: Utente non loggato o richiesta non valida.";
+                echo "<p class=\"error\">Errore: Utente non loggato o richiesta non valida.</p>";
                 header("refresh:5;url=../frontend/ordini_ristorante.php");
             } elseif ($tipo == 'fattorino') {
-                echo "Errore: Utente non loggato o richiesta non valida.";
+                echo "<p class=\"error\">Errore: Utente non loggato o richiesta non valida.</p>";
                 header("refresh:5;url=../frontend/fattorino.php");
             }
         }
     } else {
         if ($tipo == 'ristorante') {
-            echo "Errore: Richiesta non valida.";
+            echo "<p class =\"error\">Errore: Richiesta non valida.</p>";
             header("refresh:5;url=../frontend/ordini_ristorante.php");
         } elseif ($tipo == 'fattorino') {
-            echo "Errore: Richiesta non valida.";
+            echo "<p class=\"error\">Errore: Richiesta non valida.</p>";
             header("refresh:5;url=../frontend/fattorino.php");
         }
     }

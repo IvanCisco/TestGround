@@ -36,21 +36,8 @@ function openEditForm() {
     //console.log("Opening edit modal for item ID:", id);
     // Implement your modal functionality here
   document.getElementById('editForm').style.display = 'block';
-  }
+}
 
-/*
-  function confirmDelete(id) {
-    // Logic to confirm deletion of the menu item with ID = itemId
-    const confirmed = confirm("Sei sicuro di volerlo eliminare dal menu?");
-    if (confirmed) {
-      elimina_piatto.php
-      console.log("Deleting item with ID:");
-      // Implement deletion logic here
-    } else {
-      console.log("Deletion canceled");
-    }
-  }
-  */
 
 //BHO 
   function deleteItem(itemId) {

@@ -98,9 +98,7 @@
 		        <input type="submit" name="submit" value="Salva">
                 <span><input type="reset" value="Annulla modifiche">
 		    </form>
-	</section>
-</body>
-	    <?php include("../common/footer.html"); ?>
-
-
+	    </section>
+    </body>
+	<?php include("../common/footer.html"); ?>
 </html>

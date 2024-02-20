@@ -32,11 +32,6 @@ $stmt = $conn->prepare( "SELECT data,ora,stato,metodopagamento FROM ordine WHERE
 
 
  if ($result && $result->num_rows > 0) {
-    /*
-    echo "<h2>I tuoi ordini :</h2>";
-            echo "<ul>";*/
-    
-    // per ogni riga
     while ($row = $result->fetch_assoc()) {
 
 

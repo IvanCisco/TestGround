@@ -64,24 +64,6 @@ if ($result->num_rows > 0) {
     header("Location: ../index.html");
 }
 
-//select per i turni del fattorino
-/*$stmt = $conn->prepare("SELECT * FROM flavorasu WHERE mail = ?");
-$stmt->bind_param("s", $mail);
-$stmt->execute();
-$result = $stmt->get_result();
-
-
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        
-        echo "<p>Giorno: " . $row["giorno"] . "</p>";
-         echo "<p>inizio turno: " . $row["orainizio"] . "</p>";
-          echo "<p>fine turno: " . $row["orafine"] . "</p>";
-        }
-}else {
-    echo "Non è stato inserito alcun turno";
-}*/
 $tabella = "flavorasu";
 include("../backend/visualizza_orari.php");
 
