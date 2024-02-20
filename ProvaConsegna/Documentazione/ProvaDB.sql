@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 15, 2024 alle 17:27
+-- Creato il: Feb 20, 2024 alle 16:32
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -62,8 +62,7 @@ CREATE TABLE `compone` (
 --
 
 INSERT INTO `compone` (`piatto`, `menu`) VALUES
-('Carbonara', 'Carbonara'),
-('Margherita', 'Margherita');
+('Carbonara', 'Carbonara');
 
 -- --------------------------------------------------------
 
@@ -103,8 +102,7 @@ CREATE TABLE `contiene` (
 --
 
 INSERT INTO `contiene` (`nome`, `mail`, `data`, `ora`) VALUES
-('Carbonara', 'ristorante2@gmail.com', '2023-11-11', '18:45:00'),
-('Margherita', 'ristorante1@gmail.com', '2023-11-10', '12:30:00');
+('Carbonara', 'ristorante2@gmail.com', '2023-11-11', '18:45:00');
 
 -- --------------------------------------------------------
 
@@ -131,7 +129,8 @@ CREATE TABLE `fattorino` (
 
 INSERT INTO `fattorino` (`mail`, `password`, `nome`, `cognome`, `sesso`, `datanascita`, `luogonascita`, `citta`, `disponibilita`, `credito`) VALUES
 ('giulia.rossi@gmail.com', 'pass', 'Giulia', 'Rossi', 'F', '1998-03-25', 'Roma', 'Roma', 'N', 9.75),
-('luca.verdi@gmail.com', 'pass', 'Lucianello', 'Verdi', 'M', '1995-08-18', 'Napoli', 'Milano', 'S', 12.50);
+('luca.verdi@gmail.com', 'pass', 'Lucianello', 'Verdi', 'M', '1995-08-18', 'Napoli', 'Milano', 'S', 12.50),
+('riderino@gmail.com', 'pass', 'Ryder', 'Willowfield', 'F', '2000-05-12', 'Willowfield', 'Torino', 'N', 0.00);
 
 -- --------------------------------------------------------
 
@@ -143,6 +142,13 @@ CREATE TABLE `flavorasu` (
   `mail` varchar(40) NOT NULL,
   `turno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `flavorasu`
+--
+
+INSERT INTO `flavorasu` (`mail`, `turno`) VALUES
+('luca.verdi@gmail.com', 39);
 
 -- --------------------------------------------------------
 
@@ -166,7 +172,7 @@ INSERT INTO `indirizzo` (`id`, `via`, `numero`, `cap`, `citta`) VALUES
 (5, 'Corso Indipendenza', '395', '38484', 'Trento'),
 (9, 'Largo Murani', '30', '00218', 'Roma'),
 (6, 'Largo Murani', '30', '218', 'Roma'),
-(4, 'Via Napoli', '5', '40144', 'Roma'),
+(4, 'Via Napoli', '5', '40144', 'Milano'),
 (1, 'Via Roma', '10', '20121', 'Milano'),
 (2, 'Via Tal Dei Tali', '5', '301', 'Roma'),
 (3, 'Via Venezia', '16', '38888', 'Milano');
@@ -190,27 +196,9 @@ INSERT INTO `operainfatt` (`mail`, `zona`) VALUES
 ('giulia.rossi@gmail.com', '2'),
 ('luca.verdi@gmail.com', '1'),
 ('luca.verdi@gmail.com', '2'),
-('luca.verdi@gmail.com', '4'),
-('luca.verdi@gmail.com', '5');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `operainrist`
---
-
-CREATE TABLE `operainrist` (
-  `mail` varchar(40) NOT NULL,
-  `zona` enum('1','2','3','4','5') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `operainrist`
---
-
-INSERT INTO `operainrist` (`mail`, `zona`) VALUES
-('ristorante1@gmail.com', '4'),
-('ristorante2@gmail.com', '4');
+('riderino@gmail.com', '1'),
+('riderino@gmail.com', '4'),
+('riderino@gmail.com', '5');
 
 -- --------------------------------------------------------
 
@@ -232,7 +220,9 @@ CREATE TABLE `ordine` (
 
 INSERT INTO `ordine` (`data`, `ora`, `stato`, `metodopagamento`, `mailacq`) VALUES
 ('2023-11-10', '12:30:00', 'in preparazione', 'contanti', 'mario.rossi@gmail.com'),
-('2023-11-11', '18:45:00', 'consegnato', 'carta', 'laura.bianchi@gmail.com');
+('2023-11-11', '18:45:00', 'consegnato', 'carta', 'laura.bianchi@gmail.com'),
+('2024-02-15', '18:02:12', 'in preparazione', 'carta', 'mario.rossi@gmail.com'),
+('2024-02-15', '22:14:14', 'in preparazione', 'contanti', 'mario.rossi@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -255,9 +245,9 @@ CREATE TABLE `pietanza` (
 --
 
 INSERT INTO `pietanza` (`nome`, `mail`, `prezzo`, `descrizione`, `tipo`, `elenco`, `immagine`) VALUES
+('Bellio', 'ristorante1@gmail.com', 14.50, 'Stratosf', 'piatto', NULL, '../immagini/ristorante1gmailcom_Bellio.png'),
 ('Carbonara', 'ristorante2@gmail.com', 12.00, 'Spaghetti con uova, guanciale e pecorino', 'piatto', NULL, NULL),
-('Margherita', 'ristorante1@gmail.com', 8.50, 'Mozzarella, pomodoro, basilico', 'piatto', NULL, NULL),
-('Menu Strepitoso', 'ristorante1@gmail.com', 12.80, 'Un menu fuori di testa!', 'menu', 'Margherita', NULL);
+('One', 'ristorante1@gmail.com', 12.90, 'settimo', 'piatto', NULL, '../immagini/ristorante1gmailcom_One.jpg');
 
 -- --------------------------------------------------------
 
@@ -272,16 +262,17 @@ CREATE TABLE `ristorante` (
   `nome` varchar(30) NOT NULL,
   `ragsoc` char(20) NOT NULL,
   `location` int(11) NOT NULL,
-  `sedelegale` int(11) NOT NULL
+  `sedelegale` int(11) NOT NULL,
+  `zona` enum('1','2','3','4','5') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `ristorante`
 --
 
-INSERT INTO `ristorante` (`mail`, `password`, `partitaiva`, `nome`, `ragsoc`, `location`, `sedelegale`) VALUES
-('ristorante1@gmail.com', 'pass', '2147483647', 'La Trattoria', 'Raggiano', 3, 5),
-('ristorante2@gmail.com', 'pass', '57382958372', 'Pizzeria Napoli', 'Ragione in tutto', 4, 6);
+INSERT INTO `ristorante` (`mail`, `password`, `partitaiva`, `nome`, `ragsoc`, `location`, `sedelegale`, `zona`) VALUES
+('ristorante1@gmail.com', 'pass', '2147483647', 'La Trattoria', 'Raggiano', 3, 5, '1'),
+('ristorante2@gmail.com', 'pass', '57382958372', 'Pizzeria Napoli', 'Ragione in tutto', 4, 6, '1');
 
 -- --------------------------------------------------------
 
@@ -293,6 +284,14 @@ CREATE TABLE `rlavorasu` (
   `mail` varchar(40) NOT NULL,
   `turno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `rlavorasu`
+--
+
+INSERT INTO `rlavorasu` (`mail`, `turno`) VALUES
+('ristorante1@gmail.com', 37),
+('ristorante2@gmail.com', 35);
 
 -- --------------------------------------------------------
 
@@ -325,11 +324,18 @@ INSERT INTO `turno` (`id`, `giorno`, `orainizio`, `orafine`) VALUES
 (11, 'Lunedì', '00:00:00', '00:50:00'),
 (12, 'Lunedì', '00:00:00', '00:55:00'),
 (13, 'Lunedì', '00:00:00', '01:00:00'),
+(33, 'Lunedì', '07:00:00', '14:00:00'),
+(38, 'Lunedì', '12:00:00', '14:00:00'),
 (30, 'Martedì', '04:00:00', '07:10:00'),
+(36, 'Martedì', '04:00:00', '15:00:00'),
+(39, 'Martedì', '09:00:00', '16:30:00'),
 (20, 'Martedì', '09:00:00', '18:00:00'),
+(34, 'Martedì', '12:00:00', '15:00:00'),
 (31, 'Mercoledì', '06:20:00', '12:45:00'),
 (21, 'Mercoledì', '09:00:00', '18:00:00'),
+(37, 'Giovedì', '01:05:00', '20:10:00'),
 (29, 'Giovedì', '06:20:00', '18:55:00'),
+(35, 'Giovedì', '10:00:00', '23:00:00'),
 (22, 'Giovedì', '11:00:00', '23:00:00'),
 (32, 'Sabato', '10:00:00', '23:30:00'),
 (18, 'Sabato', '11:00:00', '15:00:00');
@@ -415,13 +421,6 @@ ALTER TABLE `operainfatt`
   ADD KEY `zona` (`zona`);
 
 --
--- Indici per le tabelle `operainrist`
---
-ALTER TABLE `operainrist`
-  ADD PRIMARY KEY (`mail`,`zona`),
-  ADD KEY `zona` (`zona`);
-
---
 -- Indici per le tabelle `ordine`
 --
 ALTER TABLE `ordine`
@@ -442,7 +441,8 @@ ALTER TABLE `ristorante`
   ADD PRIMARY KEY (`mail`),
   ADD UNIQUE KEY `partitaiva` (`partitaiva`),
   ADD KEY `ristorante_ibfk_1` (`location`),
-  ADD KEY `ristorante_ibfk_2` (`sedelegale`);
+  ADD KEY `ristorante_ibfk_2` (`sedelegale`),
+  ADD KEY `zona` (`zona`);
 
 --
 -- Indici per le tabelle `rlavorasu`
@@ -472,13 +472,13 @@ ALTER TABLE `zona`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT per la tabella `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Limiti per le tabelle scaricate
@@ -526,13 +526,6 @@ ALTER TABLE `operainfatt`
   ADD CONSTRAINT `operainfatt_ibfk_2` FOREIGN KEY (`zona`) REFERENCES `zona` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `operainrist`
---
-ALTER TABLE `operainrist`
-  ADD CONSTRAINT `operainrist_ibfk_1` FOREIGN KEY (`mail`) REFERENCES `ristorante` (`mail`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `operainrist_ibfk_2` FOREIGN KEY (`zona`) REFERENCES `zona` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Limiti per la tabella `ordine`
 --
 ALTER TABLE `ordine`
@@ -549,7 +542,8 @@ ALTER TABLE `pietanza`
 --
 ALTER TABLE `ristorante`
   ADD CONSTRAINT `ristorante_ibfk_1` FOREIGN KEY (`location`) REFERENCES `indirizzo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ristorante_ibfk_2` FOREIGN KEY (`sedelegale`) REFERENCES `indirizzo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ristorante_ibfk_2` FOREIGN KEY (`sedelegale`) REFERENCES `indirizzo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ristorante_ibfk_3` FOREIGN KEY (`zona`) REFERENCES `zona` (`numero`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limiti per la tabella `rlavorasu`

@@ -121,18 +121,10 @@
                                 }
                             
         
-        
-                                    //echo "citta lavoro $city_where_fattorino_works<br>";
-                                    //echo "zona lavoro $area_where_fattorino_delivers<br>";
-
-
-                                    //Debugging output
-                                    //echo "City where fattorino works: $city_where_fattorino_works<br>";
-                                    //echo "Area where fattorino delivers: $area_where_fattorino_delivers<br>";
 
                                     //query commento
  
-                                    // join tra ordine,contiene,operainrist,operainfatt,fattorino,ristorante
+                                    // join tra ordine,contiene,operainfatt,fattorino,ristorante
                                     // usiamo data e ora per distinguere gli ordini
                                     // il fattorino vedrà solo ordini della città in cui lavora e ristoranti delle zone in cui lavora
                                     // lo stato può essere in preparazione e allora potrà prenderlo in carico
@@ -143,10 +135,9 @@
                                     $query = "SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
                                             FROM ordine o
                                             JOIN contiene c ON o.data = c.data AND o.ora = c.ora
-                                            JOIN operainrist oi ON c.mail = oi.mail
-                                            JOIN operainfatt of ON oi.zona = of.zona
-                                            JOIN fattorino f ON of.mail = f.mail
                                             JOIN ristorante r ON oi.mail = r.mail
+                                            JOIN operainfatt of ON r.zona = of.zona
+                                            JOIN fattorino f ON of.mail = f.mail
                                             JOIN flavorasu fl ON f.mail = fl.mail
                                             JOIN turno t ON fl.turno = t.id
                                             WHERE f.mail = ? 

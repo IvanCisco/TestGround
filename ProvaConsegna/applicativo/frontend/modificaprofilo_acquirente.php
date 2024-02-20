@@ -30,12 +30,12 @@
 		onkeypress="return (event.key !=8 && event.key ==0 || (event.key >= 0 && event.key <= 9))" minlength="5" maxlength="5" size="5" required></p>
 		<label for="citta">Città: </label>
 		<select id="citta" name="citta" required>
-            <option value="milano" <?php echo ($row['citta'] == "Milano") ? "selected" : "";?>>Milano</option>
-            <option value="roma" <?php echo ($row['citta'] == "Roma") ? "selected" : "";?>>Roma</option>
-            <option value="palermo" <?php echo ($row['citta'] == "Palermo") ? "selected" : "";?>>Palermo</option>
-            <option value="torino" <?php echo ($row['citta'] == "Torino") ? "selected" : "";?>>Torino</option>
-            <option value="cagliari" <?php echo ($row['citta'] == "Cagliari") ? "selected" : "";?>>Cagliari</option>
-            <option value="trento" <?php echo ($row['citta'] == "Trento") ? "selected" : "";?>>Trento</option>
+            <option value="Milano" <?php echo ($row['citta'] == "Milano") ? "selected" : "";?>>Milano</option>
+            <option value="Roma" <?php echo ($row['citta'] == "Roma") ? "selected" : "";?>>Roma</option>
+            <option value="Palermo" <?php echo ($row['citta'] == "Palermo") ? "selected" : "";?>>Palermo</option>
+            <option value="Torino" <?php echo ($row['citta'] == "Torino") ? "selected" : "";?>>Torino</option>
+            <option value="Cagliari" <?php echo ($row['citta'] == "Cagliari") ? "selected" : "";?>>Cagliari</option>
+            <option value="Trento" <?php echo ($row['citta'] == "Trento") ? "selected" : "";?>>Trento</option>
         </select>
 		<br><br>
 		<input type="submit" name="submit" value="Salva">

@@ -1,58 +1,50 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<script src="../js/javascript.js"></script>
-	</head>
-	<?php
-	include("../common/connessione.php");
-	session_start();
-	// Recupero dei dati dell'utente
-	if(isset($_SESSION['utente'])) {
-		$mail = $_SESSION['utente']; // Assumendo che l'email sia memorizzata in session
-		$query=mysqli_query($conn,"select * from `acquirente` where mail='$mail'");
-		$row=mysqli_fetch_array($query);
-	
- 
-		$nome=$_POST['nome'];
-		$cognome=$_POST['cognome'];
-		$password=$_POST['password'];
-		$telefono=$_POST['telefono'];
-		$istruzioni=$_POST['istruzioni'];
- 
-		mysqli_query($conn,"update `acquirente` set 
-		nome='$nome',
-		cognome='$cognome',
-		password='$password',
-		telefono='$telefono',
-		istruzioni='$istruzioni'
-		where mail='$mail'");
+<?php
+session_start();
 
-		$query=mysqli_query($conn,"select * from `domicilio` where mailacq='$mail'");
-		$row=mysqli_fetch_array($query);
-	
- 
-		$via=$_POST['via'];
-		$numero=$_POST['numero'];
-		$cap=$_POST['cap'];
-		$citta=$_POST['citta'];
+include("../common/connessione.php");
 
-		$query=mysqli_query($conn,"select * from `domicilio` where via='$via' and numero='$numero' and cap='$cap' and citta='$citta'");
-		$row=mysqli_fetch_array($query);
- 
-		mysqli_query($conn,"update `domicilio` set 
-		via='$via',
-		numero='$numero',
-		cap='$cap',
-		citta='$citta'
-		where mailacq='$mail'");
-	    echo "Modifica avvenuta con successo, verrai reindirizzato alla pagina acquirente";
-    ?>
-    <script>
-        redirectdelay(5000, '../frontend/acquirente.php');//delay di 5 secondi post avvenuta registrazione
-    </script>
-    <?php
-	} else {
-    	echo "Error: " . $query . "<br>" . $conn->error;
-	}
-	?>
-</html>
+if (!isset($_SESSION["utente"])) {
+	header("Location: ../index.html");
+} else {
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $mail = $_SESSION["utente"];
+
+        $password = $_POST["password"];
+        $nome = $_POST["nome"];
+        $cognome = $_POST["cognome"];
+		$telefono = $_POST["telefono"];
+		$istruzioni = $_POST["istruzioni"];
+        $via = $_POST["via"];
+        $numero = $_POST["numero"];
+        $cap = $_POST["cap"];
+        $citta = $_POST["citta"];
+
+		try {
+            $conn->begin_Transaction();
+            $sql1 = "INSERT IGNORE INTO indirizzo (via, numero, cap, citta) VALUES ('$via', '$numero', '$cap', '$citta')";
+			$sql2 = "UPDATE acquirente
+					SET 
+						nome = '$nome',
+						cognome = '$cognome',
+						password = '$password',
+						telefono = '$telefono',
+						istruzioni = '$istruzioni',
+						domicilio = (SELECT indirizzo.id
+                                                FROM indirizzo
+                                                WHERE indirizzo.via = '$via'
+                                                AND indirizzo.numero = '$numero'
+                                                AND indirizzo.cap = '$cap'
+                                                AND indirizzo.citta = '$citta')
+						WHERE mail = '$mail'";
+			$conn-query($sql1);
+			$conn-query($sql2);
+			$conn->commit();
+            header("Location: ../frontend/profilo_acquirente.php");           
+        } catch (\Throwable $e) {
+            $conn->rollback();
+			echo "<p class\"error\">Errore nel passaggio dei parametri</p>";
+			echo $sql1 . "<br>" . $conn->error . "Inizia qui";
+			echo $sql2 . "<br>" . $conn->error;
+        }
+    }
+}
