@@ -50,6 +50,7 @@
                     <label for="cardNumber">Numero della carta:</label>
                     <input type="text" inputmode="numeric" class="daticarta" id="cardNumber" name="cardNumber" minlength="16" maxlength="16" size="16"
                     onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
+                    <br><br>
                     <label for="cardCode">CCV:</label>
                     <input type="text" inputmode="numeric" class="daticarta" id="cardCode" name="cardCode" minlength="3" maxlength="3" size="3"
                     onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
