@@ -134,6 +134,7 @@
 
         
 
+
                                     $query = "SELECT o.data, o.ora, o.stato, r.nome AS nome_ristorante
                                             FROM ordine o
                                             JOIN contiene c ON o.data = c.data AND o.ora = c.ora
@@ -149,6 +150,24 @@
                                             AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine
                                             AND o.stato in('in preparazione','preso in carico')
                                             AND TIMESTAMPDIFF(HOUR, CONCAT(o.data, ' ', o.ora), NOW()) < 2";
+
+                                    $query = "SELECT DISTINCT o.data, o.ora, o.stato, r.nome AS nome_ristorante
+          FROM ordine o
+          JOIN contiene c ON o.data = c.data AND o.ora = c.ora
+          JOIN ristorante r ON c.mail = r.mail
+          JOIN operainfatt of ON r.zona = of.zona
+          JOIN fattorino f ON of.mail = f.mail
+          JOIN flavorasu fl ON f.mail = fl.mail
+          JOIN turno t ON fl.turno = t.id
+          WHERE f.mail = ? 
+          AND f.citta = ? 
+          $zone_clause /* condizione dinamica per zona 
+          AND t.giorno = ?
+          AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine
+          AND o.stato IN ('in preparazione','preso in carico')
+          AND TIMESTAMPDIFF(HOUR, CONCAT(o.data, ' ', o.ora), NOW()) < 2";
+
+
 
                                    
 

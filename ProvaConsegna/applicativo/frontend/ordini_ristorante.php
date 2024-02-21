@@ -18,6 +18,7 @@
     if (isset($_SESSION['utente'])) {
         $mail = $_SESSION['utente'];
 
+
         //QUERY che seleziona cosa contengono gli ordini
         $query = "SELECT c.nome, c.data, c.ora, o.stato
                 FROM contiene c
@@ -26,6 +27,20 @@
                 AND (o.stato = 'in preparazione' OR o.stato ='preso in carico')
                 AND TIMESTAMPDIFF(HOUR, CONCAT(c.data, ' ', c.ora), NOW()) < 2
                 ORDER BY c.data, c.ora";
+
+            //QUERY che seleziona cosa contengono gli ordini
+            $query = "SELECT c.nome, c.data, c.ora, o.stato
+            FROM ordine o
+            JOIN (
+                SELECT MAX(data) AS data, MAX(ora) AS ora, mail, nome
+                FROM contiene
+                WHERE mail = ?
+                GROUP BY mail, nome
+            ) c ON c.data = o.data AND c.ora = o.ora
+            WHERE o.stato IN ('in preparazione', 'preso in carico')
+            AND TIMESTAMPDIFF(HOUR, CONCAT(c.data, ' ', c.ora), NOW()) < 2
+            ORDER BY c.data, c.ora";
+
 
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $mail);
