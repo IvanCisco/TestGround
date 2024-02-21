@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,7 +8,7 @@
         <script src="../js/javascript.js"></script>
     </head>
     <body>
-        <?php include("../common/navbar_fattorino.php"); ?>
+        <?php // include("../common/navbar_fattorino.php"); ?>
 
         <h1>Ordini disponibili nella tua zona</h1>
         <section class="page-content">
@@ -18,7 +19,7 @@
 
         opera in rist ha mail e zona zona
         mail rist si collega a location da cui posso prendere la zona e città
-        */
+        
         // connetto al database
         include("../common/connessione.php");
         session_start();
@@ -67,12 +68,13 @@
 
                 // Esegui una query per controllare se il fattorino è in turno in questo momento di questo giorno 
                 
+
                 $query = "SELECT t.giorno, t.orainizio, t.orafine 
                         FROM turno t
                         JOIN flavorasu fl ON t.id = fl.turno
                         JOIN fattorino f ON f.mail = fl.mail
-                        WHERE /*f.citta = 'Milano'*/
-                        /*AND*/ t.giorno = ?
+                        WHERE /*f.citta = 'Milano'
+                        AND t.giorno = ?
                         AND ? BETWEEN t.orainizio AND t.orafine";
 
                 //$res= $conn->query($query);
@@ -142,7 +144,7 @@
                                             JOIN turno t ON fl.turno = t.id
                                             WHERE f.mail = ? 
                                             AND f.citta = ? 
-                                            $zone_clause /* condizione dinamica per zona */
+                                            $zone_clause /* condizione dinamica per zona 
                                             AND t.giorno = ?
                                             AND '$oraCorrente' BETWEEN t.orainizio AND t.orafine
                                             AND o.stato in('in preparazione','preso in carico')
@@ -171,7 +173,7 @@
                                             $nomeRistorante = $row['nome_ristorante'];
 
                                             echo "<div class='order'>";
-                                            /*echo "<p>Nome: $nome, Data: $data, Ora: $ora, Stato: $stato</p>";*/
+                                            /*echo "<p>Nome: $nome, Data: $data, Ora: $ora, Stato: $stato</p>";
                                             echo "<p> Data: $data, Ora: $ora, Stato: $stato, Ristorante: $nomeRistorante</p>";
 
                                             // bottone modifica stato
@@ -202,9 +204,141 @@
         }  else {
             header("Location: ../index.html");
         }
-        
+        */
         ?>
         </section>
     </body>
-    <?php include("../common/footer.html"); ?>
+    <?php // include("../common/footer.html"); ?>
 </html>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/stile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="../js/navbar.js"></script>
+    <script src="../js/javascript.js"></script>
+</head>
+<body>
+<?php include("../common/navbar_fattorino.php"); ?>
+
+<h1>Ordini disponibili nella tua zona</h1>
+<section class="page-content">
+<?php
+// Connessione al database e altre operazioni iniziali
+include("../common/connessione.php");
+session_start();
+
+// Verifica se l'utente è loggato
+if (isset($_SESSION['utente'])) {
+    $mail = $_SESSION['utente'];
+
+    // Query per verificare la disponibilità del fattorino
+    $queryDisponibilita = "SELECT disponibilita FROM fattorino WHERE mail=?";
+    $stmtFattorino = $conn->prepare($queryDisponibilita);
+    $stmtFattorino->bind_param("s", $mail);
+    $stmtFattorino->execute();
+    $resultdisponibilitaFattorino = $stmtFattorino->get_result();
+
+    if ($resultdisponibilitaFattorino && $resultdisponibilitaFattorino->num_rows > 0) {
+        $row = $resultdisponibilitaFattorino->fetch_assoc();
+        $disp = $row['disponibilita'];
+    } else {
+        echo "Errore nel recupero della disponibilità del fattorino.";
+    }
+
+    if ($disp == "N") {
+        echo "<p class=\"error\">Attualmente la tua disponibilità si trova su N, non puoi accettare alcun ordine. Recati nella sezione modifica profilo per attivarla</p>";
+    } else {
+        // Recupero della data e ora correnti
+        date_default_timezone_set("Europe/Rome");
+        $dataOdiernaING = date("l");
+        $iNGToITA = array(
+            'Monday' => 'Lunedì',
+            'Tuesday' => 'Martedì',
+            'Wednesday' => 'Mercoledì',
+            'Thursday' => 'Giovedì',
+            'Friday' => 'Venerdì',
+            'Saturday' => 'Sabato',
+            'Sunday' => 'Domenica'
+        );
+        $giornoCorrente = $iNGToITA[$dataOdiernaING];
+        $oraCorrente = date("H:i:s");
+
+        // Esegui una query per controllare se il fattorino è in turno in questo momento di questo giorno 
+        $query = "SELECT t.giorno, t.orainizio, t.orafine 
+                    FROM turno t
+                    JOIN flavorasu fl ON t.id = fl.turno
+                    JOIN fattorino f ON f.mail = fl.mail
+                    WHERE f.mail = ? 
+                    AND t.giorno = ?
+                    AND ? BETWEEN t.orainizio AND t.orafine";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("sss", $mail, $giornoCorrente, $oraCorrente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            // Il fattorino è in turno
+            while ($row = $result->fetch_assoc()) {
+                // Esegui la query per recuperare gli ordini disponibili per il fattorino
+                $queryOrdini = "SELECT DISTINCT o.data, o.ora, o.stato, r.nome AS nome_ristorante
+                                FROM ordine o
+                                JOIN contiene c ON o.data = c.data AND o.ora = c.ora
+                                JOIN ristorante r ON c.mail = r.mail
+                                WHERE o.stato IN ('in preparazione', 'preso in carico')
+                                AND TIMESTAMPDIFF(HOUR, CONCAT(o.data, ' ', o.ora), NOW()) < 2";
+                $resultOrdini = $conn->query($queryOrdini);
+
+                if ($resultOrdini && $resultOrdini->num_rows > 0) {
+                    // Visualizza gli ordini disponibili
+                    while ($rowOrdine = $resultOrdini->fetch_assoc()) {
+                        echo "<div class='order'>";
+                        echo "<p>Data: {$rowOrdine['data']}, Ora: {$rowOrdine['ora']}, Stato: {$rowOrdine['stato']}, Ristorante: {$rowOrdine['nome_ristorante']}</p>";
+
+                        // Recupera gli articoli associati a questo ordine
+                        $dataOrdine = $rowOrdine['data'];
+                        $oraOrdine = $rowOrdine['ora'];
+                        $queryArticoli = "SELECT nome FROM contiene WHERE data = '$dataOrdine' AND ora = '$oraOrdine'";
+                        $resultArticoli = $conn->query($queryArticoli);
+
+                        if ($resultArticoli && $resultArticoli->num_rows > 0) {
+                            // Visualizza gli articoli associati all'ordine
+                            echo "<div class='order-items'>";
+                            while ($rowArticolo = $resultArticoli->fetch_assoc()) {
+                                echo "<p>{$rowArticolo['nome']}</p>";
+                            }
+                            echo "</div>"; // Chiudi div 'order-items'
+                        } else {
+                            echo "<p class='error'>Nessun articolo trovato per questo ordine.</p>";
+                        }
+
+                        // Bottone per prendere in carico l'ordine
+                        if ($rowOrdine['stato'] == 'in preparazione') {
+                            echo "<form method='post' action='../backend/modify_order_status.php'>";
+                            echo "<input type='hidden' name='data' value='{$rowOrdine['data']}'>";
+                            echo "<input type='hidden' name='ora' value='{$rowOrdine['ora']}'>";
+                            echo "<input type='submit' name='modifyOrderStatus' value='Prendi in carico'>";
+                            echo "</form>";
+                        }
+                        
+                        echo "</div>"; // Chiudi div 'order'
+                    }
+                } else {
+                    echo "<p class=\"error\">Nessun ordine disponibile.</p>";
+                }
+            }
+        } else {
+            echo "<p class=\"error\">Non sei in turno.</p>";
+        }
+    }
+}  else {
+    header("Location: ../index.html");
+}
+?>
+</section>
+<?php include("../common/footer.html"); ?>
+</body>
+</html>
+
+
