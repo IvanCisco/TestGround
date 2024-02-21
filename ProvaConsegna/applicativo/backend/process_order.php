@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/stile.css">
+</head>
+<body>
+    <section class="page-content">
+
 <?php
 session_start();
 
@@ -86,13 +94,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmtOrdine->close();
         $stmtContiene->close();
 
-        echo "Ordine eseguito con successo. Verrai reindirizzato alla lista di ristoranti";
+        echo "<p class=\"success\">Ordine eseguito con successo. Verrai reindirizzato alla lista di ristoranti </p>";
         header("refresh:5;url=../frontend/acquirente.php");
         
         exit();
     }
 } else {
-        echo "Error processing selectedPlates.";
+        echo "<p class=\"error\">Errore nell'elaborazione dei piatti selezionati.</p>";
     }
     session_destroy()
 ?>
+</section>
+</body>
+</html>

@@ -3,6 +3,8 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../css/stile.css">
 </head>
+<body>
+    <section class="page-content">
 <?php
 
 
@@ -46,14 +48,17 @@ if (isset($_POST['modifyOrderStatus'])) {
     
                     $prezzototale_stmt = $conn->prepare($prezzototale_query);
                     if ($prezzototale_stmt === false) {
-                        echo "Errore nella preparazione dell'istruzione SQL per ottenere il prezzo totale: " . $conn->error;
+                        echo "<p class =\"error\">Errore nella preparazione dell'istruzione SQL per ottenere il prezzo totale: </p> " . $conn->error;
+                        echo "<p class =\"error\">verrai reindirizzato alla home</p>";
                     } else {
                         $prezzototale_stmt->bind_param("sss", $data, $ora, $mail);
                         $prezzototale_stmt->execute();
                         $prezzototale_result = $prezzototale_stmt->get_result();
 
                         if ($prezzototale_result === false) {
-                            echo "Errore nell'esecuzione della query per ottenere il prezzo totale: " . $conn->error;
+                            echo "<p class =\"error\">Errore nell'esecuzione della query per ottenere il prezzo totale: </p>" . $conn->error;
+                            echo "<p class =\"error\">verrai reindirizzato alla home</p>";
+                             header("refresh:5;url=../frontend/fattorino.php");
                         } else {
                             $totalPriceRow = $prezzototale_result->fetch_assoc();
                             $totalPrice = $totalPriceRow['prezzo_totale'];
@@ -64,7 +69,9 @@ if (isset($_POST['modifyOrderStatus'])) {
                             $updateCreditStmt = $conn->prepare($updateCreditQuery);
 
                             if ($updateCreditStmt === false) {
-                                echo "Errore nella preparazione dell'istruzione SQL per aggiornare il credito del fattorino: " . $conn->error;
+                                echo "<p class =\"error\">Errore nella preparazione dell'istruzione SQL per aggiornare il credito del fattorino: </p>" . $conn->error;
+                                echo "<p class =\"error\">verrai reindirizzato alla home</p>";
+                                 header("refresh:5;url=../frontend/fattorino.php");
                             } else {
                                 $updateCreditStmt->bind_param("ds", $credit, $mail);
                                 $updateCreditStmt->execute();
@@ -82,45 +89,53 @@ if (isset($_POST['modifyOrderStatus'])) {
                 $stmt->bind_param("sss", $newStato, $data, $ora);
                 $stmt->execute();
                 if ($stmt->affected_rows > 0) {
-                    echo "La modifica allo stato dell'ordine è avvenuta con successo, verrai reindirizzato.";
+                    echo "<p class =\"success\">La modifica allo stato dell'ordine è avvenuta con successo, verrai reindirizzato. </p>";
+                    echo "<p class =\"success\">verrai reindirizzato</p>";
                     // Reindirizzamento in base al tipo
                     if ($tipo == 'ristorante') {
                         header("refresh:5;url=../frontend/ordini_ristorante.php");
                     } elseif ($tipo == 'fattorino') {
                         header("refresh:5;url=../frontend/fattorino.php");
                     } else {
-                        echo "errore di reindirizzamento";
+                        echo "<p class =\"error\">errore di reindirizzamento</p>";
                         header("refresh:5;url=../common/logout.php");
                     }
                 } else {
-                    echo "Errore: Stato non modificato.";
+                    echo "<p class =\"error\">Errore: Stato non modificato.</p>";
+                    echo "<p class =\"error\">verrai reindirizzato alla home</p>";
                     header("refresh:5;url=../frontend/ordini_ristorante.php");
                 }
                 $stmt->close();
             } else {
                 if ($tipo == 'ristorante') {
-                    echo "Errore: Tipo utente o stato corrente non valido.";
+                    echo "<p class =\"error\">Errore: Tipo utente o stato corrente non valido.</p>";
+                    echo "<p class =\"error\">verrai reindirizzato</p>";
                     header("refresh:5;url=../frontend/ordini_ristorante.php");
                 } elseif ($tipo == 'fattorino') {
-                    echo "Errore: il ristorante deve confermare il ritiro";
+                    echo "<p class =\"error\">Errore: il ristorante deve confermare il ritiro</p>";
+                    echo "<p class =\"error\">verrai reindirizzato alla home</p>";
                     header("refresh:5;url=../frontend/fattorino.php");
                 }
             }
         } else {
             if ($tipo == 'ristorante') {
                 echo "<p class=\"error\">Errore: Utente non loggato o richiesta non valida.</p>";
+                echo "<p class =\"error\">verrai reindirizzato </p>";
                 header("refresh:5;url=../frontend/ordini_ristorante.php");
             } elseif ($tipo == 'fattorino') {
                 echo "<p class=\"error\">Errore: Utente non loggato o richiesta non valida.</p>";
+                echo "<p class =\"error\">verrai reindirizzato alla home</p>";
                 header("refresh:5;url=../frontend/fattorino.php");
             }
         }
     } else {
         if ($tipo == 'ristorante') {
             echo "<p class =\"error\">Errore: Richiesta non valida.</p>";
+            echo "<p class =\"error\">verrai reindirizzato</p>";
             header("refresh:5;url=../frontend/ordini_ristorante.php");
         } elseif ($tipo == 'fattorino') {
             echo "<p class=\"error\">Errore: Richiesta non valida.</p>";
+            echo "<p class =\"error\">verrai reindirizzato alla home</p>";
             header("refresh:5;url=../frontend/fattorino.php");
         }
     }
@@ -128,4 +143,6 @@ if (isset($_POST['modifyOrderStatus'])) {
     echo "modifyOrderStatus non è settato!";
 }
 ?>
+</section>
+</body>
 </html>
